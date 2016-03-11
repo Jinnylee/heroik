@@ -1,5 +1,4 @@
 
-// This is just testing to make sure the code works. The below code should be added to the NAV BAR in layouts
 $(document).ready(function () {
 
   $('#signup-form').on('submit', function(e){
