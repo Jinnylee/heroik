@@ -9,4 +9,7 @@ Rails.application.routes.draw do
 
   root 'home#index'
 
+  get '/profile', to: 'profile#profile'
+  get '/getprofileinfo.json', to: 'profile#getprofileinfo'
+
 end
