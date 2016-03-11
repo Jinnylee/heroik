@@ -3,7 +3,7 @@ class ProfileController < ApplicationController
   def profile
   end
 
-  def getprofileposts
+  def getprofileinfo
     @posts = Post.where(user_id: 1).order(created_at: :desc)
     @username = User.where(id: 1)
     respond_to do |format|

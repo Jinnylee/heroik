@@ -29,13 +29,14 @@ $(document).ready(function () {
     $('#showuserposts').append(ownPosts);
   };
 
-    // get all posts
-  var showOwnPosts = function () {
+    // get all posts, show user information on user column
+  var showUserPage = function () {
     $.ajax({
-      url: "/getprofileposts.json",
+      url: "/getprofileinfo.json",
       method: "GET",
       success: function (response, status) {
         console.log(response)
+        appendUserInformation(response.username[0].name, response.username[0].username, response.username[0].created_at, response.username[0].quote);
 
         response.posts.forEach(function(elem, index) {
           appendOwnPosts(elem.title, response.username[0].username, elem.created_at);
@@ -49,11 +50,8 @@ $(document).ready(function () {
     })
   };
 
-  // show user information on user column
-
-
   var init = function() {
-    showOwnPosts();
+    showUserPage();
   }
 
   init();
