@@ -4,9 +4,10 @@
 $(document).ready(function () {
 
 //append user information on user column
-  var appendUserInformation = function(name, username, created_at, quote) {
+  var appendUserInformation = function(image, name, username, created_at, quote) {
     var userInfo =
     '<div class="col-xs-12" id="userinfo">' +
+      '<img src=' + image + ' class="col-xs-12 photo">' +
       '<div class="col-xs-12">' + name + '</div>' +
       '<div class="col-xs-12">' + username + '</div>' +
       '<div class="col-xs-12">' + created_at + '</div>' +
@@ -17,10 +18,10 @@ $(document).ready(function () {
   };
 
 //append all the posts that belong to that user
-  var appendOwnPosts = function(title, username, created_at) {
+  var appendOwnPosts = function(image, title, username, created_at) {
     var ownPosts =
     '<div class="col-xs-12 col-md-4 post">' +
-      '<div class="col-xs-12 photo">Photo</div>' +
+      '<img src=' + image + ' class="col-xs-12 photo">' +
       '<div class="col-xs-12 title">' + title + '</div>' +
       '<div class="col-xs-12 username">' + username + '</div>' +
       '<div class="col-xs-12 date">' + created_at + '</div>' +
@@ -35,12 +36,10 @@ $(document).ready(function () {
       url: "/getprofileinfo.json",
       method: "GET",
       success: function (response, status) {
-        console.log(response)
-        appendUserInformation(response.username[0].name, response.username[0].username, response.username[0].created_at, response.username[0].quote);
+        appendUserInformation(response.image, response.username[0].name, response.username[0].username, response.username[0].created_at, response.username[0].quote);
 
         response.posts.forEach(function(elem, index) {
-          appendOwnPosts(elem.title, response.username[0].username, elem.created_at);
-          console.log(elem);
+          appendOwnPosts(elem.image, elem.title, response.username[0].username, elem.created_at);
         })
       },
       error: function(response, status) {
