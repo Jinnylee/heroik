@@ -1,0 +1,20 @@
+<!--SAMPLE HTML FOR TESTING ONLY-->
+<div id="show-comments">
+  <strong>Comments:</strong>
+  <% @comment.each do |elem| %>
+    <p><img src=<%= elem.user.image %>> <strong><%= elem.user.name %></strong><br><%= elem.comment %></p>
+  <% end %>
+</div>
+
+<div>
+  <strong>Create:</strong>
+  <form id="commentform">
+    <div>
+        <label for="commentfield">Your Comment:</label>
+        <input type="text" name="commentfield" placeholder="comments">
+    </div>
+    <div>
+      <input type="submit" id="comment-button">
+    </div>
+  </form>
+</div>
