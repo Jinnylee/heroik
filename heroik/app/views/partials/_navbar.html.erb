@@ -24,38 +24,46 @@
       </ul>
 
 <!--       SIGN UP/ SIGN IN BUTTON -->
-      <ul class="nav navbar-nav navbar-right">
-        <li><button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">Sign Up/Sign in</button>
-<!--         MODAL -->
-        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <h4 class="modal-title" id="myModalLabel">Sign Up or Sign In!</h4>
-            </div>
-            <div class="modal-body">
-              <form id="signin-form">
-                <p>SIGN IN</p>
-                <p><input type="email" name="email" placeholder="email"></p>
-                <p><input type="password" name="password" placeholder="password"></p>
-                <button id="submit-button-home" class="btn btn-default"type="submit">Submit</button>
-              </form>
-
-              <form id="signup-form">
-                <p>SIGN UP</p>
-                <p><input type="email" placeholder="Email" name="email"></p>
-                <p><input type="password" placeholder="Password"name="password"></p>
-                <p><input type="password" placeholder="Password confirm"name="password_confirmation"></p>
-                <button id="submit-button-home" class="btn btn-default"type="submit">Submit</button>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
-
+      <ul id="user-navbar-section" class="nav navbar-nav navbar-right">
+        <li id="user-name-dashboard" style="display: none">
+          <span></span>
+        </li>
+        <li id="logout" style="display: none">
+          <button class="btn btn-primary btn-lg" id="logout-button">Logout</button>
+        </li>
+        <li id="signin-signup">
+          <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">Sign Up/Sign in</button>
         </li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
+
+
+<!--         MODAL -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Sign Up or Sign In!</h4>
+      </div>
+      <div class="modal-body">
+        <form id="signin-form">
+          <p>SIGN IN</p>
+          <p><input type="email" name="email" placeholder="email"></p>
+          <p><input type="password" name="password" placeholder="password"></p>
+          <button id="submit-button-home" class="btn btn-default"type="submit">Submit</button>
+        </form>
+
+        <form id="signup-form">
+          <p>SIGN UP</p>
+          <p><input type="email" placeholder="Email" name="email"></p>
+          <p><input type="password" placeholder="Password"name="password"></p>
+          <p><input type="password" placeholder="Password confirm"name="password_confirmation"></p>
+          <button id="submit-button-home" class="btn btn-default"type="submit">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
