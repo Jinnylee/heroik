@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   resources :comments, only: [:new, :index, :create, :delete]
   resources :votes, only: [:update]
   resources :quotes
+  resources :home
 
+  root 'home#index'
 
 end
