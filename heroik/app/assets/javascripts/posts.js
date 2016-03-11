@@ -29,19 +29,17 @@ $(document).ready(function () {
     $('#showuserposts').append(ownPosts);
   };
 
-    // get all journals
+    // get all posts
   var showOwnPosts = function () {
     $.ajax({
-      url: "/profile",
+      url: "/getprofileposts.json",
       method: "GET",
-      data: {
-        result:
-      },
       success: function (response, status) {
-        response.forEach(function(elem, index) {
-          appendOwnJournals(elem.title, elem.username, elem.created_at);
+        console.log(response)
+
+        response.posts.forEach(function(elem, index) {
+          appendOwnPosts(elem.title, response.username[0].username, elem.created_at);
           console.log(elem);
-          appendOwnPosts();
         })
       },
       error: function(response, status) {
