@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
 
   # before_action :set_current_user
   def authenticate_current_user
-    render json: {message: "Unauthorize"} if get_current_user.nil?
+    render json: {message: "Unauthorize"}, status: :unauthorized if get_current_user.nil?
   end
 
   def get_current_user
