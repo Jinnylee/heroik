@@ -33,7 +33,7 @@ $(document).ready(function () {
     // get all posts, show user information on user column
   var showUserPage = function () {
     $.ajax({
-      url: "/api/getprofileinfo.json",
+      url: "/api/users/profile.json",
       method: "GET",
       success: function (response, status) {
         console.log(response)

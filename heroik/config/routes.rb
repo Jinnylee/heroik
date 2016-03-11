@@ -4,8 +4,8 @@ Rails.application.routes.draw do
 
   namespace :api do
     # users
-    resources :users, only: [:index, :show, :update]
     get '/users/profile', to: 'users#profile'
+    resources :users, only: [:index, :show, :update]
 
     #posts
     resources :posts, only: [:index, :show, :create, :update, :destroy] do
