@@ -54,6 +54,7 @@ console.log("clicked");
     $('#signin-signup').hide();
     $('#user-name-dashboard').show();
     $('#logout').show();
-    $('#user-name-dashboard span').text(user.name);
+    $('#nav-profile').text(user.name);
+
   });
 });
