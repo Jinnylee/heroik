@@ -3,14 +3,21 @@ Rails.application.routes.draw do
   mount_devise_token_auth_for 'User', at: 'auth'
 
   namespace :api do
-    resources :users, only: [:index, :new, :create, :show, :edit, :update]
-    resources :posts
-    resources :comments, only: [:new, :show, :create, :delete]
-    resources :votes, only: [:update]
+    # users
+    resources :users, only: [:index, :show, :update]
+    get '/users/profile', to: 'users#profile'
+
+    #posts
+    resources :posts, only: [:index, :show, :create, :update, :destroy] do
+      # posts comments
+      resources :comments, only: [:index, :show, :create, :delete]
+
+      # posts votes
+      put '/votes', to: 'votes#update'
+    end
+
+    #quotes
     resources :quotes
-    resources :home
-    get '/getprofileinfo', to: 'profile#getprofileinfo'
-    get '/getsinglepost/:post_id', to: 'posts#getsinglepost'
   end
 
   # pages

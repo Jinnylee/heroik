@@ -82,7 +82,7 @@ $(document).ready(function () {
 
       $.ajax({
         method: "GET",
-        url: "/api/getsinglepost/" + id + ".json",
+        url: "/api/posts/" + id + ".json",
         success: function (response) {
           console.log(response);
           modalForSinglePost(response.title, response.username, response.created_at, response.description);
