@@ -14,11 +14,19 @@ $(document).ready(function () {
   // SIGN UP FORM IN MODAL POP UP - ONCE SIGN UP BUTTON IN NAV BAR IS CLICKED
   $('#signup-form').on('submit', function(e){
       e.preventDefault();
-console.log("clicked");
+    console.log("clicked");
+    first_name = $('#signup-form input[name="first-name"]').val();
+    last_name = $('#signup-form input[name="last-name"]').val();
+
     $.auth.emailSignUp({
       email: $('#signup-form input[name="email"]').val(),
       password: $('#signup-form input[name="password"]').val(),
-      password_confirmation: $('#signup-form input[name="password_confirmation"]').val()
+      password_confirmation: $('#signup-form input[name="password_confirmation"]').val(),
+      first_name: first_name,
+      last_name: last_name,
+      username: $('#signup-form input[name="username"]').val(),
+      name: first_name +' ' + last_name
+
     }).then(function(user){
       console.log(user)
       window.location.href = "/";
@@ -56,5 +64,7 @@ console.log("clicked");
     $('#logout').show();
     $('#nav-profile').text(user.name);
 
-  });
+    }).fail(function(resp){
+      console.log(resp)
+    });
 });
