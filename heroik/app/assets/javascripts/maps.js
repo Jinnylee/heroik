@@ -1,28 +1,24 @@
 // $(document).ready(function(){
 
-  // var map;
-  // function initMap() {
-  //   map = new google.maps.Map(document.getElementById('map'), {
-  //     center: {lat: -34.397, lng: 150.644},
-  //     zoom: 8
-  //   });
-  // };
-// });
+var marker = [];
 var getMarkers = function () {
   $.ajax({
-    url: "/api/maps/index.json",
+    url: "/api/maps.json",
     method: "GET",
     success: function (response, status) {
-      console.log(response)
+      response.forEach(function (elem, index){
+        var marker[index] = new google.maps.Marker({
+          position: {lat: elem.latitude, lng: elem.longitude},
+          icon: elem.category,
+          map: map,
+          title: elem.title,
+          postID: elem.id
+        });
+        marker[index].addListener("click",function(){
+          modalForSinglePost(response.title, response.username, response.created_at, response.description);
+        });
+      });
 
-      // user = response.user;
-      // appendUserInformation(user.image, user.name, user.username, user.created_at, user.quote);
-
-      // response.posts.forEach(function(elem, index) {
-      //   appendOwnPosts(elem.id, elem.image, elem.title, elem.username, elem.created_at);
-      // });
-
-      // showOnePost();
     },
     error: function(response, status) {
       console.log(response);
@@ -30,6 +26,7 @@ var getMarkers = function () {
     }
   })
 };
+
 getMarkers();
 
 function initMap() {
@@ -80,7 +77,11 @@ function initMap() {
     position: hongKong,
     icon: community,
     map: map,
-    title: 'Hello World!'
+    title: 'Hello World!',
+    postID: 1
+  });
+  marker1.addListener("click",function(){
+    console.log(marker1.postID);
   });
     var marker2 = new google.maps.Marker({
     position: {lat: 22.2852, lng: 114.1514},
