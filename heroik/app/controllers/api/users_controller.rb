@@ -8,7 +8,11 @@ class API::UsersController < ApplicationController
     end
   end
 
-  def index
-  end
+  # def index
+  #   @posts = Post.all
+  #   respond_to do |format|
+  #     format.json { render 'profile.jbuilder' }
+  #   end
+  # end
 
 end
