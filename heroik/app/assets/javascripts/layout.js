@@ -21,7 +21,7 @@ console.log("clicked");
       password_confirmation: $('#signup-form input[name="password_confirmation"]').val()
     }).then(function(user){
       console.log(user)
-      window.location.href = "/home";
+      window.location.href = "/";
 
     }).fail(function(resp){
       console.log(resp)
@@ -37,7 +37,7 @@ console.log("clicked");
       password: $('#signin-form input[name="password"]').val(),
     }).then(function(user){
       console.log(user)
-      window.location.href = '/home'
+      window.location.href = '/'
     }).fail(function(resp){
       console.log(resp)
     });
@@ -47,7 +47,7 @@ console.log("clicked");
   $('#logout-button').on('click', function(e){
     e.preventDefault();
     $.auth.signOut();
-    window.location.href = "/home";
+    window.location.href = "/";
   });
 
   $.auth.validateToken().then(function(user){
