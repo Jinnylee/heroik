@@ -16,6 +16,8 @@ Rails.application.routes.draw do
       put '/votes', to: 'votes#update'
     end
 
+    #maps
+    resources :maps, only: [:index]
     #quotes
     resources :quotes
   end
@@ -23,5 +25,6 @@ Rails.application.routes.draw do
   # pages
   root 'pages#index'
   get '/profile', to: 'pages#profile'
+  get '/neighbourhood', to: 'pages#neighbourhood'
 
 end
