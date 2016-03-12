@@ -1,0 +1,13 @@
+
+
+/*CAROUESEL*/
+
+.carousel .item {
+    width: 100%; /*slider width*/
+    max-height: 400px; /*slider height*/
+}
+
+.carousel .item img {
+    width: 100%; /*img width*/
+    background-position:center;
+}
