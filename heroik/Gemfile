@@ -36,6 +36,7 @@ gem 'font-awesome-rails'
 gem 'momentjs-rails'
 gem 'devise_token_auth'
 gem 'omniauth'
+gem 'omniauth-facebook'
 gem 'bower'
 gem 'paperclip'
 

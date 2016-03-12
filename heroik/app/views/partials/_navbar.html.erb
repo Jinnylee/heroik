@@ -50,6 +50,7 @@
       </div>
       <div class="modal-body">
         <form id="signin-form">
+          <%= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook) %>
           <p>SIGN IN</p>
           <p><input type="email" name="email" placeholder="email"></p>
           <p><input type="password" name="password" placeholder="password"></p>

@@ -34,4 +34,8 @@ DeviseTokenAuth.setup do |config|
   # If, however, you wish to integrate with legacy Devise authentication, you can
   # do so by enabling this flag. NOTE: This feature is highly experimental!
   # enable_standard_devise_support = false
+
+  # IMPORTANT: DO NOT INSERT APP ID AND APP SECRET HERE, INSERT IN ENV FILE only
+  config.omniauth :facebook, ENV["APP_ID"], ENV["APP_SECRET"],
+                  callback_url: "CALLBACK_URL"
 end
