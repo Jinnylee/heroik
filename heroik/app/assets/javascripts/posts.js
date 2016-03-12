@@ -30,14 +30,12 @@ $(document).ready(function () {
     $('#showuserposts').append(ownPosts);
   };
 
-    // get all posts, show user information on user column
+  // GET ALL POSTS AND USER INFORMATION
   var showUserPage = function () {
     $.ajax({
       url: "/api/users/profile.json",
       method: "GET",
       success: function (response, status) {
-        console.log(response)
-
         user = response.user;
         appendUserInformation(user.image, user.name, user.username, user.created_at, user.quote);
 
@@ -54,7 +52,7 @@ $(document).ready(function () {
     })
   };
 
-  // append content to modal
+  // APPEND CONTENT TO MODAL
   var modalForSinglePost = function(title, username, date, description) {
     var header =
     '<div id="singletitle">' +
@@ -74,6 +72,7 @@ $(document).ready(function () {
     $('.single-header').append(header);
   };
 
+  //SHOW ONE POST ON MODAL
   var showOnePost = function () {
     $('.post').off().on('click', function (e) {
       e.preventDefault();
@@ -96,8 +95,105 @@ $(document).ready(function () {
     });
   }
 
+  //CREATE POST
+  var createPost = function () {
+    $('#createpost').on('submit', function (e) {
+      e.preventDefault();
+      $('#create-form-message').text('');
+
+      var post = {
+        title   : $('#createpost [name="title"]').val(),
+        category    : $('#createpost [name="category"]').val(),
+        address : $('#createpost [name="address"]').val(),
+        description : $('#createpost [name="description"]').val()
+      };
+
+      console.log(post);
+
+      $.ajax({
+        method: 'POST',
+        url: '/api/posts',
+        data: post,
+        success: function (response) {
+          console.log(response)
+          $('.post').modal('hide');
+        },
+        error: function (response) {
+          console.log("no post to add", response);
+        }
+      });
+
+    })
+  };
+
+  // OPEN THE EDIT MODAL
+  var openEditModal = function () {
+    $('.editPost').off().on('click', function (e) {
+      e.preventDefault();
+      $('#editpostmodal').modal('show');
+      $('#showsinglepost').modal('hide');
+      $("#edit-form-message").text('');
+    })
+  };
+
+  // EDIT POST
+  var editPost = function () {
+    $('#editpost').on("submit", function (e) {
+      e.preventDefault();
+
+      var id = $(this).data("id");
+      var editedPost = {
+        title: $('#edit-title').val(),
+        category: $('#edit-category').val(),
+        address: $('#edit-address').val(),
+        description: $('#edit-description').val()
+      };
+
+      $.ajax({
+        url: "/api/posts/" + id + ".json",
+        method: "PUT",
+        data: editedPost,
+        success: function (response, status) {
+          console.log(response);
+          $('#editpostmodal').modal('hide');
+        },
+        error: function (response, status) {
+          console.log(response);
+        }
+      });
+
+    });
+  };
+
+  // DELETE JOURNAL
+  var deletePost = function () {
+    $('.deletePost').off().on('click', function (e){
+      e.preventDefault();
+      $('#delete-form-message').text('');
+
+      console.log("request sent!");
+
+      var id = $(this).data("id");
+
+      $.ajax({
+        url: '/api/posts/' + id,
+        method: 'DELETE',
+        success: function (response, status) {
+          console.log(response);
+          $('#showsinglepost').modal('hide');
+        },
+        error: function (response, status) {
+          console.log(response);
+        }
+      })
+    })
+  }
+
   var init = function() {
     showUserPage();
+    openEditModal();
+    createPost();
+    editPost();
   }
 
   init();

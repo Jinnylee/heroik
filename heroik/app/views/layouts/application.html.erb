@@ -14,14 +14,21 @@
 <div class="modal fade" id="showsinglepost" tabindex="-1" role="dialog">
   <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-header single-header">
+      <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title single-header" id="myModalLabel"></h4>
       </div>
       <div class="modal-body single-body">
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Hero!</button>
+        <% if current_user %>
+          <button type="button" class="btn btn-default editPost"><i class="fa fa-pencil-square-o"></i> Edit</button>
+          <button type="button" class="btn btn-default deletePost"><i class="fa fa-trash-o"></i> Delete</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <% else %>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Hero!</button>
+        <% end %>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
