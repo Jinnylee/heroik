@@ -214,6 +214,7 @@ $(document).ready(function () {
         success: function (response, status) {
           console.log(response);
           $('#showsinglepost').modal('hide');
+          showUserPage();
         },
         error: function (response, status) {
           console.log(response);
