@@ -1,5 +1,6 @@
 class MapsController < ApplicationController
-  def neighbourhood
 
+  def neighbourhood
   end
+
 end
