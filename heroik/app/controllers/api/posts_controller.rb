@@ -8,18 +8,27 @@ class API::PostsController < ApplicationController
   end
 
   def create
-    post = Post.new(params[:post])
-    if post.save!
-      render json: { status: 200 }
-    else
-      render json: { status: 400 }
-    end
+    @post = Post.new(post_params)
+      respond_to do |format|
+        if @post.save
+          format.json { render json: @post }
+        else
+          format.json { render json: @post.errors, status: :unprocessable_entity }
+        end
+      end
   end
 
 
-  # def update
-  #   Post.update(params[:id])
-  # end
+  def update
+    @post = Post.update(params[:id])
+    respond_to do |format|
+        if @post.save
+          format.json { render json: @post }
+        else
+          format.json { render json: @post.errors, status: :unprocessable_entity }
+        end
+      end
+  end
 
   # def destroy
   #   Post.delete(params[:id])
@@ -27,10 +36,10 @@ class API::PostsController < ApplicationController
 
 
 
-  # private
-  #   def post_params
-  #     params.require(:post).permit(:title, :category, :address, :description)
-  #   end
+  private
+    def post_params
+      params.require(:post).permit(:title, :image, :category, :location, :description, :user_id, :post_votes)
+    end
 
 
 end

@@ -96,27 +96,30 @@ $(document).ready(function () {
   }
 
   //CREATE POST
-  var createPost = function () {
+  var createPost = function (user) {
     $('#createpost').on('submit', function (e) {
       e.preventDefault();
       $('#create-form-message').text('');
 
       var post = {
         title   : $('#createpost [name="title"]').val(),
+        image : $('#createpost [name="image"]').val(),
         category    : $('#createpost [name="category"]').val(),
-        address : $('#createpost [name="address"]').val(),
-        description : $('#createpost [name="description"]').val()
+        location : $('#createpost [name="location"]').val(),
+        description : $('#createpost [name="description"]').val(),
+        user_id : user.id,
+        post_votes : 0
       };
-
-      console.log(post);
 
       $.ajax({
         method: 'POST',
         url: '/api/posts',
-        data: post,
+        data: {
+          post: post
+        },
         success: function (response) {
-          console.log(response)
-          $('.post').modal('hide');
+          $('#addpostmodal').modal('hide');
+          appendOwnPosts();
         },
         error: function (response) {
           console.log("no post to add", response);
@@ -144,6 +147,7 @@ $(document).ready(function () {
       var id = $(this).data("id");
       var editedPost = {
         title: $('#edit-title').val(),
+        image: $('#edit-image').val(),
         category: $('#edit-category').val(),
         address: $('#edit-address').val(),
         description: $('#edit-description').val()
@@ -152,7 +156,9 @@ $(document).ready(function () {
       $.ajax({
         url: "/api/posts/" + id + ".json",
         method: "PUT",
-        data: editedPost,
+        data: {
+          post: post
+        },
         success: function (response, status) {
           console.log(response);
           $('#editpostmodal').modal('hide');
@@ -190,11 +196,16 @@ $(document).ready(function () {
   }
 
   var init = function() {
-    showUserPage();
-    openEditModal();
-    createPost();
-    editPost();
   }
+
+  $.auth.validateToken().then(function(user){
+    showUserPage();
+    createPost(user);
+    openEditModal();
+    editPost();
+  }).fail(function(response){
+    console.log(response);
+  });
 
   init();
 
