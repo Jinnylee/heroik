@@ -27,7 +27,7 @@ $(document).ready(function () {
       '<div class="col-xs-12 date">' + created_at + '</div>' +
     '</div>';
 
-    $('#showuserposts').append(ownPosts);
+    $('#userposts').append(ownPosts);
   };
 
   // GET ALL POSTS AND USER INFORMATION
@@ -36,6 +36,8 @@ $(document).ready(function () {
       url: "/api/users/profile.json",
       method: "GET",
       success: function (response, status) {
+        $('#userposts').empty();
+        $('#usercolumn').empty();
         user = response.user;
         appendUserInformation(user.image, user.name, user.username, user.created_at, user.quote);
 
@@ -53,7 +55,7 @@ $(document).ready(function () {
   };
 
   // APPEND CONTENT TO MODAL
-  var modalForSinglePost = function(title, username, date, description) {
+  var modalForSinglePost = function(title, image, category, username, created_at, location, description, id) {
     var header =
     '<div id="singletitle">' +
       title +
@@ -61,10 +63,23 @@ $(document).ready(function () {
 
     var body =
     '<div id="singlebody">' +
+      '<p><img src=' + image + ' class="col-xs-12 photo"></p>' +
+      '<p><div id="singlecategory">' + category + '</div></p>' +
       '<p><div id="singleusername">' + username + '</div></p>' +
-      '<p><div id="singledate">' + date + '</p>' +
+      '<p><div id="singledate">' + created_at + '</p>' +
+      '<p><div id="singlelocation">' + location + '</div></p>' +
       '<p><div id="singledescription">' + description + '</p>' +
     '</div>'
+
+    $('.deletePostBtn').data('id', id);
+    $('.heroBtn').data('id', id);
+    $('#editpost').data('id', id);
+
+    $('#edit-title').val(title);
+    $('#edit-image').val(image);
+    $('#edit-category').val(category);
+    $('#edit-location').val(location);
+    $('#edit-description').val(description);
 
     $('.single-body').empty();
     $('.single-header').empty();
@@ -76,15 +91,13 @@ $(document).ready(function () {
   var showOnePost = function () {
     $('.post').off().on('click', function (e) {
       e.preventDefault();
-      console.log("Click working!");
       var id = $(this).data("id")
 
       $.ajax({
         method: "GET",
         url: "/api/posts/" + id + ".json",
         success: function (response) {
-          console.log(response);
-          modalForSinglePost(response.title, response.username, response.created_at, response.description);
+          modalForSinglePost(response.title, response.image, response.category, response.username, response.created_at, response.location, response.description, response.id);
         },
         error: function (response) {
           console.log(response);
@@ -119,7 +132,7 @@ $(document).ready(function () {
         },
         success: function (response) {
           $('#addpostmodal').modal('hide');
-          appendOwnPosts();
+          showUserPage();
         },
         error: function (response) {
           console.log("no post to add", response);
@@ -131,7 +144,7 @@ $(document).ready(function () {
 
   // OPEN THE EDIT MODAL
   var openEditModal = function () {
-    $('.editPost').off().on('click', function (e) {
+    $('.editPostBtn').off().on('click', function (e) {
       e.preventDefault();
       $('#editpostmodal').modal('show');
       $('#showsinglepost').modal('hide');
@@ -145,23 +158,36 @@ $(document).ready(function () {
       e.preventDefault();
 
       var id = $(this).data("id");
-      var editedPost = {
+      console.log(id);
+      var editedpost = {
         title: $('#edit-title').val(),
         image: $('#edit-image').val(),
         category: $('#edit-category').val(),
-        address: $('#edit-address').val(),
+        location: $('#edit-location').val(),
         description: $('#edit-description').val()
       };
+
+      // var updatepost = function(image, title, username, created_at) {
+      //   var post =
+      //   '<img src=' + image + ' class="col-xs-12 photo">' +
+      //   '<div class="col-xs-12 title">' + title + '</div>' +
+      //   '<div class="col-xs-12 username">' + username + '</div>' +
+      //   '<div class="col-xs-12 date">' + created_at + '</div>';
+      // };
 
       $.ajax({
         url: "/api/posts/" + id + ".json",
         method: "PUT",
         data: {
-          post: post
+          editedpost: editedpost
         },
         success: function (response, status) {
           console.log(response);
           $('#editpostmodal').modal('hide');
+          showUserPage();
+
+          // var post = updatepost(response.image, response.title, response.username, response.created_at);
+          // $('div.data-id='+ response.id).html(post);
         },
         error: function (response, status) {
           console.log(response);
@@ -173,16 +199,17 @@ $(document).ready(function () {
 
   // DELETE JOURNAL
   var deletePost = function () {
-    $('.deletePost').off().on('click', function (e){
+    $('.deletePostBtn').off().on('click', function (e){
       e.preventDefault();
       $('#delete-form-message').text('');
 
       console.log("request sent!");
 
       var id = $(this).data("id");
+      console.log(id);
 
       $.ajax({
-        url: '/api/posts/' + id,
+        url: '/api/posts/' + id + '.json',
         method: 'DELETE',
         success: function (response, status) {
           console.log(response);
@@ -203,6 +230,7 @@ $(document).ready(function () {
     createPost(user);
     openEditModal();
     editPost();
+    deletePost();
   }).fail(function(response){
     console.log(response);
   });
