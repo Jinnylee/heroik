@@ -17,7 +17,7 @@ Rails.application.routes.draw do
     end
 
     #maps
-
+    resources :maps, only: [:index]
     #quotes
     resources :quotes
   end

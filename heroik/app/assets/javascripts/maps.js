@@ -8,6 +8,29 @@
   //   });
   // };
 // });
+var getMarkers = function () {
+  $.ajax({
+    url: "/api/maps/index.json",
+    method: "GET",
+    success: function (response, status) {
+      console.log(response)
+
+      // user = response.user;
+      // appendUserInformation(user.image, user.name, user.username, user.created_at, user.quote);
+
+      // response.posts.forEach(function(elem, index) {
+      //   appendOwnPosts(elem.id, elem.image, elem.title, elem.username, elem.created_at);
+      // });
+
+      // showOnePost();
+    },
+    error: function(response, status) {
+      console.log(response);
+      console.log("did not get post data")
+    }
+  })
+};
+getMarkers();
 
 function initMap() {
   var hongKong = {lat: 22.2783, lng: 114.1747};
