@@ -1,5 +1,3 @@
-// $(document).ready(function(){
-
   var modalForSinglePost = function(post_votes, title, image, username, location, description, created_at, category, id) {
     var body =
     '<div id="singlebody">' +
@@ -35,32 +33,6 @@ var postLat;
 var postLong;
 var hongKong = {lat: 22.2783, lng: 114.1747};
 
-// var getMarkers = function () {
-//   $.ajax({
-//     url: "/api/maps.json",
-//     method: "GET",
-//     success: function (response, status) {
-//       response.forEach(function (elem, index){
-//         getIcon(elem.category);
-//         marker[index] = new google.maps.Marker({
-//           position: {lat: elem.latitude, lng: elem.longitude},
-//           icon: postIcon,
-//           map: map,
-//           title: elem.title,
-//           postID: elem.id
-//         });
-//         marker[index].addListener("click",function(){
-//           modalForSinglePost(response.title, response.username, response.created_at, response.description);
-//         });
-//       });
-
-//     },
-//     error: function(response, status) {
-//       console.log(response);
-//       console.log("did not get post data")
-//     }
-//   })
-// };
 
 function getIcon(post){
   if (post == "Community") {
@@ -109,36 +81,6 @@ function getIcon(post){
     }
   }
 };
-function tempMarkers(){
-  var marker1 = new google.maps.Marker({
-    position: hongKong,
-    icon: community,
-    map: map,
-    title: 'Hello World!',
-    postID: 1
-  });
-  marker1.addListener("click",function(){
-    console.log(marker1.postID);
-  });
-    var marker2 = new google.maps.Marker({
-    position: {lat: 22.2852, lng: 114.1514},
-    map: map,
-    icon: animals,
-    title: 'Sheung Wan!'
-  });
-    var marker3 = new google.maps.Marker({
-    position: {lat: 22.2819, lng: 114.1581},
-    map: map,
-    icon: youth,
-    title: 'Central!'
-  });
-    var marker4 = new google.maps.Marker({
-    position: {lat: 22.2788, lng: 114.1646},
-    map: map,
-    icon: environment,
-    title: 'Admiralty!'
-  });
-};
 
 function initMap() {
 
@@ -146,34 +88,35 @@ function initMap() {
     zoom: 15,
     center: hongKong
   });
-var getMarkers = function () {
-  $.ajax({
-    url: "/api/maps.json",
-    method: "GET",
-    success: function (response, status) {
-      response.forEach(function (elem, index){
-        getIcon(elem.category);
-        marker[index] = new google.maps.Marker({
-          position: {lat: parseFloat(elem.latitude), lng: parseFloat(elem.longitude)},
-          icon: postIcon,
-          map: map,
-          title: elem.title,
-          postID: elem.id
-        });
-        marker[index].addListener("click",function(){
-          modalForSinglePost(response[index].votes, response[index].title, response[index].image, response[index].username, response[index].location, response[index].description, response[index].created_at, response[index].category, response[index].id);
-          $('#showsinglepost').modal('show');
-        });
-      });
 
-    },
-    error: function(response, status) {
-      console.log(response);
-      console.log("did not get post data")
-    }
-  })
-};
-getMarkers();
+  var getMarkers = function () {
+    $.ajax({
+      url: "/api/maps.json",
+      method: "GET",
+      success: function (response, status) {
+        response.forEach(function (elem, index){
+          getIcon(elem.category);
+          marker[index] = new google.maps.Marker({
+            position: {lat: parseFloat(elem.latitude), lng: parseFloat(elem.longitude)},
+            icon: postIcon,
+            map: map,
+            title: elem.title,
+            postID: elem.id
+          });
+          marker[index].addListener("click",function(){
+            modalForSinglePost(response[index].votes, response[index].title, response[index].image, response[index].username, response[index].location, response[index].description, response[index].created_at, response[index].category, response[index].id);
+            $('#showsinglepost').modal('show');
+          });
+        });
+
+      },
+      error: function(response, status) {
+        console.log(response);
+        console.log("did not get post data")
+      }
+    })
+  };
+  getMarkers();
 
 
   // function addMarkerOnClick(){
