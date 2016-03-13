@@ -134,8 +134,8 @@ $(document).ready(function () {
         description : $('#createpost [name="description"]').val(),
         user_id : user.id,
         post_votes : 0,
-        latitude: postLat || 22.2783,
-        longitude: postLong || 114.1747
+        latitude: postLat.toString(),
+        longitude: postLong.toString()
       };
 
       $.ajax({

@@ -1,5 +1,34 @@
 // $(document).ready(function(){
 
+  var modalForSinglePost = function(post_votes, title, image, username, location, description, created_at, category, id) {
+    var body =
+    '<div id="singlebody">' +
+      '<div id="singlevotes"><i class="fa fa-thumbs-up"></i> ' + post_votes + '</div>' +
+      '<div id="singletitle">' + title + '</div>' +
+      '<p><img src=' + image + ' class="col-xs-12 photo"></p>' +
+      '<p><div id="singleusername">' + username + '</div></p>' +
+      '<p><div id="singlelocation">' + location + '</div></p>' +
+      '<p><div id="singledescription">' + description + '</div></p>' +
+      '<p><div id="singledate">' + created_at + '</p>' +
+      '<p><div id="singlecategory">' + category + '</div></p>' +
+    '</div>';
+
+    var footer =
+    '<div id="commentsection">' +
+      '<p id="commenttag"> Comments </p>' +
+      '<p><i class="fa fa-user"></i>&nbsp;&nbsp;<textarea class="form-control" name="description" rows="1"></textarea></p>' +
+      '<p><div id="allcomments"></div></p>'
+    '</div>';
+
+    $('.heroBtn').data('id', id);
+
+    $('.single-body').empty();
+    $('.single-footer').empty();
+    $('.single-body').append(body);
+    $('.single-footer').append(footer)
+  };
+
+
 var marker = [];
 var postIcon;
 var postLat;
@@ -34,7 +63,7 @@ var hongKong = {lat: 22.2783, lng: 114.1747};
 // };
 
 function getIcon(post){
-  if (post = "community") {
+  if (post == "Community") {
     postIcon = {
       url:'http://discoverycrc.com/wp-content/uploads/2014/09/Community-Icon.png',
       size: new google.maps.Size(90,90),
@@ -43,7 +72,7 @@ function getIcon(post){
       scaledSize: new google.maps.Size(50, 50)
     }
   }
-  else if (post = "animals") {
+  else if (post == "Animals") {
     postIcon = {
       url:'https://www.jetblue.com/img/special-needs/main_service_animal_icon.png',
       size: new google.maps.Size(90,90),
@@ -52,7 +81,7 @@ function getIcon(post){
       scaledSize: new google.maps.Size(50, 50)
     }
   }
-  else if (post = "youth") {
+  else if (post == "Youth") {
     postIcon = {
       url:'https://metrounitedway.org/servlet/eAndar.WebExtDocument/article/323832353233/373834/July15Newsletter_GraduationIcon.png',
       size: new google.maps.Size(90,90),
@@ -61,7 +90,7 @@ function getIcon(post){
       scaledSize: new google.maps.Size(10500, 50)
     }
   }
-  else if (post = "environment") {
+  else if (post == "Environment") {
     postIcon = {
       url:'http://vacitup.se/wp-content/50/2014/09/wsya2011-icon5-gogreen.png',
       size: new google.maps.Size(90,90),
@@ -70,7 +99,7 @@ function getIcon(post){
       scaledSize: new google.maps.Size(50, 50)
     }
   }
-  else if (post = "goodDeeds") {
+  else if (post == "Good deeds") {
     postIcon = {
       url:'http://cdn.mysitemyway.com/etc-mysitemyway/icons/legacy-previews/icons/glossy-black-icons-symbols-shapes/018721-glossy-black-icon-symbols-shapes-smiley-face1.png',
       size: new google.maps.Size(90,90),
@@ -122,19 +151,18 @@ var getMarkers = function () {
     url: "/api/maps.json",
     method: "GET",
     success: function (response, status) {
-      console.log(response);
       response.forEach(function (elem, index){
         getIcon(elem.category);
-        console.log(postIcon);
         marker[index] = new google.maps.Marker({
-          position: {lat: elem.latitude, lng: elem.longitude},
+          position: {lat: parseFloat(elem.latitude), lng: parseFloat(elem.longitude)},
           icon: postIcon,
           map: map,
           title: elem.title,
           postID: elem.id
         });
         marker[index].addListener("click",function(){
-          modalForSinglePost(response.title, response.username, response.created_at, response.description);
+          modalForSinglePost(response[index].votes, response[index].title, response[index].image, response[index].username, response[index].location, response[index].description, response[index].created_at, response[index].category, response[index].id);
+          $('#showsinglepost').modal('show');
         });
       });
 
@@ -277,8 +305,8 @@ function initAutocomplete() {
     google.maps.event.addListener(map, "click", function(event) {
       // place a marker
       placeMarker(event.latLng);
-      postLat = event.latLng.lat();
-      postLong = event.latLng.lng();
+      postLat = event.latLng.lat().toString();
+      postLong = event.latLng.lng().toString();
       console.log(postLat);
       console.log(postLong);
 

@@ -82,7 +82,7 @@ class API::PostsController < ApplicationController
 
   private
     def post_params
-      params.require(:post).permit(:title, :image, :category, :location, :description, :user_id, :post_votes)
+      params.require(:post).permit(:title, :image, :category, :location, :description, :user_id, :post_votes, :latitude, :longitude)
     end
 
     def editedpost_params
