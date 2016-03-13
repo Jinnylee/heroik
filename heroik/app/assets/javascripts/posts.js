@@ -21,7 +21,7 @@ $(document).ready(function () {
   var appendOwnPosts = function(id, image, title, post_votes, username, created_at, category) {
     var ownPosts =
     '<div class="col-xs-12 col-md-4 post" data-id="'+ id + '" data-toggle="modal" data-target="#showsinglepost">' +
-      '<img src=' + image + ' class="col-xs-12 photo">' +
+      '<img src="' + image + '" class="col-xs-12 photo">' +
       '<div class="col-xs-12 title">' + title + '</div>' +
       '<div class="col-xs-12 votes">' + post_votes + '</div>' +
       '<div class="col-xs-12 username">' + username + '</div>' +
@@ -57,24 +57,25 @@ $(document).ready(function () {
   };
 
   // APPEND CONTENT TO MODAL
-  var modalForSinglePost = function(title, image, post_votes, category, username, created_at, location, description, id) {
-    var header =
-    '<div id="singletitle">' +
-      title +
-    '</div>'
-
+  var modalForSinglePost = function(post_votes, title, image, username, location, description, created_at, category, id) {
     var body =
     '<div id="singlebody">' +
+      '<div id="singlevotes"><i class="fa fa-thumbs-up"></i> ' + post_votes + '</div>' +
+      '<div id="singletitle">' + title + '</div>' +
       '<p><img src=' + image + ' class="col-xs-12 photo"></p>' +
-      '<p><div id="singlevotes">' + post_votes + '</div></p>' +
-      '<p><div id="singlecategory">' + category + '</div></p>' +
       '<p><div id="singleusername">' + username + '</div></p>' +
-      '<p><div id="singledate">' + created_at + '</p>' +
       '<p><div id="singlelocation">' + location + '</div></p>' +
       '<p><div id="singledescription">' + description + '</div></p>' +
-    '</div>' +
-    '<div id="commentsection">COMMENTS' +
-    '</div>'
+      '<p><div id="singledate">' + created_at + '</p>' +
+      '<p><div id="singlecategory">' + category + '</div></p>' +
+    '</div>';
+
+    var footer =
+    '<div id="commentsection">' +
+      '<p id="commenttag"> Comments </p>' +
+      '<p><i class="fa fa-user"></i>&nbsp;&nbsp;<textarea class="form-control" name="description" rows="1"></textarea></p>' +
+      '<p><div id="allcomments"></div></p>'
+    '</div>';
 
     $('.deletePostBtn').data('id', id);
     $('.heroBtn').data('id', id);
@@ -87,9 +88,9 @@ $(document).ready(function () {
     $('#edit-description').val(description);
 
     $('.single-body').empty();
-    $('.single-header').empty();
+    $('.single-footer').empty();
     $('.single-body').append(body);
-    $('.single-header').append(header);
+    $('.single-footer').append(footer)
   };
 
   // SHOW ONE POST ON MODAL
@@ -102,7 +103,12 @@ $(document).ready(function () {
         method: "GET",
         url: "/api/posts/" + id + ".json",
         success: function (response) {
-          modalForSinglePost(response.title, response.image, response.post_votes, response.category, response.username, response.created_at, response.location, response.description, response.id);
+          console.log(response);
+          modalForSinglePost(response.post_votes, response.title, response.image, response.username, response.location, response.description, response.created_at, response.category, response.id);
+
+          openEditModal();
+          editPost();
+          deletePost();
         },
         error: function (response) {
           console.log(response);
@@ -150,6 +156,7 @@ $(document).ready(function () {
   // OPEN THE EDIT MODAL
   var openEditModal = function () {
     $('.editPostBtn').off().on('click', function (e) {
+      console.log("clicked")
       e.preventDefault();
       $('#editpostmodal').modal('show');
       $('#showsinglepost').modal('hide');
@@ -211,13 +218,11 @@ $(document).ready(function () {
       console.log("request sent!");
 
       var id = $(this).data("id");
-      console.log(id);
 
       $.ajax({
         url: '/api/posts/' + id + '.json',
         method: 'DELETE',
         success: function (response, status) {
-          console.log(response);
           $('#showsinglepost').modal('hide');
           showUserPage();
         },
@@ -231,7 +236,7 @@ $(document).ready(function () {
   // APPEND POSTS TO HOME
   var appendAllPosts = function(id, image, title, post_votes, username, created_at, category) {
     var ownPosts =
-    '<div class="col-xs-12 col-md-4 post" data-id="'+ id + '" data-toggle="modal" data-target="#showsinglepost">' +
+    '<div class="col-xs-12 col-md-3 post" data-id="'+ id + '" data-toggle="modal" data-target="#showsinglepost">' +
       '<img src=' + image + ' class="col-xs-12 photo">' +
       '<div class="col-xs-12 title">' + title +
       '</div>' +'<div class="col-xs-12 votes">' + post_votes + '</div>' +
@@ -276,9 +281,6 @@ $(document).ready(function () {
   $.auth.validateToken().then(function(user){
     showUserPage();
     createPost(user);
-    openEditModal();
-    editPost();
-    deletePost();
   }).fail(function(response){
     console.log(response);
   });

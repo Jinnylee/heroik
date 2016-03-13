@@ -38,7 +38,7 @@ class API::PostsController < ApplicationController
   end
 
   def destroy
-    Post.delete(params[:id])
+    Post.destroy(params[:id])
     respond_to do |format|
       # format.html { redirect_to events_url, notice: 'Event was successfully destroyed.' }
       format.json { head :no_content }
