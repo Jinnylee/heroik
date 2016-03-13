@@ -1,22 +1,58 @@
 // $(document).ready(function(){
 
 var marker = [];
+var hongKong = {lat: 22.2783, lng: 114.1747};
+
+var addPostMarker = function () {
+
+  function initMap() {
+    var map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 15,
+      center: hongKong
+    });
+      // add a click event handler to the map object
+    google.maps.event.addListener(map, "click", function(event) {
+        // place a marker
+      placeMarker(event.latLng);
+      var postLat = event.latLng.lat();
+      var postLong = event.latLng.lng();
+
+      // display the lat/lng in your form's lat/lng fields
+      // document.getElementById("latFld").value = event.latLng.lat();
+      // document.getElementById("lngFld").value = event.latLng.lng();
+    });
+  }
+  function placeMarker(location) {
+      //remove all markers if there are any
+    deleteOverlays();
+
+    var postMarker = new google.maps.Marker({
+        position: location,
+        map: map
+    });
+
+    map.setCenter(location);
+  }
+};
+
+
+
 var getMarkers = function () {
   $.ajax({
     url: "/api/maps.json",
     method: "GET",
     success: function (response, status) {
       response.forEach(function (elem, index){
-        var marker[index] = new google.maps.Marker({
-          position: {lat: elem.latitude, lng: elem.longitude},
-          icon: elem.category,
-          map: map,
-          title: elem.title,
-          postID: elem.id
-        });
-        marker[index].addListener("click",function(){
-          modalForSinglePost(response.title, response.username, response.created_at, response.description);
-        });
+        // var marker[index] = new google.maps.Marker({
+        //   position: {lat: elem.latitude, lng: elem.longitude},
+        //   icon: elem.category,
+        //   map: map,
+        //   title: elem.title,
+        //   postID: elem.id
+        // });
+        // marker[index].addListener("click",function(){
+        //   modalForSinglePost(response.title, response.username, response.created_at, response.description);
+        // });
       });
 
     },
@@ -27,10 +63,8 @@ var getMarkers = function () {
   })
 };
 
-getMarkers();
 
 function initMap() {
-  var hongKong = {lat: 22.2783, lng: 114.1747};
 
   var map = new google.maps.Map(document.getElementById('map'), {
     zoom: 15,
@@ -101,4 +135,43 @@ function initMap() {
     icon: environment,
     title: 'Admiralty!'
   });
+
+
+  // function initMap() {
+  //   var map = new google.maps.Map(document.getElementById('map'), {
+  //     zoom: 15,
+  //     center: hongKong
+  //   });
+      // add a click event handler to the map object
+    google.maps.event.addListener(map, "click", function(event) {
+        // place a marker
+      placeMarker(event.latLng);
+      var postLat = event.latLng.lat();
+      var postLong = event.latLng.lng();
+      console.log(postLat);
+      console.log(postLong);
+
+      // display the lat/lng in your form's lat/lng fields
+      // document.getElementById("latFld").value = event.latLng.lat();
+      // document.getElementById("lngFld").value = event.latLng.lng();
+    });
+  // }
+  function placeMarker(location) {
+      //remove all markers if there are any
+    // deleteOverlays();
+
+    var postMarker = new google.maps.Marker({
+        position: location,
+        map: map
+    });
+
+    map.setCenter(location);
+  }
+
+
+
+
 };
+
+// getMarkers();
+// addPostMarker();
