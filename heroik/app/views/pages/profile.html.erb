@@ -8,7 +8,7 @@
 </div>
 
 <!-- Modal for ADDING POST-->
-<div class="modal fade" id="addpostmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade ui-autocomplete" id="addpostmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -30,7 +30,7 @@
                 <option>Animals</option>
                 <option>Good deeds</option>
               </select></p>
-              <p><input type="text" name="location" class="form-control" placeholder="Location"></p>
+              <p><input type="text" name="location" class="form-control controls" placeholder="Location" id="district"></p>
               <div id="map" style="width:456px;height:400px"></div><br>
               <p><textarea class="form-control" name="description" rows="3"></textarea></p>
               <p><input type="submit" name="create" class="btn btn-default" value="Create Post!"></p>
@@ -81,4 +81,5 @@
     </div>
   </div>
 </div>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCnwzFid9lzMJJvj7XZ2WzM7BqavODwxhU&callback=initMap"></script>
+<!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCnwzFid9lzMJJvj7XZ2WzM7BqavODwxhU&callback=initMap"></script> -->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCnwzFid9lzMJJvj7XZ2WzM7BqavODwxhU&libraries=places&callback=initAutocomplete"></script>
