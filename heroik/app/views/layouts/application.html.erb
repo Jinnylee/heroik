@@ -3,6 +3,7 @@
 <head>
   <title>Heroik</title>
   <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%= stylesheet_link_tag 'application', 'https://fonts.googleapis.com/css?family=Roboto', media: 'all' %>
   <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
 </head>
@@ -14,14 +15,15 @@
 <div class="modal fade" id="showsinglepost" tabindex="-1" role="dialog">
   <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-header single-header">
+      <div class="modal-header">
+        <button type="button" class="btn btn-danger heroBtn">Hero!</button>
+        <button type="button" class="btn btn-default editPostBtn"><i class="fa fa-pencil-square-o"></i> Edit</button>
+        <button type="button" class="btn btn-default deletePostBtn"><i class="fa fa-trash-o"></i> Delete</button>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
       </div>
       <div class="modal-body single-body">
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Hero!</button>
+      <div class="modal-footer single-footer">
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
