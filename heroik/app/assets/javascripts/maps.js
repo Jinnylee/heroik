@@ -2,6 +2,8 @@
 
 var marker = [];
 var postIcon;
+var postLat;
+var postLong;
 var hongKong = {lat: 22.2783, lng: 114.1747};
 
 // var getMarkers = function () {
@@ -275,8 +277,10 @@ function initAutocomplete() {
     google.maps.event.addListener(map, "click", function(event) {
       // place a marker
       placeMarker(event.latLng);
-      var postLat = event.latLng.lat();
-      var postLong = event.latLng.lng();
+      postLat = event.latLng.lat();
+      postLong = event.latLng.lng();
+      console.log(postLat);
+      console.log(postLong);
 
       // display the lat/lng in your form's lat/lng fields
       // document.getElementById("latFld").value = event.latLng.lat();
