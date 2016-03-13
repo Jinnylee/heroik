@@ -126,7 +126,6 @@ $(document).ready(function () {
     $('#createpost').on('submit', function (e) {
       e.preventDefault();
       $('#create-form-message').text('');
-
       var post = {
         title   : $('#createpost [name="title"]').val(),
         image : $('#createpost [name="image"]').val(),
