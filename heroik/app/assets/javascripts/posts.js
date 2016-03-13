@@ -20,13 +20,15 @@ $(document).ready(function () {
   // GET POSTS THAT BELONG TO USER (PROFILE PAGE)
   var appendOwnPosts = function(id, image, title, post_votes, username, created_at, category) {
     var ownPosts =
-    '<div class="col-xs-12 col-md-4 post" data-id="'+ id + '" data-toggle="modal" data-target="#showsinglepost">' +
-      '<img src="' + image + '" class="col-xs-12 photo">' +
-      '<div class="col-xs-12 title">' + title + '</div>' +
-      '<div class="col-xs-12 votes">' + post_votes + '</div>' +
-      '<div class="col-xs-12 username">' + username + '</div>' +
-      '<div class="col-xs-12 date">' + created_at + '</div>' +
-      '<div class="col-xs-12 category">' + category + '</div>' +
+    '<div class="item">' +
+      '<div class="col-xs-12 col-md-4 post" data-id="'+ id + '" data-toggle="modal" data-target="#showsinglepost">' +
+        '<img src="' + image + '" class="col-xs-12 photo">' +
+        '<div class="col-xs-12 title">' + title + '</div>' +
+        '<div class="col-xs-12 votes">' + post_votes + '</div>' +
+        '<div class="col-xs-12 username">' + username + '</div>' +
+        '<div class="col-xs-12 date">' + created_at + '</div>' +
+        '<div class="col-xs-12 category">' + category + '</div>' +
+      '</div>' +
     '</div>';
 
     $('#userposts').append(ownPosts);
@@ -236,13 +238,15 @@ $(document).ready(function () {
   // APPEND POSTS TO HOME
   var appendAllPosts = function(id, image, title, post_votes, username, created_at, category) {
     var ownPosts =
-    '<div class="col-xs-12 col-md-3 post" data-id="'+ id + '" data-toggle="modal" data-target="#showsinglepost">' +
-      '<img src=' + image + ' class="col-xs-12 photo">' +
-      '<div class="col-xs-12 title">' + title +
-      '</div>' +'<div class="col-xs-12 votes">' + post_votes + '</div>' +
-      '<div class="col-xs-12 username">' + username + '</div>' +
-      '<div class="col-xs-12 date">' + created_at + '</div>' +
-      '<div class="col-xs-12 category">' + category + '</div>' +
+    '<div class="item">' +
+      '<div class="col-xs-12 col-md-3 post" data-id="'+ id + '" data-toggle="modal" data-target="#showhomesinglepost">' +
+        '<img src=' + image + ' class="col-xs-12 photo">' +
+        '<div class="col-xs-12 title">' + title +
+        '</div>' +'<div class="col-xs-12 votes">' + post_votes + '</div>' +
+        '<div class="col-xs-12 username">' + username + '</div>' +
+        '<div class="col-xs-12 date">' + created_at + '</div>' +
+        '<div class="col-xs-12 category">' + category + '</div>' +
+      '</div>' +
     '</div>';
 
     $('#post-home').append(ownPosts);
