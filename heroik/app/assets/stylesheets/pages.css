@@ -1,7 +1,76 @@
+body {
+  font-family: 'Roboto', serif;
+  font-size: 15px;
+  background-color: #E8E8E8;
+}
+
+#usercolumn {
+  background-color: #B0B0B0;
+}
+
+.post {
+
+}
+
+*, *:before, *:after {box-sizing:  border-box !important;}
+
+.row {
+ -moz-column-width: 20em;
+ -webkit-column-width: 20em;
+ -moz-column-gap: 1em;
+ -webkit-column-gap:1em;
+
+}
+
+.item {
+ display: inline-block;
+ padding:  .25rem;
+ width:  100%;
+}
+
+.post {
+  background-color: white;
+  border-radius: 5px;
+  border: solid  1px grey;
+  margin: 0.5em;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  margin-top:20px;
+  position:relative;
+  display: block;
+  column-fill: auto;
+}
+
+.post img {
+  padding:2px;
+}
+
+#empty-row-home {
+  height:200px;
+  background-color:white;
+}
+
+
+.username {
+  border-top: 1px #B0B0B0;
+  border-bottom: 1px #B0B0B0;
+}
+
+.navbar-brand img {
+  width:150px;
+}
+
+.navbar {
+  border-radius: 0px;
+  background-color: white;
+}
+
+
+/*CAROUSEL
 
 Code snippet by maridlcrmn (Follow me on Twitter @maridlcrmn) for Bootsnipp.com
 Image credits: unsplash.com
-*/
+*/*/
 
 /********************************/
 /*       Fade Bs-carousel       */
