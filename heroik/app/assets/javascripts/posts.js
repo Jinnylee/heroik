@@ -3,7 +3,7 @@
 
 $(document).ready(function () {
 
-//append user information on user column
+  // GET USER INFORMATION FOR USER COLUMN (PROFILE PAGE)
   var appendUserInformation = function(image, name, username, created_at, quote) {
     var userInfo =
     '<div class="col-xs-12" id="userinfo">' +
@@ -17,14 +17,16 @@ $(document).ready(function () {
     $('#usercolumn').append(userInfo);
   };
 
-//append all the posts that belong to that user
-  var appendOwnPosts = function(id, image, title, username, created_at) {
+  // GET POSTS THAT BELONG TO USER (PROFILE PAGE)
+  var appendOwnPosts = function(id, image, title, post_votes, username, created_at, category) {
     var ownPosts =
     '<div class="col-xs-12 col-md-4 post" data-id="'+ id + '" data-toggle="modal" data-target="#showsinglepost">' +
-      '<img src=' + image + ' class="col-xs-12 photo">' +
+      '<img src="' + image + '" class="col-xs-12 photo">' +
       '<div class="col-xs-12 title">' + title + '</div>' +
+      '<div class="col-xs-12 votes">' + post_votes + '</div>' +
       '<div class="col-xs-12 username">' + username + '</div>' +
       '<div class="col-xs-12 date">' + created_at + '</div>' +
+      '<div class="col-xs-12 category">' + category + '</div>' +
     '</div>';
 
     $('#userposts').append(ownPosts);
@@ -42,7 +44,7 @@ $(document).ready(function () {
         appendUserInformation(user.image, user.name, user.username, user.created_at, user.quote);
 
         response.posts.forEach(function(elem, index) {
-          appendOwnPosts(elem.id, elem.image, elem.title, elem.username, elem.created_at);
+          appendOwnPosts(elem.id, elem.image, elem.title, elem.post_votes, elem.username, elem.created_at, elem.category);
         });
 
         showOnePost();
@@ -51,25 +53,29 @@ $(document).ready(function () {
         console.log(response);
         console.log("did not get post data")
       }
-    })
+    });
   };
 
   // APPEND CONTENT TO MODAL
-  var modalForSinglePost = function(title, image, category, username, created_at, location, description, id) {
-    var header =
-    '<div id="singletitle">' +
-      title +
-    '</div>'
-
+  var modalForSinglePost = function(post_votes, title, image, username, location, description, created_at, category, id) {
     var body =
     '<div id="singlebody">' +
+      '<div id="singlevotes"><i class="fa fa-thumbs-up"></i> ' + post_votes + '</div>' +
+      '<div id="singletitle">' + title + '</div>' +
       '<p><img src=' + image + ' class="col-xs-12 photo"></p>' +
-      '<p><div id="singlecategory">' + category + '</div></p>' +
       '<p><div id="singleusername">' + username + '</div></p>' +
-      '<p><div id="singledate">' + created_at + '</p>' +
       '<p><div id="singlelocation">' + location + '</div></p>' +
-      '<p><div id="singledescription">' + description + '</p>' +
-    '</div>'
+      '<p><div id="singledescription">' + description + '</div></p>' +
+      '<p><div id="singledate">' + created_at + '</p>' +
+      '<p><div id="singlecategory">' + category + '</div></p>' +
+    '</div>';
+
+    var footer =
+    '<div id="commentsection">' +
+      '<p id="commenttag"> Comments </p>' +
+      '<p><i class="fa fa-user"></i>&nbsp;&nbsp;<textarea class="form-control" name="description" rows="1"></textarea></p>' +
+      '<p><div id="allcomments"></div></p>'
+    '</div>';
 
     $('.deletePostBtn').data('id', id);
     $('.heroBtn').data('id', id);
@@ -82,12 +88,12 @@ $(document).ready(function () {
     $('#edit-description').val(description);
 
     $('.single-body').empty();
-    $('.single-header').empty();
+    $('.single-footer').empty();
     $('.single-body').append(body);
-    $('.single-header').append(header);
+    $('.single-footer').append(footer)
   };
 
-  //SHOW ONE POST ON MODAL
+  // SHOW ONE POST ON MODAL
   var showOnePost = function () {
     $('.post').off().on('click', function (e) {
       e.preventDefault();
@@ -97,7 +103,12 @@ $(document).ready(function () {
         method: "GET",
         url: "/api/posts/" + id + ".json",
         success: function (response) {
-          modalForSinglePost(response.title, response.image, response.category, response.username, response.created_at, response.location, response.description, response.id);
+          console.log(response);
+          modalForSinglePost(response.post_votes, response.title, response.image, response.username, response.location, response.description, response.created_at, response.category, response.id);
+
+          openEditModal();
+          editPost();
+          deletePost();
         },
         error: function (response) {
           console.log(response);
@@ -106,9 +117,9 @@ $(document).ready(function () {
       });
 
     });
-  }
+  };
 
-  //CREATE POST
+  // CREATE POST
   var createPost = function (user) {
     $('#createpost').on('submit', function (e) {
       e.preventDefault();
@@ -145,6 +156,7 @@ $(document).ready(function () {
   // OPEN THE EDIT MODAL
   var openEditModal = function () {
     $('.editPostBtn').off().on('click', function (e) {
+      console.log("clicked")
       e.preventDefault();
       $('#editpostmodal').modal('show');
       $('#showsinglepost').modal('hide');
@@ -197,7 +209,7 @@ $(document).ready(function () {
     });
   };
 
-  // DELETE JOURNAL
+  // DELETE POST
   var deletePost = function () {
     $('.deletePostBtn').off().on('click', function (e){
       e.preventDefault();
@@ -206,13 +218,11 @@ $(document).ready(function () {
       console.log("request sent!");
 
       var id = $(this).data("id");
-      console.log(id);
 
       $.ajax({
         url: '/api/posts/' + id + '.json',
         method: 'DELETE',
         success: function (response, status) {
-          console.log(response);
           $('#showsinglepost').modal('hide');
           showUserPage();
         },
@@ -221,17 +231,56 @@ $(document).ready(function () {
         }
       })
     })
-  }
+  };
+
+  // APPEND POSTS TO HOME
+  var appendAllPosts = function(id, image, title, post_votes, username, created_at, category) {
+    var ownPosts =
+    '<div class="col-xs-12 col-md-3 post" data-id="'+ id + '" data-toggle="modal" data-target="#showsinglepost">' +
+      '<img src=' + image + ' class="col-xs-12 photo">' +
+      '<div class="col-xs-12 title">' + title +
+      '</div>' +'<div class="col-xs-12 votes">' + post_votes + '</div>' +
+      '<div class="col-xs-12 username">' + username + '</div>' +
+      '<div class="col-xs-12 date">' + created_at + '</div>' +
+      '<div class="col-xs-12 category">' + category + '</div>' +
+    '</div>';
+
+    $('#post-home').append(ownPosts);
+  };
+
+  // GET ALL POSTS (HOME PAGE)
+  var allPostsHomePage = function () {
+    $.ajax({
+      url: "/api/posts.json",
+      method: "GET",
+      success: function (response, status) {
+        console.log(response);
+        response.forEach(function(elem, index) {
+          appendAllPosts(elem.id, elem.image, elem.title, elem.post_votes, elem.username, elem.created_at, elem.category);
+        });
+
+        showOnePost();
+      },
+      error: function(response, status) {
+        console.log(response);
+        console.log("did not get post data")
+      }
+    });
+  };
+
+  // GET COMMUNITY POSTS
+  // GET YOUTH POSTS
+  // GET ENVIRONMENT POSTS
+  // GET ANIMALS POSTS
+  // GET GOOD DEEDS POSTS
 
   var init = function() {
+    allPostsHomePage();
   }
 
   $.auth.validateToken().then(function(user){
     showUserPage();
     createPost(user);
-    openEditModal();
-    editPost();
-    deletePost();
   }).fail(function(response){
     console.log(response);
   });

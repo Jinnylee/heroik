@@ -1,5 +1,31 @@
+body {
+  font-family: 'Roboto', serif;
+  font-size: 15px;
+  background-color: #E8E8E8;
+}
+
+#usercolumn {
+  background-color: #B0B0B0;
+}
+
+.post {
+  background-color: white;
+  border-radius: 5px;
+  border: solid  1px grey;
+}
+
+.username {
+  border-top: 1px #B0B0B0;
+  border-bottom: 1px #B0B0B0;
+}
+
 .navbar-brand img {
   width:150px;
+}
+
+.navbar {
+  border-radius: 0px;
+  background-color: white;
 }
 
 /****** LOGIN MODAL ******/

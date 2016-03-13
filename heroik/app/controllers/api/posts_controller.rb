@@ -1,5 +1,12 @@
 class API::PostsController < ApplicationController
 
+  def index
+    @posts = Post.all
+    respond_to do |format|
+      format.json { render 'index.jbuilder' }
+    end
+  end
+
   def show
     @post = Post.find(params[:id])
     respond_to do |format|
@@ -19,7 +26,6 @@ class API::PostsController < ApplicationController
       end
   end
 
-
   def update
     @post = Post.update(params[:id], editedpost_params)
     respond_to do |format|
@@ -32,14 +38,12 @@ class API::PostsController < ApplicationController
   end
 
   def destroy
-    Post.delete(params[:id])
+    Post.destroy(params[:id])
     respond_to do |format|
       # format.html { redirect_to events_url, notice: 'Event was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
-
-
 
   private
     def post_params
