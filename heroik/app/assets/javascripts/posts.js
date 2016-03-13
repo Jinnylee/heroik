@@ -273,6 +273,8 @@ $(document).ready(function () {
     $('#community').off().on('click', function (e) {
       e.preventDefault();
       console.log("community clicked! request sending");
+      $('.carousel').hide();
+      $('#post-home').empty();
 
       $.ajax({
         url: "/api/posts/community.json",
@@ -280,9 +282,9 @@ $(document).ready(function () {
         success: function (response, status) {
           console.log(response);
           response.forEach(function (elem, index) {
-
             appendAllPosts(elem.id, elem.image, elem.title, elem.post_votes, elem.username, elem.created_at, elem.category);
           });
+          showOnePost();
         },
         error: function (response, status) {
           console.log(response);
@@ -294,83 +296,119 @@ $(document).ready(function () {
 
   // GET YOUTH POSTS
   var youthPosts = function() {
-    $.ajax({
-      url: "/api/posts/youth.json",
-      method: "GET",
-      success: function (response, status) {
-        console.log(response);
-        response.forEach(function (elem, index) {
-          appendAllPosts(elem.id, elem.image, elem.title, elem.post_votes, elem.username, elem.created_at, elem.category);
-        });
+    $('#youth').off().on('click', function (e) {
+      e.preventDefault();
+      console.log("community clicked! request sending");
+      $('.carousel').hide();
+      $('#post-home').empty();
 
-      },
-      error: function (response, status) {
-        console.log(response);
-        console.log("did not get community posts");
-      }
+      $.ajax({
+        url: "/api/posts/youth.json",
+        method: "GET",
+        success: function (response, status) {
+          console.log(response);
+          response.forEach(function (elem, index) {
+            appendAllPosts(elem.id, elem.image, elem.title, elem.post_votes, elem.username, elem.created_at, elem.category);
+          });
+          showOnePost();
+        },
+        error: function (response, status) {
+          console.log(response);
+          console.log("did not get community posts");
+        }
+      });
     });
   };
 
   // GET ENVIRONMENT POSTS
   var environmentPosts = function() {
-    $.ajax({
-      url: "/api/posts/environment.json",
-      method: "GET",
-      success: function (response, status) {
-        console.log(response);
-        response.forEach(function (elem, index) {
-          appendAllPosts(elem.id, elem.image, elem.title, elem.post_votes, elem.username, elem.created_at, elem.category);
-        });
+    $('#environment').off().on('click', function (e) {
+      e.preventDefault();
+      console.log("community clicked! request sending");
+      $('.carousel').hide();
+      $('#post-home').empty();
 
-      },
-      error: function (response, status) {
-        console.log(response);
-        console.log("did not get community posts");
-      }
+      $.ajax({
+        url: "/api/posts/environment.json",
+        method: "GET",
+        success: function (response, status) {
+          console.log(response);
+          response.forEach(function (elem, index) {
+            appendAllPosts(elem.id, elem.image, elem.title, elem.post_votes, elem.username, elem.created_at, elem.category);
+          });
+          showOnePost();
+        },
+        error: function (response, status) {
+          console.log(response);
+          console.log("did not get community posts");
+        }
+      });
     });
   };
 
   // GET ANIMALS POSTS
   var animalsPosts = function() {
-    $.ajax({
-      url: "/api/posts/animals.json",
-      method: "GET",
-      success: function (response, status) {
-        console.log(response);
-        response.forEach(function (elem, index) {
-          appendAllPosts(elem.id, elem.image, elem.title, elem.post_votes, elem.username, elem.created_at, elem.category);
-        });
+    $('#animals').off().on('click', function (e) {
+      e.preventDefault();
+      console.log("community clicked! request sending");
+      $('.carousel').hide();
+      $('#post-home').empty();
 
-      },
-      error: function (response, status) {
-        console.log(response);
-        console.log("did not get community posts");
-      }
+      $.ajax({
+        url: "/api/posts/animals.json",
+        method: "GET",
+        success: function (response, status) {
+          console.log(response);
+          response.forEach(function (elem, index) {
+            appendAllPosts(elem.id, elem.image, elem.title, elem.post_votes, elem.username, elem.created_at, elem.category);
+          });
+          showOnePost();
+        },
+        error: function (response, status) {
+          console.log(response);
+          console.log("did not get community posts");
+        }
+      });
     });
   };
 
   // GET GOOD DEEDS POSTS
   var goodDeedsPosts = function() {
-    $.ajax({
-      url: "/api/posts/gooddeeds.json",
-      method: "GET",
-      success: function (response, status) {
-        console.log(response);
-        response.forEach(function (elem, index) {
-          appendAllPosts(elem.id, elem.image, elem.title, elem.post_votes, elem.username, elem.created_at, elem.category);
-        });
+    $('#gooddeeds').off().on('click', function (e) {
+      e.preventDefault();
+      console.log("community clicked! request sending");
+      $('.carousel').hide();
+      $('#post-home').empty();
 
-      },
-      error: function (response, status) {
-        console.log(response);
-        console.log("did not get community posts");
-      }
+      $.ajax({
+        url: "/api/posts/good_deeds.json",
+        method: "GET",
+        success: function (response, status) {
+          console.log(response);
+          response.forEach(function (elem, index) {
+            appendAllPosts(elem.id, elem.image, elem.title, elem.post_votes, elem.username, elem.created_at, elem.category);
+          });
+          showOnePost();
+        },
+        error: function (response, status) {
+          console.log(response);
+          console.log("did not get community posts");
+        }
+      });
     });
   };
+
+  // GET MOST POPULAR POSTS
+  // GO TO HOME
 
 
   var init = function() {
     allPostsHomePage();
+    communityPosts();
+    youthPosts();
+    environmentPosts();
+    animalsPosts();
+    goodDeedsPosts();
   }
 
   $.auth.validateToken().then(function(user){

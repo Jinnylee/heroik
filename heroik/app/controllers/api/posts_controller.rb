@@ -45,6 +45,41 @@ class API::PostsController < ApplicationController
     end
   end
 
+  def community
+    @posts = Post.where(category: 'Community')
+    respond_to do |format|
+      format.json { render 'index.jbuilder' }
+    end
+  end
+
+  def youth
+    @posts = Post.where(category: 'Youth')
+    respond_to do |format|
+      format.json { render 'index.jbuilder' }
+    end
+  end
+
+  def environment
+    @posts = Post.where(category: 'Environment')
+    respond_to do |format|
+      format.json { render 'index.jbuilder' }
+    end
+  end
+
+  def animals
+    @posts = Post.where(category: 'Animals')
+    respond_to do |format|
+      format.json { render 'index.jbuilder' }
+    end
+  end
+
+  def good_deeds
+    @posts = Post.where(category: 'Good deeds')
+    respond_to do |format|
+      format.json { render 'index.jbuilder' }
+    end
+  end
+
   private
     def post_params
       params.require(:post).permit(:title, :image, :category, :location, :description, :user_id, :post_votes)
