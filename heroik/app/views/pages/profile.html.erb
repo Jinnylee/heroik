@@ -1,8 +1,9 @@
-<div class="container">
+<div class="container-fluid">
   <div class="col-md-3" id="usercolumn"></div>
 
   <div class="col-md-9" id="showuserposts">
     <div class="col-md-4" id="addpostdiv"><button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#addpostmodal"><i class="fa fa-plus"></i></button></div>
+    <div id="userposts"></div>
   </div>
 </div>
 
@@ -12,16 +13,16 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+        <h4 class="modal-title" id="myModalLabel">Add a post!</h4>
       </div>
       <div class="modal-body">
 
         <div id="createpost-profile">
 
             <form id="createpost">
-              <p><input type="text" class="form-control" placeholder="Title"></p>
-              <p>image</p>
-              <p><select class="form-control">
+              <p><input type="text" name="title" class="form-control" placeholder="Title"></p>
+              <p><input type="text" name="image" class="form-control" placeholder="Photo link"></p>
+              <p><select class="form-control" name="category">
                 <option>Category</option>
                 <option>Community</option>
                 <option>Youth</option>
@@ -29,12 +30,46 @@
                 <option>Animals</option>
                 <option>Good deeds</option>
               </select></p>
-              <p><input type="text" class="form-control" placeholder="Address"></p>
-              <p><textarea class="form-control" rows="3"></textarea></p>
-              <p><input type="submit" name="create" class="btn btn-default"></p>
+              <p><input type="text" name="location" class="form-control" placeholder="Location"></p>
+              <p><textarea class="form-control" name="description" rows="3"></textarea></p>
+              <p><input type="submit" name="create" class="btn btn-default" value="Create Post!"></p>
             </form>
 
             <div id="create-form-message"></div>
+          </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal for EDITING POST-->
+<div class="modal fade" id="editpostmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+
+      <div class="modal-body">
+
+        <div id="editpost-profile">
+
+            <form id="editpost">
+              <p><input type="text" id="edit-title" class="form-control" placeholder="Title"></p>
+              <p><input type="text" name="edit-image" class="form-control" placeholder="Photo link"></p>
+              <p><select class="form-control" id="edit-category">
+                <option>Category</option>
+                <option>Community</option>
+                <option>Youth</option>
+                <option>Environment</option>
+                <option>Animals</option>
+                <option>Good deeds</option>
+              </select></p>
+              <p><input type="text" class="form-control" id="edit-location" placeholder="Location"></p>
+              <p><textarea class="form-control" id="edit-description" rows="3" placeholder="Description"></textarea></p>
+              <p><input type="submit" name="edit" class="btn btn-default"></p>
+            </form>
+
+            <div id="edit-form-message"></div>
           </div>
 
       </div>
