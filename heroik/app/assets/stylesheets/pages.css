@@ -39,7 +39,7 @@ body {
 .post {
   background-color: white;
   border-radius: 5px;
-  border: solid  1px grey;
+  border: solid  1px #CCCBC6;
   margin: 0.5em;
   padding-top: 20px;
   padding-bottom: 20px;

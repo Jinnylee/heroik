@@ -85,12 +85,16 @@ $(document).ready(function () {
     var footer =
     '<div id="commentsection">' +
       '<p id="commenttag"> Comments </p>' +
-      '<p><i class="fa fa-user"></i>&nbsp;&nbsp;<textarea class="form-control" name="description" rows="1"></textarea></p>' +
-      '<p><div id="allcomments"></div></p>'
+      '<p><i class="fa fa-user"></i>&nbsp;&nbsp;' +
+      '<textarea class="form-control" id="commentform" name="comment" rows="1" placeholder="Add a comment..."></textarea>' +
+      '</p>' +
+      '<button type="button" class="btn btn-danger" id="comment-btn">Comment</button>' +
+      '<p><div id="allcomments"></div></p>' +
     '</div>';
 
     $('.deletePostBtn').data('id', id);
     $('.heroBtn').data('id', id);
+    $('#comment-btn').data('id', id);
     $('#editpost').data('id', id);
 
     $('#edit-title').val(title);
@@ -105,6 +109,15 @@ $(document).ready(function () {
     $('.single-footer').append(footer)
   };
 
+
+  var addComment = function () {
+    console.log("post.js addComment", $("#comment-btn"));
+    $("#comment-btn").off().on('click', function(e) {
+      e.preventDefault();
+      console.log("comment clicked and sending request!");
+    });
+  };
+
   // SHOW ONE POST ON MODAL
   var showOnePost = function () {
     $('.post').off().on('click', function (e) {
@@ -115,12 +128,18 @@ $(document).ready(function () {
         method: "GET",
         url: "/api/posts/" + id + ".json",
         success: function (response) {
-          console.log(response);
           modalForSinglePost(response.post_votes, response.title, response.image, response.username, response.location, response.description, response.created_at, response.category, response.id);
 
           openEditModal();
           editPost();
           deletePost();
+          addComment();
+
+          // $.auth.validateToken().then(function(user){
+          //   addComment(user);
+          // }).fail(function(response){
+          //   console.log(response);
+          // });
         },
         error: function (response) {
           console.log(response);
@@ -269,7 +288,6 @@ $(document).ready(function () {
       url: "/api/posts.json",
       method: "GET",
       success: function (response, status) {
-        console.log(response);
         response.forEach(function(elem, index) {
           appendAllPosts(elem.id, elem.image, elem.title, elem.post_votes, elem.username, elem.created_at, elem.category);
         });
