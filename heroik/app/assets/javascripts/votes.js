@@ -20,21 +20,3 @@ var addHeroButton = function (){
     });
   });
 };
-
-// var checkHero = function (user){
-//     var id = $(this).data("id");
-
-//     $.ajax({
-//       method: "GET",
-//       url: "/api/posts/" + id + "/votes.json",
-//       success: function (response) {
-//         console.log(response);
-//         $(".heroBtn").addClass("hide");
-//       },
-//       error: function (response) {
-//         console.log(response);
-//         console.log("not getting single post data!")
-//       }
-//     });
-//   });
-// };
