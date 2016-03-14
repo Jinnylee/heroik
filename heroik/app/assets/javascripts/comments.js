@@ -1,8 +1,6 @@
-$(document).ready(function(){
-
   var addComment = function (user) {
     console.log("AddComment")
-    $("#comment-btn").off().on('click', function(e) {
+    $(".comment-btn").off().on('click', function(e) {
     e.preventDefault();
     console.log("comment clicked and sending request!");
 
@@ -10,8 +8,8 @@ $(document).ready(function(){
     console.log(id);
 
     var newComment = {
-      comment : $('#commentform [name="comment"]').val(),
-      post_id : post.id,
+      comment : $('textarea#commentform').val(),
+      post_id : id,
       user_id : user.id
     };
     console.log(newComment);
@@ -40,10 +38,7 @@ $(document).ready(function(){
   };
 
 
-  $.auth.validateToken().then(function(user){
-    addComment(user);
-  }).fail(function(response){
-    console.log(response);
-  });
+$(document).ready(function(){
+
 
 });

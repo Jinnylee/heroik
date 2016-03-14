@@ -82,19 +82,19 @@ $(document).ready(function () {
       '<p><div id="singlecategory">' + category + '</div></p>' +
     '</div>';
 
-    var footer =
-    '<div id="commentsection">' +
-      '<p id="commenttag"> Comments </p>' +
-      '<p><i class="fa fa-user"></i>&nbsp;&nbsp;' +
-      '<textarea class="form-control" id="commentform" name="comment" rows="1" placeholder="Add a comment..."></textarea>' +
-      '</p>' +
-      '<button type="button" class="btn btn-danger" id="comment-btn">Comment</button>' +
-      '<p><div id="allcomments"></div></p>' +
-    '</div>';
+    // var footer =
+    // '<div id="commentsection">' +
+    //   '<p id="commenttag"> Comments </p>' +
+    //   '<p><i class="fa fa-user"></i>&nbsp;&nbsp;' +
+    //   '<textarea class="form-control" id="commentform" name="comment" rows="1" placeholder="Add a comment..."></textarea>' +
+    //   '</p>' +
+    //   '<button type="button" class="btn btn-danger" id="comment-btn">Comment</button>' +
+    //   '<p><div id="allcomments"></div></p>' +
+    // '</div>';
 
     $('.deletePostBtn').data('id', id);
     $('.heroBtn').data('id', id);
-    $('#comment-btn').data('id', id);
+    $('.comment-btn').data('id', id);
     $('#editpost').data('id', id);
 
     $('#edit-title').val(title);
@@ -104,18 +104,9 @@ $(document).ready(function () {
     $('#edit-description').val(description);
 
     $('.single-body').empty();
-    $('.single-footer').empty();
+    // $('.single-footer').empty();
     $('.single-body').append(body);
-    $('.single-footer').append(footer)
-  };
-
-
-  var addComment = function () {
-    console.log("post.js addComment", $("#comment-btn"));
-    $("#comment-btn").off().on('click', function(e) {
-      e.preventDefault();
-      console.log("comment clicked and sending request!");
-    });
+    // $('.single-footer').append(footer)
   };
 
   // SHOW ONE POST ON MODAL
@@ -128,18 +119,26 @@ $(document).ready(function () {
         method: "GET",
         url: "/api/posts/" + id + ".json",
         success: function (response) {
+          $.auth.validateToken().then(function(user){
+            if (user.id == response.user_id) {
+              $('.editPostBtn').removeClass('hide');
+              $('.deletePostBtn').removeClass('hide');
+            }
+          }).fail(function(response){
+            console.log(response);
+          });
+
           modalForSinglePost(response.post_votes, response.title, response.image, response.username, response.location, response.description, response.created_at, response.category, response.id);
 
           openEditModal();
           editPost();
           deletePost();
-          addComment();
 
-          // $.auth.validateToken().then(function(user){
-          //   addComment(user);
-          // }).fail(function(response){
-          //   console.log(response);
-          // });
+          $.auth.validateToken().then(function(user){
+            addComment(user);
+          }).fail(function(response){
+            console.log(response);
+          });
         },
         error: function (response) {
           console.log(response);
@@ -269,7 +268,7 @@ $(document).ready(function () {
   var appendAllPosts = function(id, image, title, post_votes, username, created_at, category) {
     var ownPosts =
     '<div class="item">' +
-      '<div class="col-xs-12 post" data-id="'+ id + '" data-toggle="modal" data-target="#showhomesinglepost">' +
+      '<div class="col-xs-12 post" data-id="'+ id + '" data-toggle="modal" data-target="#showsinglepost">' +
         '<img src=' + image + ' class="col-xs-12 photo">' +
         '<div class="col-xs-12 title">' + title +
         '</div>' +'<div class="col-xs-12 votes">' + post_votes + '</div>' +
