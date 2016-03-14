@@ -114,19 +114,22 @@ $(document).ready(function () {
     $('.post').off().on('click', function (e) {
       e.preventDefault();
       var id = $(this).data("id")
+      $('.editPostBtn').addClass('hide');
+      $('.deletePostBtn').addClass('hide');
+      $('.heroBtn').removeClass("hide");
 
       $.ajax({
         method: "GET",
         url: "/api/posts/" + id + ".json",
         success: function (response) {
-          $.auth.validateToken().then(function(user){
-            if (user.id == response.user_id) {
-              $('.editPostBtn').removeClass('hide');
-              $('.deletePostBtn').removeClass('hide');
-            }
-          }).fail(function(response){
-            console.log(response);
-          });
+          console.log(response)
+          if (response.belongs_to_current_user){
+            $('.editPostBtn').removeClass('hide');
+            $('.deletePostBtn').removeClass('hide');
+          }
+          if (response.current_user_voted > 0) {
+            $('.heroBtn').addClass("hide");
+          }
 
           modalForSinglePost(response.post_votes, response.title, response.image, response.username, response.location, response.description, response.created_at, response.category, response.id);
 
@@ -136,6 +139,7 @@ $(document).ready(function () {
 
           $.auth.validateToken().then(function(user){
             addComment(user);
+            addHeroButton();
           }).fail(function(response){
             console.log(response);
           });
