@@ -19,7 +19,7 @@ body {
 }
 
 .post{
-  border:1px solid gray;
+  border:1px solid #bfbfbf;
   border-radius: 5px;
   background:white;
   margin-bottom:20px;
@@ -36,6 +36,13 @@ body {
 .post img {
   padding:2px;
 }
+
+title {
+    font-weight: bold;
+    font-size: 16px;
+}
+
+
 
 /*PREVIOUS PINTEREST CSS CODE - HARDWIRED*/
 
