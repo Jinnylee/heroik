@@ -35,7 +35,7 @@ function getIcon(post){
   }
   else if (post == "Environment") {
     postIcon = {
-      url:'http://vacitup.se/wp-content/50/2014/09/wsya2011-icon5-gogreen.png',
+      url:'http://www.yara.us/images/399-77022IMAGE%20banner%20image%20environment%20CORRECT.png',
       size: new google.maps.Size(90,90),
       origin: new google.maps.Point(0, 0),
       anchor: new google.maps.Point(0, 0),
