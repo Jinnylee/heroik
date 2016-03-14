@@ -1,7 +1,7 @@
 class API::CommentsController < ApplicationController
 
   def index
-    @comments = Comment.where(post_id: params[:id]).limit(5)
+    @comments = Comment.where(post_id: params[:post_id])
     respond_to do |format|
       format.json { render json: @comments.as_json(include: :user) }
     end

@@ -40,13 +40,33 @@
 
 // SHOW COMMENTS ON POST MODEL
   var showAllComments = function() {
+    var id = $('.comment-btn').data("id");
+
     $.ajax({
       type: 'GET',
       url: 'api/posts/' + id + '/comments.json',
       success: function(response) {
         console.log(response);
-        response.forEach(function(elem, index) {
-          appendComments(elem.image, elem.username, elem.comment);
+        $('#allcomments').empty();
+        $('#see-more').show();
+
+        if (response.length <= 5) {
+          console.log("why");
+          $('#see-more').hide();
+        }
+
+        var i;
+        for (i = 0; i < 5; i++) {
+          appendComments(response[i].user.image, response[i].user.username, response[i].comment);
+        }
+
+        $('#view-all-comments').off().on('click', function(e) {
+          e.preventDefault();
+          console.log('clicked');
+          $('#see-more').hide();
+          for (i = 5; i < response.length; i++) {
+            appendComments(response[i].user.image, response[i].user.username, response[i].comment);
+          };
         });
 
       },
@@ -60,11 +80,10 @@
   var appendComments = function(image, username, comment) {
     var comments =
     '<div class="comment">' +
-      '<div class="comment-user-image">' + image + '</div>' +
+      '<img src="' + image + '" class="comment-user-image" >' +
       '<div class="comment-user">' + username + '</div>' +
-      '<br><div class="comment-text">' + comment + '</div>' +
+      '<div class="comment-text">' + comment + '</div>' +
     '</div>'
 
-    $('#allcomments').empty();
     $('#allcomments').append(comments);
   };

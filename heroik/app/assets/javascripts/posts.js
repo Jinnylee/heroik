@@ -137,6 +137,7 @@ $(document).ready(function () {
           openEditModal();
           editPost();
           deletePost();
+          showAllComments();
 
           $.auth.validateToken().then(function(user){
             addComment(user);
