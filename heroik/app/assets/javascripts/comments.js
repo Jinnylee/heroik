@@ -1,3 +1,5 @@
+
+//ADD COMMENT
   var addComment = function (user) {
     $(".comment-btn").off().on('click', function(e) {
     e.preventDefault();
@@ -19,7 +21,6 @@
         newComment: newComment
       },
       success: function(response){
-        console.log(response);
         $('textarea#commentform').val('');
 
         var newComment =
@@ -27,7 +28,6 @@
         "<b>" + response.user.username + "</b>" +
         "<br>" + response.comment +
         "</div>"
-        console.log(user)
 
         $("#allcomments").append(newComment);
       },
@@ -38,8 +38,33 @@
     });
   };
 
+// SHOW COMMENTS ON POST MODEL
+  var showAllComments = function() {
+    $.ajax({
+      type: 'GET',
+      url: 'api/posts/' + id + '/comments.json',
+      success: function(response) {
+        console.log(response);
+        response.forEach(function(elem, index) {
+          appendComments(elem.image, elem.username, elem.comment);
+        });
 
-$(document).ready(function(){
+      },
+      error: function(response) {
+        console.log(response);
+      }
+    })
+  }
 
+// APPEND COMMENTS ON POST MODEL (limit to 5)
+  var appendComments = function(image, username, comment) {
+    var comments =
+    '<div class="comment">' +
+      '<div class="comment-user-image">' + image + '</div>' +
+      '<div class="comment-user">' + username + '</div>' +
+      '<br><div class="comment-text">' + comment + '</div>' +
+    '</div>'
 
-});
+    $('#allcomments').empty();
+    $('#allcomments').append(comments);
+  };
