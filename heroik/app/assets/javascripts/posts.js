@@ -293,7 +293,7 @@ $(document).ready(function () {
       method: "GET",
       success: function (response, status) {
         response.forEach(function(elem, index) {
-          appendAllPosts(elem.id, elem.image, elem.title, elem.post_votes, elem.username, elem.created_at, elem.category);
+          appendAllPosts(elem.id, elem.image, elem.title, elem.post_votes, elem.user.username, elem.created_at, elem.category);
         });
         masonryGrid();
         showOnePost();
