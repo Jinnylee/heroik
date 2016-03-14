@@ -31,6 +31,7 @@ Rails.application.routes.draw do
 
   # pages
   root 'pages#index'
+  get '/posts', to: 'pages#posts'
   get '/profile', to: 'pages#profile'
   get '/neighbourhood', to: 'pages#neighbourhood'
 
