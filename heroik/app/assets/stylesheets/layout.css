@@ -26,8 +26,9 @@ body {
   margin-bottom:0px;
 }
 
-.navbar-brand img {
-  width:150px;
+a.navbar-brand > img {
+  width: 250px;
+  margin-top: -20px;
 }
 
 .navbar {
@@ -45,7 +46,9 @@ body {
 #environment:hover, #community:hover, #animals:hover, #youth:hover, #gooddeeds:hover, #mostpopular:hover, #neighborhood:hover {
   background-color:DarkTurquoise;
   color:white;
-  font-weight:bold;
+/*  background-image:url("https://d3ui957tjb5bqd.cloudfront.net/images/screenshots/products/24/240/240143/christmas-tree-f.jpg?1416330834");
+  background-size: 100%;
+  background-position: center;*/
 }
 
 #nav-profile {
