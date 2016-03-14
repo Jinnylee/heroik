@@ -114,6 +114,7 @@ $(document).ready(function () {
     $('.post').off().on('click', function (e) {
       e.preventDefault();
       var id = $(this).data("id")
+      // if (location.pathname == "/")
       $('.editPostBtn').addClass('hide');
       $('.deletePostBtn').addClass('hide');
       $('.heroBtn').removeClass("hide");
