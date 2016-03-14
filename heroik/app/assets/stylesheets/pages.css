@@ -1,7 +1,102 @@
+body {
+  font-family: 'Roboto', serif;
+  font-size: 15px;
+  background-color: #E8E8E8;
+}
+
+#usercolumn {
+  background-color: #B0B0B0;
+}
+
+.container-fluid {
+  margin:0 auto;
+}
+/*POSTS SECTION ON HOMEPAGE*/
+
+#post-home.row{
+  margin:0 auto;
+  margin-top:20px;
+}
+
+.post{
+  border:1px solid #bfbfbf;
+  border-radius: 5px;
+  background:white;
+  margin-bottom:20px;
+  padding-top:20px;
+  padding-bottom:20px;
+}
+
+/*This item is attached to masonryGrid in posts.js file*/
+.item {
+  width: 335px;
+
+}
+
+.post img {
+  padding:2px;
+}
+
+title {
+    font-weight: bold;
+    font-size: 16px;
+}
+
+
+
+/*PREVIOUS PINTEREST CSS CODE - HARDWIRED*/
+
+/**, *:before, *:after {box-sizing:  border-box !important;}
+
+.row {
+ -moz-column-width: 20em;
+ -webkit-column-width: 20em;
+ -moz-column-gap: 1em;
+ -webkit-column-gap:1em;
+
+}
+
+.item {
+ display: inline-block;
+ padding:  .25rem;
+ width:  100%;
+}
+
+.post {
+  background-color: white;
+  border-radius: 5px;
+  border: solid  1px #CCCBC6;
+  margin: 0.5em;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  margin-top:20px;
+  position:relative;
+  display: block;
+  column-fill: auto;
+}
+*/
+
+
+.username {
+  border-top: 1px #B0B0B0;
+  border-bottom: 1px #B0B0B0;
+}
+
+.navbar-brand img {
+  width:150px;
+}
+
+.navbar {
+  border-radius: 0px;
+  background-color: white;
+}
+
+
+/*CAROUSEL
 
 Code snippet by maridlcrmn (Follow me on Twitter @maridlcrmn) for Bootsnipp.com
 Image credits: unsplash.com
-*/
+*/*/
 
 /********************************/
 /*       Fade Bs-carousel       */

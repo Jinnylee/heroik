@@ -1,9 +1,5 @@
 class API::CommentsController < ApplicationController
 
-  # def new
-  #   @comment = Comment.new
-  # end
-
   def show
     @comment = Comment.where(post_id: params[:id])
   end
@@ -13,10 +9,9 @@ class API::CommentsController < ApplicationController
 
     respond_to do |format|
       if @comment.save
-        format.html { redirect_to @comment, notice: 'Comment was successfully created.' }
-        format.json { render json: @comment }
+         # format.json { render json: @comment }
+        format.json { render json: @comment.as_json(include: :user) }
       else
-        format.html { render :new }
         format.json { render json: @comment.errors, status: :unprocessable_entity }
       end
     end
@@ -24,7 +19,7 @@ class API::CommentsController < ApplicationController
 
   private
     def comment_params
-      params.require(:insertComment).permit(:comment, :user_id, :post_id)
+      params.require(:newComment).permit(:comment, :post_id, :user_id)
     end
 
 end

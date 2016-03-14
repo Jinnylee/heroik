@@ -1,104 +1,300 @@
-// $(document).ready(function(){
+  // var modalForSinglePost = function(post_votes, title, image, username, location, description, created_at, category, id) {
+  //   var body =
+  //   '<div id="singlebody">' +
+  //     '<div id="singlevotes"><i class="fa fa-thumbs-up"></i> ' + post_votes + '</div>' +
+  //     '<div id="singletitle">' + title + '</div>' +
+  //     '<p><img src=' + image + ' class="col-xs-12 photo"></p>' +
+  //     '<p><div id="singleusername">' + username + '</div></p>' +
+  //     '<p><div id="singlelocation">' + location + '</div></p>' +
+  //     '<p><div id="singledescription">' + description + '</div></p>' +
+  //     '<p><div id="singledate">' + created_at + '</p>' +
+  //     '<p><div id="singlecategory">' + category + '</div></p>' +
+  //   '</div>';
+
+  //   var footer =
+  //   '<div id="commentsection">' +
+  //     '<p id="commenttag"> Comments </p>' +
+  //     '<p><i class="fa fa-user"></i>&nbsp;&nbsp;<textarea class="form-control" name="description" rows="1"></textarea></p>' +
+  //     '<p><div id="allcomments"></div></p>'
+  //   '</div>';
+
+  //   $('.heroBtn').data('id', id);
+
+  //   $('.single-body').empty();
+  //   $('.single-footer').empty();
+  //   $('.single-body').append(body);
+  //   $('.single-footer').append(footer)
+  // };
+
 
 var marker = [];
-var getMarkers = function () {
-  $.ajax({
-    url: "/api/maps.json",
-    method: "GET",
-    success: function (response, status) {
-      response.forEach(function (elem, index){
-        var marker[index] = new google.maps.Marker({
-          position: {lat: elem.latitude, lng: elem.longitude},
-          icon: elem.category,
-          map: map,
-          title: elem.title,
-          postID: elem.id
-        });
-        marker[index].addListener("click",function(){
-          modalForSinglePost(response.title, response.username, response.created_at, response.description);
-        });
-      });
+var postIcon;
+var postLat;
+var postLong;
+var hongKong = {lat: 22.2783, lng: 114.1747};
 
-    },
-    error: function(response, status) {
-      console.log(response);
-      console.log("did not get post data")
+
+function getIcon(post){
+  if (post == "Community") {
+    postIcon = {
+      url:'http://discoverycrc.com/wp-content/uploads/2014/09/Community-Icon.png',
+      size: new google.maps.Size(90,90),
+      origin: new google.maps.Point(0, 0),
+      anchor: new google.maps.Point(0, 0),
+      scaledSize: new google.maps.Size(50, 50)
     }
-  })
+  }
+  else if (post == "Animals") {
+    postIcon = {
+      url:'https://www.jetblue.com/img/special-needs/main_service_animal_icon.png',
+      size: new google.maps.Size(90,90),
+      origin: new google.maps.Point(0, 0),
+      anchor: new google.maps.Point(0, 0),
+      scaledSize: new google.maps.Size(50, 50)
+    }
+  }
+  else if (post == "Youth") {
+    postIcon = {
+      url:'https://metrounitedway.org/servlet/eAndar.WebExtDocument/article/323832353233/373834/July15Newsletter_GraduationIcon.png',
+      size: new google.maps.Size(90,90),
+      origin: new google.maps.Point(0, 0),
+      anchor: new google.maps.Point(0, 0),
+      scaledSize: new google.maps.Size(10500, 50)
+    }
+  }
+  else if (post == "Environment") {
+    postIcon = {
+      url:'http://vacitup.se/wp-content/50/2014/09/wsya2011-icon5-gogreen.png',
+      size: new google.maps.Size(90,90),
+      origin: new google.maps.Point(0, 0),
+      anchor: new google.maps.Point(0, 0),
+      scaledSize: new google.maps.Size(50, 50)
+    }
+  }
+  else if (post == "Good deeds") {
+    postIcon = {
+      url:'http://cdn.mysitemyway.com/etc-mysitemyway/icons/legacy-previews/icons/glossy-black-icons-symbols-shapes/018721-glossy-black-icon-symbols-shapes-smiley-face1.png',
+      size: new google.maps.Size(90,90),
+      origin: new google.maps.Point(0, 0),
+      anchor: new google.maps.Point(0, 0),
+      scaledSize: new google.maps.Size(50, 50)
+    }
+  }
 };
 
-getMarkers();
-
 function initMap() {
-  var hongKong = {lat: 22.2783, lng: 114.1747};
 
   var map = new google.maps.Map(document.getElementById('map'), {
     zoom: 15,
     center: hongKong
   });
 
-  var community = {
-    url:'http://discoverycrc.com/wp-content/uploads/2014/09/Community-Icon.png',
-    size: new google.maps.Size(50,50),
-    origin: new google.maps.Point(0, 0),
-    anchor: new google.maps.Point(0, 0),
-    scaledSize: new google.maps.Size(20, 20)
-  }
-  var animals = {
-    url:'https://www.jetblue.com/img/special-needs/main_service_animal_icon.png',
-    size: new google.maps.Size(50,50),
-    origin: new google.maps.Point(0, 0),
-    anchor: new google.maps.Point(0, 0),
-    scaledSize: new google.maps.Size(20, 20)
-  }
-  var youth = {
-    url:'https://metrounitedway.org/servlet/eAndar.WebExtDocument/article/323832353233/373834/July15Newsletter_GraduationIcon.png',
-    size: new google.maps.Size(70,70),
-    origin: new google.maps.Point(0, 0),
-    anchor: new google.maps.Point(0, 0),
-    scaledSize: new google.maps.Size(25, 25)
-  }
-  var environment = {
-    url:'http://vacitup.se/wp-content/uploads/2014/09/wsya2011-icon5-gogreen.png',
-    size: new google.maps.Size(70,70),
-    origin: new google.maps.Point(0, 0),
-    anchor: new google.maps.Point(0, 0),
-    scaledSize: new google.maps.Size(25, 25)
-  }
-  var goodDeeds = {
-    url:'http://cdn.mysitemyway.com/etc-mysitemyway/icons/legacy-previews/icons/glossy-black-icons-symbols-shapes/018721-glossy-black-icon-symbols-shapes-smiley-face1.png',
-    size: new google.maps.Size(70,70),
-    origin: new google.maps.Point(0, 0),
-    anchor: new google.maps.Point(0, 0),
-    scaledSize: new google.maps.Size(25, 25)
-  }
+  var getMarkers = function () {
+    $.ajax({
+      url: "/api/maps.json",
+      method: "GET",
+      success: function (response, status) {
+        response.forEach(function (elem, index){
+          getIcon(elem.category);
+          marker[index] = new google.maps.Marker({
+            position: {lat: parseFloat(elem.latitude), lng: parseFloat(elem.longitude)},
+            icon: postIcon,
+            map: map,
+            title: elem.title,
+            postID: elem.id
+          });
+          marker[index].addListener("click",function(){
+            modalForSinglePost(response[index].votes, response[index].title, response[index].image, response[index].username, response[index].location, response[index].description, response[index].created_at, response[index].category, response[index].id);
+            $('#showsinglepost').modal('show');
+            $('.editPostBtn').hide();
+            $('.deletePostBtn').hide();
+            console.log(elem);
+            // if (response.current_user_voted > 0) {
+            //   $('.heroBtn').addClass("hide");
+            // }
+          });
+        });
 
-  var marker1 = new google.maps.Marker({
-    position: hongKong,
-    icon: community,
-    map: map,
-    title: 'Hello World!',
-    postID: 1
-  });
-  marker1.addListener("click",function(){
-    console.log(marker1.postID);
-  });
-    var marker2 = new google.maps.Marker({
-    position: {lat: 22.2852, lng: 114.1514},
-    map: map,
-    icon: animals,
-    title: 'Sheung Wan!'
-  });
-    var marker3 = new google.maps.Marker({
-    position: {lat: 22.2819, lng: 114.1581},
-    map: map,
-    icon: youth,
-    title: 'Central!'
-  });
-    var marker4 = new google.maps.Marker({
-    position: {lat: 22.2788, lng: 114.1646},
-    map: map,
-    icon: environment,
-    title: 'Admiralty!'
-  });
+      },
+      error: function(response, status) {
+        console.log(response);
+        console.log("did not get post data")
+      }
+    })
+  };
+  getMarkers();
+
+
+  // function addMarkerOnClick(){
+  //   setMarkersArray = []
+  //   google.maps.event.addListener(map, "click", function(event) {
+  //     // place a marker
+  //     placeMarker(event.latLng);
+  //     var postLat = event.latLng.lat();
+  //     var postLong = event.latLng.lng();
+
+  //     // display the lat/lng in your form's lat/lng fields
+  //     // document.getElementById("latFld").value = event.latLng.lat();
+  //     // document.getElementById("lngFld").value = event.latLng.lng();
+  //   });
+  // };
+  // function placeMarker(location) {
+  //   //remove all markers if there are any
+  //   deleteOverlays();
+
+  //   //set hero icon
+  //   var hero = {
+  //     url:'https://cdn3.iconfinder.com/data/icons/human-behaviour-and-situations-part-1/400/Popular-19-512.png',
+  //     size: new google.maps.Size(300,300),
+  //     origin: new google.maps.Point(0, 0),
+  //     anchor: new google.maps.Point(0, 0),
+  //     scaledSize: new google.maps.Size(100, 100)
+  //   }
+  //   var postMarker = new google.maps.Marker({
+  //       position: location,
+  //       map: map,
+  //       icon: hero
+  //   });
+
+  //   // add marker in markers array
+  //   setMarkersArray.push(postMarker);
+
+  //   //re-center location to clicked point
+  //   // map.setCenter(location);
+  // };
+  // function deleteOverlays() {
+  //   if (setMarkersArray) {
+  //     for (i in setMarkersArray) {
+  //       setMarkersArray[i].setMap(null);
+  //     }
+  //   setMarkersArray.length = 0;
+  //   }
+  // };
+  // // getMarkers();
+  // // tempMarkers();
+  // addMarkerOnClick();
+
+  // $("#addpostmodal").on("shown.bs.modal", function(e) {
+  //     google.maps.event.trigger(map, "resize");
+  //     map.setCenter(hongKong);
+  //     // map.setZoom(15);
+  //   });
 };
+
+function initAutocomplete() {
+  var map = new google.maps.Map(document.getElementById('map'), {
+    center: {lat: -33.8688, lng: 151.2195},
+    zoom: 13,
+    // mapTypeId: google.maps.MapTypeId.ROADMAP
+  });
+
+  $("#addpostmodal").on("shown.bs.modal", function(e) {
+      google.maps.event.trigger(map, "resize");
+      map.setCenter(hongKong);
+      // map.setZoom(15);
+    });
+
+
+  // Create the search box and link it to the UI element.
+  var input = document.getElementById('district');
+  var searchBox = new google.maps.places.SearchBox(input);
+  map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+  // Bias the SearchBox results towards current map's viewport.
+  map.addListener('bounds_changed', function() {
+    searchBox.setBounds(map.getBounds());
+  });
+
+  var markers = [];
+  // Listen for the event fired when the user selects a prediction and retrieve
+  // more details for that place.
+  searchBox.addListener('places_changed', function() {
+    var places = searchBox.getPlaces();
+
+    if (places.length == 0) {
+      return;
+    }
+
+    // Clear out the old markers.
+    markers.forEach(function(marker) {
+      marker.setMap(null);
+    });
+    markers = [];
+
+    // For each place, get the icon, name and location.
+    var bounds = new google.maps.LatLngBounds();
+    places.forEach(function(place) {
+      var icon = {
+        url: place.icon,
+        size: new google.maps.Size(71, 71),
+        origin: new google.maps.Point(0, 0),
+        anchor: new google.maps.Point(17, 34),
+        scaledSize: new google.maps.Size(25, 25)
+      };
+
+      // Create a marker for each place.
+      // markers.push(new google.maps.Marker({
+      //   map: map,
+      //   icon: icon,
+      //   title: place.name,
+      //   position: place.geometry.location
+      // }));
+
+      if (place.geometry.viewport) {
+        // Only geocodes have viewport.
+        bounds.union(place.geometry.viewport);
+      } else {
+        bounds.extend(place.geometry.location);
+      }
+    });
+    map.fitBounds(bounds);
+  });
+  function addMarkerOnClick(){
+    setMarkersArray = []
+    google.maps.event.addListener(map, "click", function(event) {
+      // place a marker
+      placeMarker(event.latLng);
+      postLat = event.latLng.lat().toString();
+      postLong = event.latLng.lng().toString();
+      console.log(postLat);
+      console.log(postLong);
+
+      // display the lat/lng in your form's lat/lng fields
+      // document.getElementById("latFld").value = event.latLng.lat();
+      // document.getElementById("lngFld").value = event.latLng.lng();
+    });
+  };
+  function placeMarker(location) {
+    //remove all markers if there are any
+    deleteOverlays();
+
+    //set hero icon
+    var hero = {
+      url:'https://cdn3.iconfinder.com/data/icons/human-behaviour-and-situations-part-1/400/Popular-19-512.png',
+      size: new google.maps.Size(300,300),
+      origin: new google.maps.Point(0, 0),
+      anchor: new google.maps.Point(0, 0),
+      scaledSize: new google.maps.Size(100, 100)
+    }
+    var postMarker = new google.maps.Marker({
+        position: location,
+        map: map,
+        icon: hero
+    });
+
+    // add marker in markers array
+    setMarkersArray.push(postMarker);
+
+    //re-center location to clicked point
+    // map.setCenter(location);
+  };
+  function deleteOverlays() {
+    if (setMarkersArray) {
+      for (i in setMarkersArray) {
+        setMarkersArray[i].setMap(null);
+      }
+    setMarkersArray.length = 0;
+    }
+  };
+  addMarkerOnClick();
+}

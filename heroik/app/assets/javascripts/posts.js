@@ -1,7 +1,56 @@
+  // APPEND CONTENT TO MODAL
+  var modalForSinglePost = function(post_votes, title, image, username, location, description, created_at, category, id) {
+    var body =
+    '<div id="singlebody">' +
+      '<div id="singlevotes"><i class="fa fa-thumbs-up"></i> ' + post_votes + '</div>' +
+      '<div id="singletitle">' + title + '</div>' +
+      '<p><img src=' + image + ' class="col-xs-12 photo"></p>' +
+      '<p><div id="singleusername">' + username + '</div></p>' +
+      '<p><div id="singlelocation">' + location + '</div></p>' +
+      '<p><div id="singledescription">' + description + '</div></p>' +
+      '<p><div id="singledate">' + created_at + '</p>' +
+      '<p><div id="singlecategory">' + category + '</div></p>' +
+    '</div>';
+
+    // var footer =
+    // '<div id="commentsection">' +
+    //   '<p id="commenttag"> Comments </p>' +
+    //   '<p><i class="fa fa-user"></i>&nbsp;&nbsp;' +
+    //   '<textarea class="form-control" id="commentform" name="comment" rows="1" placeholder="Add a comment..."></textarea>' +
+    //   '</p>' +
+    //   '<button type="button" class="btn btn-danger" id="comment-btn">Comment</button>' +
+    //   '<p><div id="allcomments"></div></p>' +
+    // '</div>';
+
+    $('.deletePostBtn').data('id', id);
+    $('.heroBtn').data('id', id);
+    $('.comment-btn').data('id', id);
+    $('#editpost').data('id', id);
+
+    $('#edit-title').val(title);
+    $('#edit-image').val(image);
+    $('#edit-category').val(category);
+    $('#edit-location').val(location);
+    $('#edit-description').val(description);
+
+    $('.single-body').empty();
+    // $('.single-footer').empty();
+    $('.single-body').append(body);
+    // $('.single-footer').append(footer)
+  };
 // Place all the behaviors and hooks related to the matching controller here.
 // All this logic will automatically be available in application.js.
 
 $(document).ready(function () {
+
+  var masonryGrid = function() {
+    setTimeout(function(){
+      $('#post-home').masonry({
+        itemSelector: '.item',
+        columnWidth: 350
+      });
+    }, 1000)
+  };
 
   // GET USER INFORMATION FOR USER COLUMN (PROFILE PAGE)
   var appendUserInformation = function(image, name, username, created_at, quote) {
@@ -20,8 +69,8 @@ $(document).ready(function () {
   // GET POSTS THAT BELONG TO USER (PROFILE PAGE)
   var appendOwnPosts = function(id, image, title, post_votes, username, created_at, category) {
     var ownPosts =
-    '<div class="item">' +
-      '<div class="col-xs-12 col-md-4 post" data-id="'+ id + '" data-toggle="modal" data-target="#showsinglepost">' +
+    '<div class="col-xs-12 col-md-4 item">' +
+      '<div class="col-xs-12 post" data-id="'+ id + '" data-toggle="modal" data-target="#showsinglepost">' +
         '<img src="' + image + '" class="col-xs-12 photo">' +
         '<div class="col-xs-12 title">' + title + '</div>' +
         '<div class="col-xs-12 votes">' + post_votes + '</div>' +
@@ -33,6 +82,7 @@ $(document).ready(function () {
 
     $('#userposts').append(ownPosts);
   };
+
 
   // GET ALL POSTS AND USER INFORMATION
   var showUserPage = function () {
@@ -58,59 +108,42 @@ $(document).ready(function () {
     });
   };
 
-  // APPEND CONTENT TO MODAL
-  var modalForSinglePost = function(post_votes, title, image, username, location, description, created_at, category, id) {
-    var body =
-    '<div id="singlebody">' +
-      '<div id="singlevotes"><i class="fa fa-thumbs-up"></i> ' + post_votes + '</div>' +
-      '<div id="singletitle">' + title + '</div>' +
-      '<p><img src=' + image + ' class="col-xs-12 photo"></p>' +
-      '<p><div id="singleusername">' + username + '</div></p>' +
-      '<p><div id="singlelocation">' + location + '</div></p>' +
-      '<p><div id="singledescription">' + description + '</div></p>' +
-      '<p><div id="singledate">' + created_at + '</p>' +
-      '<p><div id="singlecategory">' + category + '</div></p>' +
-    '</div>';
-
-    var footer =
-    '<div id="commentsection">' +
-      '<p id="commenttag"> Comments </p>' +
-      '<p><i class="fa fa-user"></i>&nbsp;&nbsp;<textarea class="form-control" name="description" rows="1"></textarea></p>' +
-      '<p><div id="allcomments"></div></p>'
-    '</div>';
-
-    $('.deletePostBtn').data('id', id);
-    $('.heroBtn').data('id', id);
-    $('#editpost').data('id', id);
-
-    $('#edit-title').val(title);
-    $('#edit-image').val(image);
-    $('#edit-category').val(category);
-    $('#edit-location').val(location);
-    $('#edit-description').val(description);
-
-    $('.single-body').empty();
-    $('.single-footer').empty();
-    $('.single-body').append(body);
-    $('.single-footer').append(footer)
-  };
 
   // SHOW ONE POST ON MODAL
   var showOnePost = function () {
     $('.post').off().on('click', function (e) {
       e.preventDefault();
       var id = $(this).data("id")
+      if (location.pathname == "/") {
+        $('.editPostBtn').hide();
+        $('.deletePostBtn').hide();
+      }
+      $('.heroBtn').removeClass("hide");
 
       $.ajax({
         method: "GET",
         url: "/api/posts/" + id + ".json",
         success: function (response) {
-          console.log(response);
+          if (response.belongs_to_current_user){
+            $('.editPostBtn').removeClass('hide');
+            $('.deletePostBtn').removeClass('hide');
+          }
+          if (response.current_user_voted > 0) {
+            $('.heroBtn').addClass("hide");
+          }
+
           modalForSinglePost(response.post_votes, response.title, response.image, response.username, response.location, response.description, response.created_at, response.category, response.id);
 
           openEditModal();
           editPost();
           deletePost();
+
+          $.auth.validateToken().then(function(user){
+            addComment(user);
+            addHeroButton();
+          }).fail(function(response){
+            console.log(response);
+          });
         },
         error: function (response) {
           console.log(response);
@@ -126,7 +159,6 @@ $(document).ready(function () {
     $('#createpost').on('submit', function (e) {
       e.preventDefault();
       $('#create-form-message').text('');
-
       var post = {
         title   : $('#createpost [name="title"]').val(),
         image : $('#createpost [name="image"]').val(),
@@ -134,7 +166,9 @@ $(document).ready(function () {
         location : $('#createpost [name="location"]').val(),
         description : $('#createpost [name="description"]').val(),
         user_id : user.id,
-        post_votes : 0
+        post_votes : 0,
+        latitude: postLat.toString(),
+        longitude: postLong.toString()
       };
 
       $.ajax({
@@ -239,7 +273,7 @@ $(document).ready(function () {
   var appendAllPosts = function(id, image, title, post_votes, username, created_at, category) {
     var ownPosts =
     '<div class="item">' +
-      '<div class="col-xs-12 col-md-3 post" data-id="'+ id + '" data-toggle="modal" data-target="#showhomesinglepost">' +
+      '<div class="col-xs-12 post" data-id="'+ id + '" data-toggle="modal" data-target="#showsinglepost">' +
         '<img src=' + image + ' class="col-xs-12 photo">' +
         '<div class="col-xs-12 title">' + title +
         '</div>' +'<div class="col-xs-12 votes">' + post_votes + '</div>' +
@@ -258,11 +292,10 @@ $(document).ready(function () {
       url: "/api/posts.json",
       method: "GET",
       success: function (response, status) {
-        console.log(response);
         response.forEach(function(elem, index) {
-          appendAllPosts(elem.id, elem.image, elem.title, elem.post_votes, elem.username, elem.created_at, elem.category);
+          appendAllPosts(elem.id, elem.image, elem.title, elem.post_votes, elem.user.username, elem.created_at, elem.category);
         });
-
+        masonryGrid();
         showOnePost();
       },
       error: function(response, status) {
@@ -274,146 +307,106 @@ $(document).ready(function () {
 
   // GET COMMUNITY POSTS
   var communityPosts = function() {
-    $('#community').off().on('click', function (e) {
-      e.preventDefault();
-      console.log("community clicked! request sending");
-      $('.carousel').hide();
-      $('#post-home').empty();
-
-      $.ajax({
-        url: "/api/posts/community.json",
-        method: "GET",
-        success: function (response, status) {
-          console.log(response);
-          response.forEach(function (elem, index) {
-            appendAllPosts(elem.id, elem.image, elem.title, elem.post_votes, elem.username, elem.created_at, elem.category);
-          });
-          showOnePost();
-        },
-        error: function (response, status) {
-          console.log(response);
-          console.log("did not get community posts");
-        }
-      });
+    $.ajax({
+      url: "/api/posts/community.json",
+      method: "GET",
+      success: function (response, status) {
+        console.log(response);
+        response.forEach(function (elem, index) {
+          appendAllPosts(elem.id, elem.image, elem.title, elem.post_votes, elem.username, elem.created_at, elem.category);
+        });
+        masonryGrid();
+        showOnePost();
+      },
+      error: function (response, status) {
+        console.log(response);
+        console.log("did not get community posts");
+      }
     });
   };
 
   // GET YOUTH POSTS
   var youthPosts = function() {
-    $('#youth').off().on('click', function (e) {
-      e.preventDefault();
-      console.log("community clicked! request sending");
-      $('.carousel').hide();
-      $('#post-home').empty();
-
-      $.ajax({
-        url: "/api/posts/youth.json",
-        method: "GET",
-        success: function (response, status) {
-          console.log(response);
-          response.forEach(function (elem, index) {
-            appendAllPosts(elem.id, elem.image, elem.title, elem.post_votes, elem.username, elem.created_at, elem.category);
-          });
-          showOnePost();
-        },
-        error: function (response, status) {
-          console.log(response);
-          console.log("did not get community posts");
-        }
-      });
+    $.ajax({
+      url: "/api/posts/youth.json",
+      method: "GET",
+      success: function (response, status) {
+        console.log(response);
+        response.forEach(function (elem, index) {
+          appendAllPosts(elem.id, elem.image, elem.title, elem.post_votes, elem.username, elem.created_at, elem.category);
+        });
+        masonryGrid();
+        showOnePost();
+      },
+      error: function (response, status) {
+        console.log(response);
+        console.log("did not get community posts");
+      }
     });
   };
 
   // GET ENVIRONMENT POSTS
   var environmentPosts = function() {
-    $('#environment').off().on('click', function (e) {
-      e.preventDefault();
-      console.log("community clicked! request sending");
-      $('.carousel').hide();
-      $('#post-home').empty();
-
-      $.ajax({
-        url: "/api/posts/environment.json",
-        method: "GET",
-        success: function (response, status) {
-          console.log(response);
-          response.forEach(function (elem, index) {
-            appendAllPosts(elem.id, elem.image, elem.title, elem.post_votes, elem.username, elem.created_at, elem.category);
-          });
-          showOnePost();
-        },
-        error: function (response, status) {
-          console.log(response);
-          console.log("did not get community posts");
-        }
-      });
+    $.ajax({
+      url: "/api/posts/environment.json",
+      method: "GET",
+      success: function (response, status) {
+        console.log(response);
+        response.forEach(function (elem, index) {
+          appendAllPosts(elem.id, elem.image, elem.title, elem.post_votes, elem.username, elem.created_at, elem.category);
+        });
+        masonryGrid();
+        showOnePost();
+      },
+      error: function (response, status) {
+        console.log(response);
+        console.log("did not get community posts");
+      }
     });
   };
 
   // GET ANIMALS POSTS
   var animalsPosts = function() {
-    $('#animals').off().on('click', function (e) {
-      e.preventDefault();
-      console.log("community clicked! request sending");
-      $('.carousel').hide();
-      $('#post-home').empty();
-
-      $.ajax({
-        url: "/api/posts/animals.json",
-        method: "GET",
-        success: function (response, status) {
-          console.log(response);
-          response.forEach(function (elem, index) {
-            appendAllPosts(elem.id, elem.image, elem.title, elem.post_votes, elem.username, elem.created_at, elem.category);
-          });
-          showOnePost();
-        },
-        error: function (response, status) {
-          console.log(response);
-          console.log("did not get community posts");
-        }
-      });
+    $.ajax({
+      url: "/api/posts/animals.json",
+      method: "GET",
+      success: function (response, status) {
+        console.log(response);
+        response.forEach(function (elem, index) {
+          appendAllPosts(elem.id, elem.image, elem.title, elem.post_votes, elem.username, elem.created_at, elem.category);
+        });
+        masonryGrid()
+        showOnePost();
+      },
+      error: function (response, status) {
+        console.log(response);
+        console.log("did not get community posts");
+      }
     });
   };
 
   // GET GOOD DEEDS POSTS
   var goodDeedsPosts = function() {
-    $('#gooddeeds').off().on('click', function (e) {
-      e.preventDefault();
-      console.log("community clicked! request sending");
-      $('.carousel').hide();
-      $('#post-home').empty();
-
-      $.ajax({
-        url: "/api/posts/good_deeds.json",
-        method: "GET",
-        success: function (response, status) {
-          console.log(response);
-          response.forEach(function (elem, index) {
-            appendAllPosts(elem.id, elem.image, elem.title, elem.post_votes, elem.username, elem.created_at, elem.category);
-          });
-          showOnePost();
-        },
-        error: function (response, status) {
-          console.log(response);
-          console.log("did not get community posts");
-        }
-      });
+    $.ajax({
+      url: "/api/posts/good_deeds.json",
+      method: "GET",
+      success: function (response, status) {
+        console.log(response);
+        response.forEach(function (elem, index) {
+          appendAllPosts(elem.id, elem.image, elem.title, elem.post_votes, elem.username, elem.created_at, elem.category);
+        });
+        masonryGrid()
+        showOnePost();
+      },
+      error: function (response, status) {
+        console.log(response);
+        console.log("did not get community posts");
+      }
     });
   };
 
   // GET MOST POPULAR POSTS
   // GO TO HOME
-
-
-  var init = function() {
-    allPostsHomePage();
-    communityPosts();
-    youthPosts();
-    environmentPosts();
-    animalsPosts();
-    goodDeedsPosts();
-  }
 
   $.auth.validateToken().then(function(user){
     showUserPage();
@@ -421,6 +414,40 @@ $(document).ready(function () {
   }).fail(function(response){
     console.log(response);
   });
+
+  var init = function () {
+    if (location.pathname == '/posts') {
+      if (location.search.split('?')[1]) {
+        var params = {target: ''};
+        location.search.split('?')[1].split('&').forEach(function(elem){
+          var temp = elem.split('=');
+          params[temp[0]] = temp[1];
+        });
+
+        switch (params.target) {
+          case "community":
+            communityPosts();
+            break;
+          case "youth":
+            youthPosts();
+            break;
+          case "environment":
+            environmentPosts();
+            break;
+          case "animals":
+            animalsPosts();
+            break;
+          case "gooddeeds":
+            goodDeedsPosts();
+            break;
+          default:
+            allPostsHomePage();
+        }
+      }
+    } else {
+      allPostsHomePage();
+    }
+  }
 
   init();
 

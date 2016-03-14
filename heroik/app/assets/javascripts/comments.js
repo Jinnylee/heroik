@@ -1,27 +1,45 @@
-$(document).ready(function(){
-
-  $("#commentform").on('submit', function(e){
+  var addComment = function (user) {
+    $(".comment-btn").off().on('click', function(e) {
     e.preventDefault();
+    console.log("clicked comment")
+
+    var id = $(this).data("id");
 
     var newComment = {
-      comment: $("#commentform input[name='commentfield']").val(),
-      post_id: 1,
-      user_id: 1
-    }
+      comment : $('textarea#commentform').val(),
+      post_id : id,
+      user_id : user.id
+    };
+    console.log(newComment);
+
     $.ajax({
-      type: "POST",
-      url: "/comments.json",
+      type: 'POST',
+      url: 'api/posts/' + id + '/comments.json',
       data: {
-        insertComment: newComment
+        newComment: newComment
       },
       success: function(response){
         console.log(response);
-        var newPara = "<p>"+response.comment+"</p>"
-        $("#show-comments").append(newPara);
+        $('textarea#commentform').val('');
+
+        var newComment =
+        "<div>" +
+        "<b>" + response.user.username + "</b>" +
+        "<br>" + response.comment +
+        "</div>"
+        console.log(user)
+
+        $("#allcomments").append(newComment);
       },
       error: function(response){
         console.log(response);
       }
     });
-  });
+    });
+  };
+
+
+$(document).ready(function(){
+
+
 });

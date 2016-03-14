@@ -17,10 +17,15 @@
 //= require pubsub-js/src/pubsub.js
 //= require j-toker/dist/jquery.j-toker.js
 //= require twitter/bootstrap
+//= require masonry/dist/masonry.pkgd.js
 //= require_tree .
 
 $.auth.configure({
   // By default, you only need to configure apiUrl
   // Note that if you put a '/' at the end of the link, there will be errors when calling the api
-  apiUrl: 'http://localhost:3000'
+  apiUrl: 'http://localhost:3000',
+  forceHardRedirect: true,
+  authProviderPaths: {
+    facebook:  '/auth/facebook',
+  }
 })
