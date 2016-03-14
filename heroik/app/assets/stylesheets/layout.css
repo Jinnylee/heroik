@@ -26,6 +26,7 @@ NAVBAR CSS*/
 
 .navbar-default {
   margin-bottom:0px;
+  height:85px;
 }
 
 a.navbar-brand > img {
