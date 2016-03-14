@@ -12,13 +12,15 @@ Rails.application.routes.draw do
     get '/posts/youth', to: 'posts#youth'
     get '/posts/environment', to: 'posts#environment'
     get '/posts/animals', to: 'posts#animals'
-    get 'posts/good_deeds', to: 'posts#good_deeds'
+    get '/posts/good_deeds', to: 'posts#good_deeds'
     resources :posts, only: [:index, :show, :create, :update, :destroy] do
+
       # posts comments
       resources :comments, only: [:index, :show, :create, :delete]
 
       # posts votes
       put '/votes', to: 'votes#update'
+
     end
 
     #maps
