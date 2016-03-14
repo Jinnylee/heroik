@@ -136,6 +136,7 @@ $(document).ready(function () {
 
           $.auth.validateToken().then(function(user){
             addComment(user);
+            addHeroButton();
           }).fail(function(response){
             console.log(response);
           });
