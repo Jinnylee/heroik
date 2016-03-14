@@ -86,7 +86,7 @@ function initMap() {
             }).fail(function(response){
               console.log(response);
             });
-              console.log(elem);
+              // console.log(elem);
             // if (response.current_user_voted > 0) {
             //   $('.heroBtn').addClass("hide");
             // }

@@ -287,16 +287,29 @@ $(document).ready(function () {
   };
 
   // APPEND QUOTE TO HOME
+  var colorPick="white";
   var appendQuote = function(quote) {
+    colorGenerator();
     var sentence =
     '<div class="item">' +
-      '<div class="col-xs-12 post">' +
+      '<div class="col-xs-12 post" style="background-color:'+colorPick+'">' +
         '<div class="col-xs-12">' + quote +'</div>' +
       '</div>' +
     '</div>';
-
     $('#post-home').append(sentence);
   };
+  function colorGenerator(){
+    var color=Math.floor((Math.random()*4+1));
+    if (color==1){
+      colorPick = "#66c2ff";//blue
+    } else if (color==2){
+      colorPick = "#ff3333"; //red
+    } else if (color==3){
+      colorPick = "#00cc00"; //green
+    } else if (color>=4){
+      colorPick = "#ffa31a"; //orange
+    }
+  }
 
   //GET RANDOM QUOTE
   var quoteArray=[];
