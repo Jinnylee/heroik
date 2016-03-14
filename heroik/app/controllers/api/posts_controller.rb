@@ -1,7 +1,7 @@
 class API::PostsController < ApplicationController
 
   def index
-    @posts = Post.all
+    @posts = Post.all.order("created_at DESC")
     respond_to do |format|
       format.json { render json: @posts.as_json(include: :user) }
     end
@@ -46,35 +46,35 @@ class API::PostsController < ApplicationController
   end
 
   def community
-    @posts = Post.where(category: 'Community')
+    @posts = Post.where(category: 'Community').order("created_at DESC")
     respond_to do |format|
       format.json { render 'index.jbuilder' }
     end
   end
 
   def youth
-    @posts = Post.where(category: 'Youth')
+    @posts = Post.where(category: 'Youth').order("created_at DESC")
     respond_to do |format|
       format.json { render 'index.jbuilder' }
     end
   end
 
   def environment
-    @posts = Post.where(category: 'Environment')
+    @posts = Post.where(category: 'Environment').order("created_at DESC")
     respond_to do |format|
       format.json { render 'index.jbuilder' }
     end
   end
 
   def animals
-    @posts = Post.where(category: 'Animals')
+    @posts = Post.where(category: 'Animals').order("created_at DESC")
     respond_to do |format|
       format.json { render 'index.jbuilder' }
     end
   end
 
   def good_deeds
-    @posts = Post.where(category: 'Good deeds')
+    @posts = Post.where(category: 'Good deeds').order("created_at DESC")
     respond_to do |format|
       format.json { render 'index.jbuilder' }
     end

@@ -29,7 +29,7 @@
         "<br>" + response.comment +
         "</div>"
 
-        $("#allcomments").append(newComment);
+        $("#allcomments").preppend(newComment);
       },
       error: function(response){
         console.log(response);
