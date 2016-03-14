@@ -8,7 +8,9 @@ body {
   background-color: #B0B0B0;
 }
 
-
+.container-fluid {
+  margin:0 auto;
+}
 /*POSTS SECTION ON HOMEPAGE*/
 
 #post-home.row{
@@ -16,8 +18,24 @@ body {
   margin-top:20px;
 }
 
+.post{
+  border:1px solid gray;
+  border-radius: 5px;
+  background:white;
+  margin-bottom:20px;
+  padding-top:20px;
+  padding-bottom:20px;
+}
 
+/*This item is attached to masonryGrid in posts.js file*/
+.item {
+  width: 335px;
 
+}
+
+.post img {
+  padding:2px;
+}
 
 /*PREVIOUS PINTEREST CSS CODE - HARDWIRED*/
 
@@ -50,18 +68,6 @@ body {
   column-fill: auto;
 }
 */
-
-.item {
-  width: 350px;
-}
-
-
-
-.post img {
-  padding:2px;
-}
-
-
 
 
 .username {
