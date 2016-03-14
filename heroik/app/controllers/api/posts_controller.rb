@@ -16,14 +16,14 @@ class API::PostsController < ApplicationController
 
   def create
     @post = Post.new(post_params)
-      respond_to do |format|
-        if @post.save
-          format.json { render json: @post }
-          # format.json { render 'profile.jbuilder' }
-        else
-          format.json { render json: @post.errors, status: :unprocessable_entity }
-        end
+    respond_to do |format|
+      if @post.save
+        format.json { render json: @post }
+        # format.json { render 'profile.jbuilder' }
+      else
+        format.json { render json: @post.errors, status: :unprocessable_entity }
       end
+    end
   end
 
   def update
