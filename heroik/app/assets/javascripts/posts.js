@@ -1,3 +1,43 @@
+  // APPEND CONTENT TO MODAL
+  var modalForSinglePost = function(post_votes, title, image, username, location, description, created_at, category, id) {
+    var body =
+    '<div id="singlebody">' +
+      '<div id="singlevotes"><i class="fa fa-thumbs-up"></i> ' + post_votes + '</div>' +
+      '<div id="singletitle">' + title + '</div>' +
+      '<p><img src=' + image + ' class="col-xs-12 photo"></p>' +
+      '<p><div id="singleusername">' + username + '</div></p>' +
+      '<p><div id="singlelocation">' + location + '</div></p>' +
+      '<p><div id="singledescription">' + description + '</div></p>' +
+      '<p><div id="singledate">' + created_at + '</p>' +
+      '<p><div id="singlecategory">' + category + '</div></p>' +
+    '</div>';
+
+    // var footer =
+    // '<div id="commentsection">' +
+    //   '<p id="commenttag"> Comments </p>' +
+    //   '<p><i class="fa fa-user"></i>&nbsp;&nbsp;' +
+    //   '<textarea class="form-control" id="commentform" name="comment" rows="1" placeholder="Add a comment..."></textarea>' +
+    //   '</p>' +
+    //   '<button type="button" class="btn btn-danger" id="comment-btn">Comment</button>' +
+    //   '<p><div id="allcomments"></div></p>' +
+    // '</div>';
+
+    $('.deletePostBtn').data('id', id);
+    $('.heroBtn').data('id', id);
+    $('.comment-btn').data('id', id);
+    $('#editpost').data('id', id);
+
+    $('#edit-title').val(title);
+    $('#edit-image').val(image);
+    $('#edit-category').val(category);
+    $('#edit-location').val(location);
+    $('#edit-description').val(description);
+
+    $('.single-body').empty();
+    // $('.single-footer').empty();
+    $('.single-body').append(body);
+    // $('.single-footer').append(footer)
+  };
 // Place all the behaviors and hooks related to the matching controller here.
 // All this logic will automatically be available in application.js.
 
@@ -68,62 +108,22 @@ $(document).ready(function () {
     });
   };
 
-  // APPEND CONTENT TO MODAL
-  var modalForSinglePost = function(post_votes, title, image, username, location, description, created_at, category, id) {
-    var body =
-    '<div id="singlebody">' +
-      '<div id="singlevotes"><i class="fa fa-thumbs-up"></i> ' + post_votes + '</div>' +
-      '<div id="singletitle">' + title + '</div>' +
-      '<p><img src=' + image + ' class="col-xs-12 photo"></p>' +
-      '<p><div id="singleusername">' + username + '</div></p>' +
-      '<p><div id="singlelocation">' + location + '</div></p>' +
-      '<p><div id="singledescription">' + description + '</div></p>' +
-      '<p><div id="singledate">' + created_at + '</p>' +
-      '<p><div id="singlecategory">' + category + '</div></p>' +
-    '</div>';
-
-    // var footer =
-    // '<div id="commentsection">' +
-    //   '<p id="commenttag"> Comments </p>' +
-    //   '<p><i class="fa fa-user"></i>&nbsp;&nbsp;' +
-    //   '<textarea class="form-control" id="commentform" name="comment" rows="1" placeholder="Add a comment..."></textarea>' +
-    //   '</p>' +
-    //   '<button type="button" class="btn btn-danger" id="comment-btn">Comment</button>' +
-    //   '<p><div id="allcomments"></div></p>' +
-    // '</div>';
-
-    $('.deletePostBtn').data('id', id);
-    $('.heroBtn').data('id', id);
-    $('.comment-btn').data('id', id);
-    $('#editpost').data('id', id);
-
-    $('#edit-title').val(title);
-    $('#edit-image').val(image);
-    $('#edit-category').val(category);
-    $('#edit-location').val(location);
-    $('#edit-description').val(description);
-
-    $('.single-body').empty();
-    // $('.single-footer').empty();
-    $('.single-body').append(body);
-    // $('.single-footer').append(footer)
-  };
 
   // SHOW ONE POST ON MODAL
   var showOnePost = function () {
     $('.post').off().on('click', function (e) {
       e.preventDefault();
       var id = $(this).data("id")
-      // if (location.pathname == "/")
-      $('.editPostBtn').addClass('hide');
-      $('.deletePostBtn').addClass('hide');
+      if (location.pathname == "/") {
+        $('.editPostBtn').hide();
+        $('.deletePostBtn').hide();
+      }
       $('.heroBtn').removeClass("hide");
 
       $.ajax({
         method: "GET",
         url: "/api/posts/" + id + ".json",
         success: function (response) {
-          console.log(response)
           if (response.belongs_to_current_user){
             $('.editPostBtn').removeClass('hide');
             $('.deletePostBtn').removeClass('hide');
