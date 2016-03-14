@@ -20,6 +20,14 @@ class API::CommentsController < ApplicationController
     end
   end
 
+  def destroy
+    Comment.destroy(params[:id])
+    respond_to do |format|
+      # format.html { redirect_to events_url, notice: 'Event was successfully destroyed.' }
+      format.json { head :no_content }
+    end
+  end
+
   private
     def comment_params
       params.require(:newComment).permit(:comment, :post_id, :user_id)

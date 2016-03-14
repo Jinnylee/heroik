@@ -83,7 +83,31 @@
       '<img src="' + image + '" class="comment-user-image" >' +
       '<div class="comment-user">' + username + '</div>' +
       '<div class="comment-text">' + comment + '</div>' +
+      '<button type="button" class="btn btn-default deleteCommentBtn"><i class="fa fa-trash-o"></i></button>'
     '</div>'
 
     $('#allcomments').append(comments);
   };
+
+  var deleteComment = function() {
+    $('.deleteCommentBtn').off().on('click', function (e){
+      e.preventDefault();
+
+      console.log("request sent!");
+
+      var id = $('.comment-btn').data("id");
+      var cid = $('this').data("id");
+      console.log(cid);
+
+      $.ajax({
+        url: '/api/posts/' + id + '/comments/' + cid + '.json',
+        method: 'DELETE',
+        success: function (response, status) {
+          console.log(response);
+        },
+        error: function (response, status) {
+          console.log(response);
+        }
+      })
+    })
+  }

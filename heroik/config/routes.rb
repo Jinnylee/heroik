@@ -17,7 +17,7 @@ Rails.application.routes.draw do
     resources :posts, only: [:index, :show, :create, :update, :destroy] do
 
       # posts comments
-      resources :comments, only: [:index, :show, :create, :delete]
+      resources :comments, only: [:index, :show, :create, :destroy]
 
       # posts votes
       put '/votes', to: 'votes#update'
