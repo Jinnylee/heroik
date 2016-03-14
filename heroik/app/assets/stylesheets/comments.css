@@ -9,3 +9,19 @@
   width: 40px;
   border-radius: 25px;
 }
+
+#commenttag{
+  padding-top: 15px;
+  padding-left: 0px;
+  margin-top: 10px;
+  margin-bottom:10px;
+  border-top: solid #E0E0E0 1px;
+}
+
+#commentform{
+  margin-top: 10px;
+
+}
+.comment-btn {
+  margin-top: 10px;
+}

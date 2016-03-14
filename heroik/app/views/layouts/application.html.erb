@@ -15,24 +15,19 @@
 <div class="modal fade single-modal" id="showsinglepost" tabindex="-1" role="dialog">
   <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-header">
+      <div class="modal-header single-header">
         <button type="button" class="btn btn-danger heroBtn">Hero!</button>
-        <button type="button" class="btn btn-default editPostBtn"><i class="fa fa-pencil-square-o"></i> Edit</button>
-        <button type="button" class="btn btn-default deletePostBtn"><i class="fa fa-trash-o"></i> Delete</button>
+        <button type="button" class="btn btn-info editPostBtn"><i class="fa fa-pencil-square-o"></i> Edit</button>
+        <button type="button" class="btn btn-info deletePostBtn"><i class="fa fa-trash-o"></i> Delete</button>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
       </div>
-      <div class="modal-body single-body">
-      </div>
-      <div class="modal-footer single-footer">
-        <div id ="commentsection">
-          <div id="commenttag"> Comments </div>
-          <br><div><p>
-            <textarea class="form-control" id="commentform" name="comment" rows="1" placeholder="Add a comment..."></textarea>
-            <button type="button" class="btn btn-danger comment-btn">Comment</button>
-          </p></div>
-          <div id="allcomments"></div>
-          <div id="see-more"><button type="button" class="btn btn-default" id="view-all-comments">View all comments...</button></div>
-        </div>
+      <div class="modal-body single-body"></div>
+      <div id ="commentsection">
+        <div class="col-xs-12" id="commenttag"> Comments </div>
+        <textarea class="form-control" id="commentform" name="comment" rows="1" placeholder="Add a comment..."></textarea>
+        <button type="button" class="btn btn-info comment-btn">Comment</button>
+        <div class="col-xs-12" id="allcomments"></div>
+        <div class="col-xs-12" id="see-more"><button type="button" class="btn btn-default" id="view-all-comments">View all comments...</button></div>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->

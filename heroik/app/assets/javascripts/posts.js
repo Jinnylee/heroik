@@ -1,26 +1,17 @@
   // APPEND CONTENT TO MODAL
-  var modalForSinglePost = function(post_votes, title, image, username, location, description, created_at, category, id) {
+  var modalForSinglePost = function(post_votes, created_at, category, title, image, location, description, pp, username, id) {
     var body =
-    '<div id="singlebody">' +
-      '<div id="singlevotes"><i class="fa fa-thumbs-up"></i> ' + post_votes + '</div>' +
-      '<div id="singletitle">' + title + '</div>' +
-      '<p><img src=' + image + ' onerror="this.src=\'http://camaleon.tuzitio.com/assets/camaleon_cms/image-not-found-4a963b95bf081c3ea02923dceaeb3f8085e1a654fc54840aac61a57a60903fef.png\'" class="col-xs-12 photo"></p>' +
-      '<p><div id="singleusername">' + username + '</div></p>' +
-      '<p><div id="singlelocation">' + location + '</div></p>' +
-      '<p><div id="singledescription">' + description + '</div></p>' +
-      '<p><div id="singledate">' + created_at + '</p>' +
-      '<p><div id="singlecategory">' + category + '</div></p>' +
+    '<div class="col-xs-12" id="singlebody">' +
+      '<div class="row"><div class="body col-xs-2" id="singlevotes"><i class="fa fa-thumbs-up"></i> ' + post_votes + '</div>' +
+      '<div class="body col-xs-8" id="singledate">' + created_at + '</div>' +
+      '<div class="body col-xs-2" id="singlecategory">' + category + '</div>' +
+      '<div  class="body col-xs-12" id="singletitle">' + title + '</div>' +
+      '<p><img src=' + image + ' onerror="this.src=\'http://camaleon.tuzitio.com/assets/camaleon_cms/image-not-found-4a963b95bf081c3ea02923dceaeb3f8085e1a654fc54840aac61a57a60903fef.png\'" class="photo body col-xs-12"></p>' +
+      '<div class="body col-xs-12" id="singlelocation">' + location + '</div>' +
+      '<div class="body col-xs-12" id="singledescription">' + description + '</div></div>' +
+      '<div class="row userrow"><img src="' + pp + '" onerror="this.src=\'http://camaleon.tuzitio.com/assets/camaleon_cms/image-not-found-4a963b95bf081c3ea02923dceaeb3f8085e1a654fc54840aac61a57a60903fef.png\'" class="photo body pro-pic col-xs-2">' +
+      '<div class="body col-xs-10" id="singleusername">' + username + '</div></div>' +
     '</div>';
-
-    // var footer =
-    // '<div id="commentsection">' +
-    //   '<p id="commenttag"> Comments </p>' +
-    //   '<p><i class="fa fa-user"></i>&nbsp;&nbsp;' +
-    //   '<textarea class="form-control" id="commentform" name="comment" rows="1" placeholder="Add a comment..."></textarea>' +
-    //   '</p>' +
-    //   '<button type="button" class="btn btn-danger" id="comment-btn">Comment</button>' +
-    //   '<p><div id="allcomments"></div></p>' +
-    // '</div>';
 
     $('.deletePostBtn').data('id', id);
     $('.heroBtn').data('id', id);
@@ -34,12 +25,8 @@
     $('#edit-description').val(description);
 
     $('.single-body').empty();
-    // $('.single-footer').empty();
     $('.single-body').append(body);
-    // $('.single-footer').append(footer)
   };
-// Place all the behaviors and hooks related to the matching controller here.
-// All this logic will automatically be available in application.js.
 
 $(document).ready(function () {
 
@@ -131,7 +118,7 @@ $(document).ready(function () {
             $('.heroBtn').addClass("hide");
           }
 
-          modalForSinglePost(response.post_votes, response.title, response.image, response.username, response.location, response.description, response.created_at, response.category, response.id);
+          modalForSinglePost(response.post_votes, response.created_at, response.category, response.title, response.image, response.location, response.description, response.pp, response.username, response.id);
 
           openEditModal();
           editPost();
