@@ -17,6 +17,7 @@
 //= require pubsub-js/src/pubsub.js
 //= require j-toker/dist/jquery.j-toker.js
 //= require twitter/bootstrap
+//= require masonry/dist/masonry.pkgd.js
 //= require_tree .
 
 $.auth.configure({

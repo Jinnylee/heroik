@@ -3,6 +3,15 @@
 
 $(document).ready(function () {
 
+  var masonryGrid = function() {
+    setTimeout(function(){
+      $('#post-home').masonry({
+        itemSelector: '.item',
+        columnWidth: 350
+      });
+    }, 1000)
+  };
+
   // GET USER INFORMATION FOR USER COLUMN (PROFILE PAGE)
   var appendUserInformation = function(image, name, username, created_at, quote) {
     var userInfo =
@@ -33,6 +42,7 @@ $(document).ready(function () {
 
     $('#userposts').append(ownPosts);
   };
+
 
   // GET ALL POSTS AND USER INFORMATION
   var showUserPage = function () {
@@ -239,7 +249,7 @@ $(document).ready(function () {
   // APPEND POSTS TO HOME
   var appendAllPosts = function(id, image, title, post_votes, username, created_at, category) {
     var ownPosts =
-    '<div class="col-xs-12 col-md-3 item" >' +
+    '<div class="item">' +
       '<div class="col-xs-12 post" data-id="'+ id + '" data-toggle="modal" data-target="#showhomesinglepost">' +
         '<img src=' + image + ' class="col-xs-12 photo">' +
         '<div class="col-xs-12 title">' + title +
@@ -263,6 +273,7 @@ $(document).ready(function () {
         response.forEach(function(elem, index) {
           appendAllPosts(elem.id, elem.image, elem.title, elem.post_votes, elem.username, elem.created_at, elem.category);
         });
+        masonryGrid();
 
         showOnePost();
       },
