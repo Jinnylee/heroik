@@ -3,7 +3,7 @@ class API::PostsController < ApplicationController
   def index
     @posts = Post.all
     respond_to do |format|
-      format.json { render 'index.jbuilder' }
+      format.json { render json: @posts.as_json(include: :user) }
     end
   end
 
