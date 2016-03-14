@@ -228,7 +228,7 @@ PROFILE PAGE CSS*/
 button.btn.btn-primary.btn-lg {
   height: 300px;
   width: 100%;
-  margin-top: 40px;
+  margin-top: 20px;
 }
 
 i.fa.fa-plus {
@@ -237,5 +237,5 @@ i.fa.fa-plus {
 
 #usercolumn {
   margin-top: 20px;
-  background-color: #B0B0B0;
+  background-color: #E8E8E8;
 }
