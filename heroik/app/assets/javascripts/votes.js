@@ -1,5 +1,5 @@
 var addHeroButton = function (){
-  $(".heroBtn").on("click",function(e){
+  $(".heroBtn").off().on("click",function(e){
     e.preventDefault;
     console.log("clicked");
 

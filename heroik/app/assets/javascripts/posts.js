@@ -4,7 +4,7 @@
     '<div id="singlebody">' +
       '<div id="singlevotes"><i class="fa fa-thumbs-up"></i> ' + post_votes + '</div>' +
       '<div id="singletitle">' + title + '</div>' +
-      '<p><img src=' + image + ' class="col-xs-12 photo"></p>' +
+      '<p><img src=' + image + ' onerror="this.src=\'http://camaleon.tuzitio.com/assets/camaleon_cms/image-not-found-4a963b95bf081c3ea02923dceaeb3f8085e1a654fc54840aac61a57a60903fef.png\'" class="col-xs-12 photo"></p>' +
       '<p><div id="singleusername">' + username + '</div></p>' +
       '<p><div id="singlelocation">' + location + '</div></p>' +
       '<p><div id="singledescription">' + description + '</div></p>' +
@@ -56,7 +56,7 @@ $(document).ready(function () {
   var appendUserInformation = function(image, name, username, created_at, quote) {
     var userInfo =
     '<div class="col-xs-12" id="userinfo">' +
-      '<img src=' + image + ' class="col-xs-12 photo">' +
+      '<img src=' + image + ' onerror="this.src=\'http://camaleon.tuzitio.com/assets/camaleon_cms/image-not-found-4a963b95bf081c3ea02923dceaeb3f8085e1a654fc54840aac61a57a60903fef.png\'" class="col-xs-12 photo">' +
       '<div class="col-xs-12">' + name + '</div>' +
       '<div class="col-xs-12">' + username + '</div>' +
       '<div class="col-xs-12">' + created_at + '</div>' +
@@ -71,7 +71,7 @@ $(document).ready(function () {
     var ownPosts =
     '<div class="col-xs-12 col-md-4 item">' +
       '<div class="col-xs-12 post" data-id="'+ id + '" data-toggle="modal" data-target="#showsinglepost">' +
-        '<img src="' + image + '" class="col-xs-12 photo">' +
+        '<img src=' + image + ' onerror="this.src=\'http://camaleon.tuzitio.com/assets/camaleon_cms/image-not-found-4a963b95bf081c3ea02923dceaeb3f8085e1a654fc54840aac61a57a60903fef.png\'" class="col-xs-12 photo">' +
         '<div class="col-xs-12 title">' + title + '</div>' +
         '<div class="col-xs-12 votes">' + post_votes + '</div>' +
         '<div class="col-xs-12 username">' + username + '</div>' +
@@ -274,7 +274,7 @@ $(document).ready(function () {
     var ownPosts =
     '<div class="item">' +
       '<div class="col-xs-12 post" data-id="'+ id + '" data-toggle="modal" data-target="#showsinglepost">' +
-        '<img src=' + image + ' class="col-xs-12 photo">' +
+        '<img src=' + image + ' onerror="this.src=\'http://camaleon.tuzitio.com/assets/camaleon_cms/image-not-found-4a963b95bf081c3ea02923dceaeb3f8085e1a654fc54840aac61a57a60903fef.png\'" class="col-xs-12 photo">' +
         '<div class="col-xs-12 title">' + title +
         '</div>' +'<div class="col-xs-12 votes">' + post_votes + '</div>' +
         '<div class="col-xs-12 username">' + username + '</div>' +
@@ -286,6 +286,53 @@ $(document).ready(function () {
     $('#post-home').append(ownPosts);
   };
 
+  // APPEND QUOTE TO HOME
+  var colorPick="white";
+  var appendQuote = function(quote) {
+    colorGenerator();
+    var sentence =
+    '<div class="item">' +
+      '<div class="col-xs-12 post" style="background-color:'+colorPick+'">' +
+        '<div class="col-xs-12">' + quote +'</div>' +
+      '</div>' +
+    '</div>';
+    $('#post-home').append(sentence);
+  };
+  function colorGenerator(){
+    var color=Math.floor((Math.random()*4+1));
+    if (color==1){
+      colorPick = "#66c2ff";//blue
+    } else if (color==2){
+      colorPick = "#ff3333"; //red
+    } else if (color==3){
+      colorPick = "#00cc00"; //green
+    } else if (color>=4){
+      colorPick = "#ffa31a"; //orange
+    }
+  }
+
+  //GET RANDOM QUOTE
+  var quoteArray=[];
+  var getQuote = function(){
+    var randomizer = Math.floor((Math.random() * 10) + 1);
+    if (randomizer<5){
+      $.ajax({
+        url: "/api/quotes.json",
+        method: "GET",
+        success: function (response, status) {
+          if ($.inArray(response.id, quoteArray)<0){
+             appendQuote(response.smile);
+             quoteArray.push(response.id);
+           };
+        },
+        error: function(response, status) {
+          console.log(response);
+          console.log("did not get quote data")
+        }
+      });
+    };
+  };
+
   // GET ALL POSTS (HOME PAGE)
   var allPostsHomePage = function () {
     $.ajax({
@@ -294,6 +341,7 @@ $(document).ready(function () {
       success: function (response, status) {
         response.forEach(function(elem, index) {
           appendAllPosts(elem.id, elem.image, elem.title, elem.post_votes, elem.user.username, elem.created_at, elem.category);
+          getQuote();
         });
         masonryGrid();
         showOnePost();
