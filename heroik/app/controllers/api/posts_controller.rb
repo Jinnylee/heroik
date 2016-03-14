@@ -80,6 +80,13 @@ class API::PostsController < ApplicationController
     end
   end
 
+  def most_popular
+    @posts = Post.order("post_votes DESC").limit(20)
+    respond_to do |format|
+      format.json { render 'index.jbuilder' }
+    end
+  end
+
   private
     def post_params
       params.require(:post).permit(:title, :image, :category, :location, :description, :user_id, :post_votes, :latitude, :longitude)

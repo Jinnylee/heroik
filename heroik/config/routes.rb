@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     get '/posts/environment', to: 'posts#environment'
     get '/posts/animals', to: 'posts#animals'
     get '/posts/good_deeds', to: 'posts#good_deeds'
+    get '/posts/most_popular', to: 'posts#most_popular'
     resources :posts, only: [:index, :show, :create, :update, :destroy] do
 
       # posts comments

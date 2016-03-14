@@ -67,15 +67,14 @@ $(document).ready(function () {
   };
 
   // GET POSTS THAT BELONG TO USER (PROFILE PAGE)
-  var appendOwnPosts = function(id, image, title, post_votes, username, created_at, category) {
+  var appendOwnPosts = function(id, image, title, post_votes, username, category) {
     var ownPosts =
     '<div class="col-xs-12 col-md-4 item">' +
       '<div class="col-xs-12 post" data-id="'+ id + '" data-toggle="modal" data-target="#showsinglepost">' +
         '<img src=' + image + ' onerror="this.src=\'http://camaleon.tuzitio.com/assets/camaleon_cms/image-not-found-4a963b95bf081c3ea02923dceaeb3f8085e1a654fc54840aac61a57a60903fef.png\'" class="col-xs-12 photo">' +
         '<div class="col-xs-12 title">' + title + '</div>' +
-        '<div class="col-xs-12 votes">' + post_votes + '</div>' +
+        '<div class="col-xs-12 votes"><i class="fa fa-thumbs-up"></i> ' + post_votes + '</div>' +
         '<div class="col-xs-12 username">' + username + '</div>' +
-        '<div class="col-xs-12 date">' + created_at + '</div>' +
         '<div class="col-xs-12 category">' + category + '</div>' +
       '</div>' +
     '</div>';
@@ -96,7 +95,7 @@ $(document).ready(function () {
         appendUserInformation(user.image, user.name, user.username, user.created_at, user.quote);
 
         response.posts.forEach(function(elem, index) {
-          appendOwnPosts(elem.id, elem.image, elem.title, elem.post_votes, elem.username, elem.created_at, elem.category);
+          appendOwnPosts(elem.id, elem.image, elem.title, elem.post_votes, elem.username, elem.category);
         });
 
         showOnePost();
@@ -216,14 +215,6 @@ $(document).ready(function () {
         description: $('#edit-description').val()
       };
 
-      // var updatepost = function(image, title, username, created_at) {
-      //   var post =
-      //   '<img src=' + image + ' class="col-xs-12 photo">' +
-      //   '<div class="col-xs-12 title">' + title + '</div>' +
-      //   '<div class="col-xs-12 username">' + username + '</div>' +
-      //   '<div class="col-xs-12 date">' + created_at + '</div>';
-      // };
-
       $.ajax({
         url: "/api/posts/" + id + ".json",
         method: "PUT",
@@ -234,9 +225,6 @@ $(document).ready(function () {
           console.log(response);
           $('#editpostmodal').modal('hide');
           showUserPage();
-
-          // var post = updatepost(response.image, response.title, response.username, response.created_at);
-          // $('div.data-id='+ response.id).html(post);
         },
         error: function (response, status) {
           console.log(response);
@@ -271,15 +259,14 @@ $(document).ready(function () {
   };
 
   // APPEND POSTS TO HOME
-  var appendAllPosts = function(id, image, title, post_votes, username, created_at, category) {
+  var appendAllPosts = function(id, image, title, post_votes, username, category) {
     var ownPosts =
     '<div class="item">' +
       '<div class="col-xs-12 post" data-id="'+ id + '" data-toggle="modal" data-target="#showsinglepost">' +
         '<img src=' + image + ' onerror="this.src=\'http://camaleon.tuzitio.com/assets/camaleon_cms/image-not-found-4a963b95bf081c3ea02923dceaeb3f8085e1a654fc54840aac61a57a60903fef.png\'" class="col-xs-12 photo">' +
         '<div class="col-xs-12 title">' + title +
-        '</div>' +'<div class="col-xs-12 votes">' + post_votes + '</div>' +
+        '</div>' +'<div class="col-xs-12 votes"><i class="fa fa-thumbs-up"></i> ' + post_votes + '</div>' +
         '<div class="col-xs-12 username">' + username + '</div>' +
-        '<div class="col-xs-12 date">' + created_at + '</div>' +
         '<div class="col-xs-12 category">' + category + '</div>' +
       '</div>' +
     '</div>';
@@ -341,7 +328,7 @@ $(document).ready(function () {
       method: "GET",
       success: function (response, status) {
         response.forEach(function(elem, index) {
-          appendAllPosts(elem.id, elem.image, elem.title, elem.post_votes, elem.user.username, elem.created_at, elem.category);
+          appendAllPosts(elem.id, elem.image, elem.title, elem.post_votes, elem.user.username, elem.category);
           getQuote();
         });
         masonryGrid();
@@ -362,7 +349,7 @@ $(document).ready(function () {
       success: function (response, status) {
         console.log(response);
         response.forEach(function (elem, index) {
-          appendAllPosts(elem.id, elem.image, elem.title, elem.post_votes, elem.username, elem.created_at, elem.category);
+          appendAllPosts(elem.id, elem.image, elem.title, elem.post_votes, elem.username, elem.category);
         });
         masonryGrid();
         showOnePost();
@@ -382,7 +369,7 @@ $(document).ready(function () {
       success: function (response, status) {
         console.log(response);
         response.forEach(function (elem, index) {
-          appendAllPosts(elem.id, elem.image, elem.title, elem.post_votes, elem.username, elem.created_at, elem.category);
+          appendAllPosts(elem.id, elem.image, elem.title, elem.post_votes, elem.username, elem.category);
         });
         masonryGrid();
         showOnePost();
@@ -402,7 +389,7 @@ $(document).ready(function () {
       success: function (response, status) {
         console.log(response);
         response.forEach(function (elem, index) {
-          appendAllPosts(elem.id, elem.image, elem.title, elem.post_votes, elem.username, elem.created_at, elem.category);
+          appendAllPosts(elem.id, elem.image, elem.title, elem.post_votes, elem.username, elem.category);
         });
         masonryGrid();
         showOnePost();
@@ -422,7 +409,7 @@ $(document).ready(function () {
       success: function (response, status) {
         console.log(response);
         response.forEach(function (elem, index) {
-          appendAllPosts(elem.id, elem.image, elem.title, elem.post_votes, elem.username, elem.created_at, elem.category);
+          appendAllPosts(elem.id, elem.image, elem.title, elem.post_votes, elem.username, elem.category);
         });
         masonryGrid()
         showOnePost();
@@ -442,19 +429,39 @@ $(document).ready(function () {
       success: function (response, status) {
         console.log(response);
         response.forEach(function (elem, index) {
-          appendAllPosts(elem.id, elem.image, elem.title, elem.post_votes, elem.username, elem.created_at, elem.category);
+          appendAllPosts(elem.id, elem.image, elem.title, elem.post_votes, elem.username, elem.category);
         });
         masonryGrid()
         showOnePost();
       },
       error: function (response, status) {
         console.log(response);
-        console.log("did not get community posts");
       }
     });
   };
 
   // GET MOST POPULAR POSTS
+  var popularPosts = function() {
+    $.ajax({
+      url: "/api/posts/most_popular.json",
+      method: "GET",
+      success: function (response, status) {
+        console.log(response);
+        response.forEach(function (elem, index) {
+          // var text = '<div class="col-xs-12 top-twenty">Top 20 Stories</div>';
+
+          // $('#userposts').append(text);
+          appendAllPosts(elem.id, elem.image, elem.title, elem.post_votes, elem.username, elem.category);
+        });
+        masonryGrid()
+        showOnePost();
+      },
+      error: function (response, status) {
+        console.log(response);
+      }
+    });
+  };
+
   // GO TO HOME
 
   $.auth.validateToken().then(function(user){
@@ -488,6 +495,9 @@ $(document).ready(function () {
             break;
           case "gooddeeds":
             goodDeedsPosts();
+            break;
+          case "mostpopular":
+            popularPosts();
             break;
           default:
             allPostsHomePage();
