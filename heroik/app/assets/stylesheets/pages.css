@@ -8,11 +8,19 @@ body {
   background-color: #B0B0B0;
 }
 
-.post {
+/*MASONRY PLUGIN CSS*/
 
-}
+/*.post {
+  width: 400px;
+}*/
 
-*, *:before, *:after {box-sizing:  border-box !important;}
+
+
+
+
+/*PREVIOUS PINTEREST CSS CODE - HARDWIRED*/
+
+/**, *:before, *:after {box-sizing:  border-box !important;}
 
 .row {
  -moz-column-width: 20em;
@@ -40,15 +48,19 @@ body {
   display: block;
   column-fill: auto;
 }
+*/
+
+.item {
+  width: 350px;
+}
+
+
 
 .post img {
   padding:2px;
 }
 
-#empty-row-home {
-  height:200px;
-  background-color:white;
-}
+
 
 
 .username {
