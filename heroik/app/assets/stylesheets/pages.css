@@ -218,3 +218,24 @@ Image credits: unsplash.com
 @media screen and (max-width: 640px){
     .hero h1 { font-size: 4em; }
 }
+/*
+PROFILE PAGE CSS*/
+
+#userposts.row {
+  margin-top: 20px;
+}
+
+button.btn.btn-primary.btn-lg {
+  height: 300px;
+  width: 100%;
+  margin-top: 40px;
+}
+
+i.fa.fa-plus {
+  font-size: 70px;
+}
+
+#usercolumn {
+  margin-top: 20px;
+  background-color: #B0B0B0;
+}
