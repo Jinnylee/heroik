@@ -1,32 +1,3 @@
-  // var modalForSinglePost = function(post_votes, title, image, username, location, description, created_at, category, id) {
-  //   var body =
-  //   '<div id="singlebody">' +
-  //     '<div id="singlevotes"><i class="fa fa-thumbs-up"></i> ' + post_votes + '</div>' +
-  //     '<div id="singletitle">' + title + '</div>' +
-  //     '<p><img src=' + image + ' class="col-xs-12 photo"></p>' +
-  //     '<p><div id="singleusername">' + username + '</div></p>' +
-  //     '<p><div id="singlelocation">' + location + '</div></p>' +
-  //     '<p><div id="singledescription">' + description + '</div></p>' +
-  //     '<p><div id="singledate">' + created_at + '</p>' +
-  //     '<p><div id="singlecategory">' + category + '</div></p>' +
-  //   '</div>';
-
-  //   var footer =
-  //   '<div id="commentsection">' +
-  //     '<p id="commenttag"> Comments </p>' +
-  //     '<p><i class="fa fa-user"></i>&nbsp;&nbsp;<textarea class="form-control" name="description" rows="1"></textarea></p>' +
-  //     '<p><div id="allcomments"></div></p>'
-  //   '</div>';
-
-  //   $('.heroBtn').data('id', id);
-
-  //   $('.single-body').empty();
-  //   $('.single-footer').empty();
-  //   $('.single-body').append(body);
-  //   $('.single-footer').append(footer)
-  // };
-
-
 var marker = [];
 var postIcon;
 var postLat;
@@ -104,11 +75,18 @@ function initMap() {
             postID: elem.id
           });
           marker[index].addListener("click",function(){
-            modalForSinglePost(response[index].votes, response[index].title, response[index].image, response[index].username, response[index].location, response[index].description, response[index].created_at, response[index].category, response[index].id);
+            modalForSinglePost(response[index].post_votes, response[index].title, response[index].image, response[index].user.username, response[index].location, response[index].description, response[index].created_at, response[index].category, response[index].id);
             $('#showsinglepost').modal('show');
             $('.editPostBtn').hide();
             $('.deletePostBtn').hide();
-            console.log(elem);
+            $('.heroBtn').removeClass("hide");
+            $.auth.validateToken().then(function(user){
+              addComment(user);
+              addHeroButton();
+            }).fail(function(response){
+              console.log(response);
+            });
+              console.log(elem);
             // if (response.current_user_voted > 0) {
             //   $('.heroBtn').addClass("hide");
             // }
