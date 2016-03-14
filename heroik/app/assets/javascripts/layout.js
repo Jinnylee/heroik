@@ -1,24 +1,5 @@
 $(document).ready(function () {
 
-// FACEBOOK LOGIN:
-
-// window.fbAsyncInit = function() {
-//     FB.init({
-//       appId      : '1012996212127261',
-//       xfbml      : true,
-//       version    : 'v2.5'
-//     });
-//   };
-
-//   (function(d, s, id){
-//      var js, fjs = d.getElementsByTagName(s)[0];
-//      if (d.getElementById(id)) {return;}
-//      js = d.createElement(s); js.id = id;
-//      js.src = "//connect.facebook.net/en_US/sdk.js";
-//      fjs.parentNode.insertBefore(js, fjs);
-//    }(document, 'script', 'facebook-jssdk'));
-
-
   var appendNameToNavBar = function(name) {
     var userName =
     '<div class="col-xs-12" id="userinfo">' +
@@ -76,6 +57,12 @@ $(document).ready(function () {
     $.auth.signOut();
     window.location.href = "/";
   });
+
+  $('#fb-button').on('click', function(e){
+    e.preventDefault();
+    console.log("test")
+    $.auth.oAuthSignIn({provider: 'facebook'});
+  })
 
   $.auth.validateToken().then(function(user){
     $('#signin-signup').hide();

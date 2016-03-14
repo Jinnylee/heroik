@@ -8,12 +8,13 @@ body {
   background-color: #B0B0B0;
 }
 
-/*MASONRY PLUGIN CSS*/
 
-/*.post {
-  width: 400px;
-}*/
+/*POSTS SECTION ON HOMEPAGE*/
 
+#post-home.row{
+  margin:0 auto;
+  margin-top:20px;
+}
 
 
 

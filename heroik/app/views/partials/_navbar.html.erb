@@ -23,19 +23,17 @@
 
         <li><a href="/neighbourhood" id="neighborhood">In my neighbourhood</a></li>
 
-        <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
-        </fb:login-button>
-
-        <div id="status">
-        </div>
       </ul>
-
 
 <!--       SIGN UP/ SIGN IN BUTTON -->
       <ul id="user-navbar-section" class="nav navbar-nav navbar-right">
         <li id="user-name-dashboard" style="display: none">
           <span><a href ="/profile" id="nav-profile"></a></span>
         </li>
+<!--         <li>
+          <div id="status"> - this is the facebook "status" line to say you have logged in
+          </div>
+        </li> -->
         <li id="logout" style="display: none">
           <button class="btn btn-primary" id="logout-button">Logout</button>
         </li>
@@ -63,6 +61,8 @@
           <p><input type="password" name="password" placeholder="password"></p>
           <button id="submit-button-home" class="btn btn-default"type="submit">Submit</button>
         </form>
+        <button class="btn" id="fb-button"></button>
+<!--         <img src="http://i63.tinypic.com/281snlw.png" id="fb-button"> -->
 
         <form id="signup-form">
           <p>SIGN UP</p>

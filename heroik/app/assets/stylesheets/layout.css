@@ -4,7 +4,23 @@ body {
   background-color: #E8E8E8;
 }
 
+/*#myModal {
+  z-index:3;
+}
 
+.fb-button {
+  z-index:2;
+}*/
+
+#fb-button {
+  background-image: url("http://i63.tinypic.com/u4fx4.png");
+  border:0;
+  display:block;
+  width:200px;
+  height:35px;
+  margin-top:20px;
+  margin-bottom:20px;
+}
 .navbar-brand img {
   width:150px;
 }
@@ -101,4 +117,6 @@ body {
   background-color: #357ae8;
   /* background-image: -webkit-gradient(linear, 0 0, 0 100%,   from(#4d90fe), to(#357ae8)); */
 }
+
+
 
