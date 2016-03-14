@@ -1,11 +1,9 @@
   var addComment = function (user) {
-    console.log("AddComment")
     $(".comment-btn").off().on('click', function(e) {
     e.preventDefault();
-    console.log("comment clicked and sending request!");
+    console.log("clicked comment")
 
     var id = $(this).data("id");
-    console.log(id);
 
     var newComment = {
       comment : $('textarea#commentform').val(),
@@ -14,26 +12,29 @@
     };
     console.log(newComment);
 
-    // $.ajax({
-    //   type: 'POST',
-    //   url: '/posts/' + id + '/comments.json',
-    //   data: {
-    //     newComment: newComment
-    //   },
-    //   success: function(response){
-    //     console.log(response);
+    $.ajax({
+      type: 'POST',
+      url: 'api/posts/' + id + '/comments.json',
+      data: {
+        newComment: newComment
+      },
+      success: function(response){
+        console.log(response);
+        $('textarea#commentform').val('');
 
-    //     var newComment =
-    //     "<p><b>" response.user.username + "</b></p>" +
-    //     "<p>" + response.comment + "</p>"
-    //     console.log(user)
+        var newComment =
+        "<div>" +
+        "<b>" + response.user.username + "</b>" +
+        "<br>" + response.comment +
+        "</div>"
+        console.log(user)
 
-    //     $("#allcomments").append(newComment);
-    //   },
-    //   error: function(response){
-    //     console.log(response);
-    //   }
-    // });
+        $("#allcomments").append(newComment);
+      },
+      error: function(response){
+        console.log(response);
+      }
+    });
     });
   };
 

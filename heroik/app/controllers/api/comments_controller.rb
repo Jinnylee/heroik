@@ -9,7 +9,8 @@ class API::CommentsController < ApplicationController
 
     respond_to do |format|
       if @comment.save
-        format.json { render json: @comment }
+         # format.json { render json: @comment }
+        format.json { render json: @comment.as_json(include: :user) }
       else
         format.json { render json: @comment.errors, status: :unprocessable_entity }
       end
@@ -18,7 +19,7 @@ class API::CommentsController < ApplicationController
 
   private
     def comment_params
-      params.require(:insertComment).permit(:comment, :user_id, :post_id)
+      params.require(:newComment).permit(:comment, :post_id, :user_id)
     end
 
 end
