@@ -30,7 +30,19 @@ body {
   background-color: white;
 }
 
+#nav-profile {
+  line-height: 50px;
+  padding-right: 30px;
+}
+
 #signin-signup {
+  padding: 2px;
+  margin-top: 6px;
+  margin-right: 20px;
+  border-radius: 2px;
+}
+
+#logout {
   padding: 2px;
   margin-top: 6px;
   margin-right: 20px;
