@@ -21,8 +21,14 @@ body {
   margin-top:20px;
   margin-bottom:20px;
 }
-.navbar-brand img {
-  width:150px;
+
+.navbar-default {
+  margin-bottom:0px;
+}
+
+a.navbar-brand > img {
+  width: 250px;
+  margin-top: -20px;
 }
 
 .navbar {
@@ -30,7 +36,36 @@ body {
   background-color: white;
 }
 
+#environment, #community, #animals, #youth, #gooddeeds, #mostpopular, #neighborhood {
+  padding-right: 20px;
+  padding-left:20px;
+  line-height: 50px;
+  text-align:center;
+}
+
+#environment:hover, #community:hover, #animals:hover, #youth:hover, #gooddeeds:hover, #mostpopular:hover, #neighborhood:hover {
+  background-color:DarkTurquoise;
+  color:white;
+/*  background-image:url("https://d3ui957tjb5bqd.cloudfront.net/images/screenshots/products/24/240/240143/christmas-tree-f.jpg?1416330834");
+  background-size: 100%;
+  background-position: center;*/
+}
+
+#nav-profile {
+  padding-right: 25px;
+  line-height: 80px;
+}
+
 #signin-signup {
+  line-height: 60px;
+  padding: 2px;
+  margin-top: 6px;
+  margin-right: 20px;
+  border-radius: 2px;
+}
+
+#logout {
+  line-height: 60px;
   padding: 2px;
   margin-top: 6px;
   margin-right: 20px;
