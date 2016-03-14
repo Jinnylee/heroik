@@ -32,7 +32,6 @@ ActiveRecord::Schema.define(version: 20160311031131) do
     t.string   "location"
     t.string   "longitude"
     t.string   "latitude"
-    t.string   "google_id"
     t.integer  "user_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false

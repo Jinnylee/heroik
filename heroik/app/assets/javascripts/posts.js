@@ -126,7 +126,6 @@ $(document).ready(function () {
     $('#createpost').on('submit', function (e) {
       e.preventDefault();
       $('#create-form-message').text('');
-
       var post = {
         title   : $('#createpost [name="title"]').val(),
         image : $('#createpost [name="image"]').val(),
@@ -134,7 +133,9 @@ $(document).ready(function () {
         location : $('#createpost [name="location"]').val(),
         description : $('#createpost [name="description"]').val(),
         user_id : user.id,
-        post_votes : 0
+        post_votes : 0,
+        latitude: postLat.toString(),
+        longitude: postLong.toString()
       };
 
       $.ajax({

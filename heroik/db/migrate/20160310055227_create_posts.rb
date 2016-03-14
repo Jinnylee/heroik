@@ -8,7 +8,6 @@ class CreatePosts < ActiveRecord::Migration
       t.string  :location
       t.string  :longitude
       t.string  :latitude
-      t.string  :google_id
       t.integer :user_id
 
 

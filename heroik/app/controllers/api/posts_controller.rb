@@ -16,14 +16,14 @@ class API::PostsController < ApplicationController
 
   def create
     @post = Post.new(post_params)
-      respond_to do |format|
-        if @post.save
-          format.json { render json: @post }
-          # format.json { render 'profile.jbuilder' }
-        else
-          format.json { render json: @post.errors, status: :unprocessable_entity }
-        end
+    respond_to do |format|
+      if @post.save
+        format.json { render json: @post }
+        # format.json { render 'profile.jbuilder' }
+      else
+        format.json { render json: @post.errors, status: :unprocessable_entity }
       end
+    end
   end
 
   def update
@@ -82,7 +82,7 @@ class API::PostsController < ApplicationController
 
   private
     def post_params
-      params.require(:post).permit(:title, :image, :category, :location, :description, :user_id, :post_votes)
+      params.require(:post).permit(:title, :image, :category, :location, :description, :user_id, :post_votes, :latitude, :longitude)
     end
 
     def editedpost_params
