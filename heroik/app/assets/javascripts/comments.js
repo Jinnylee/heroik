@@ -39,22 +39,22 @@
       success: function(response) {
         $('#allcomments').empty();
         $('#see-more').show();
-
+        console.log(response)
         if (response.length <= 4) {
           $('#see-more').hide();
           for (var i = 0; i < response.length; i++) {
-            appendComments(response[i].user.avatar, response[i].user.username, response[i].comment, response[i].id, response[i].user.id);
+            appendComments(response[i].user.image, response[i].user.username, response[i].comment, response[i].id, response[i].user.id);
           }
         } else {
           for (var i = 0; i <= 4; i++) {
-            appendComments(response[i].user.avatar, response[i].user.username, response[i].comment, response[i].id, response[i].user.id);
+            appendComments(response[i].user.image, response[i].user.username, response[i].comment, response[i].id, response[i].user.id);
           }
           $('#view-all-comments').off().on('click', function(e) {
             e.preventDefault();
             console.log('clicked');
             $('#see-more').hide();
             for (i = 5; i < response.length; i++) {
-              appendComments(response[i].user.avatar, response[i].user.username, response[i].comment, response[i].id, response[i].user.id);
+              appendComments(response[i].user.image, response[i].user.username, response[i].comment, response[i].id, response[i].user.id);
             };
           });
         }
