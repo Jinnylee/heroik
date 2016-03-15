@@ -269,15 +269,35 @@ $(document).ready(function () {
     '<div class="item">' +
       '<div class="col-xs-12 post" data-id="'+ id + '" data-toggle="modal" data-target="#showsinglepost">' +
         '<img src=' + image + ' onerror="this.src=\'http://camaleon.tuzitio.com/assets/camaleon_cms/image-not-found-4a963b95bf081c3ea02923dceaeb3f8085e1a654fc54840aac61a57a60903fef.png\'" class="col-xs-12 photo">' +
-        '<div class="col-xs-12 title">' + title +
-        '</div>' +'<div class="col-xs-12 votes" data-id="'+ id +'"><i class="fa fa-thumbs-up"></i> ' + post_votes + '</div>' +
+        '<div class="col-xs-12 title">' + title +'</div>' +
+        '<div class="col-xs-12 votes" data-id="'+ id +'"><i class="fa fa-thumbs-up"></i> ' + post_votes +
+        '<img style="float:right" src=' + category + '></div>' +
         '<div class="row"><img src="' + pp + '" onerror="this.src=\'http://camaleon.tuzitio.com/assets/camaleon_cms/image-not-found-4a963b95bf081c3ea02923dceaeb3f8085e1a654fc54840aac61a57a60903fef.png\'" class="col-xs-2 photo">' +
         '<div class="col-xs-10 username">' + username + '</div></div>' +
-        '<div class="col-xs-12 category">' + category + '</div>' +
       '</div>' +
     '</div>';
 
     $('#post-home').append(ownPosts);
+  };
+  var postIcon;
+  var getCategoryImage = function (category){
+    switch (category) {
+      case "Community":
+        postIcon = "http://i63.tinypic.com/2u3w8wg.png";
+        break;
+      case "Youth":
+        postIcon = "http://i66.tinypic.com/16beu88.png";
+        break;
+      case "Environment":
+        postIcon = "http://i64.tinypic.com/34yz3uc.png";
+        break;
+      case "Animals":
+        postIcon = "http://i63.tinypic.com/2qis2ko.png";
+        break;
+      case "Good Deeds":
+        postIcon = "http://i67.tinypic.com/2exnc79.png";
+        break;
+    }
   };
 
   // GET ALL POSTS (HOME PAGE)
@@ -286,9 +306,9 @@ $(document).ready(function () {
       url: "/api/posts.json",
       method: "GET",
       success: function (response, status) {
-        console.log(response);
         response.forEach(function(elem, index) {
-          appendAllPosts(elem.id, elem.postpic, elem.title, elem.post_votes, elem.pp, elem.username, elem.category);
+          getCategoryImage(elem.category);
+          appendAllPosts(elem.id, elem.postpic, elem.title, elem.post_votes, elem.pp, elem.username, postIcon);
           getQuote();
         });
         masonryGrid();
@@ -354,9 +374,9 @@ $(document).ready(function () {
       url: "/api/posts/community.json",
       method: "GET",
       success: function (response, status) {
-        console.log(response);
         response.forEach(function (elem, index) {
-          appendAllPosts(elem.id, elem.postpic, elem.title, elem.post_votes, elem.pp, elem.username, elem.category);
+          getCategoryImage(elem.category);
+          appendAllPosts(elem.id, elem.postpic, elem.title, elem.post_votes, elem.pp, elem.username, postIcon);
         });
         masonryGrid();
         showOnePost();
@@ -374,9 +394,9 @@ $(document).ready(function () {
       url: "/api/posts/youth.json",
       method: "GET",
       success: function (response, status) {
-        console.log(response);
         response.forEach(function (elem, index) {
-          appendAllPosts(elem.id, elem.postpic, elem.title, elem.post_votes, elem.pp, elem.username, elem.category);
+          getCategoryImage(elem.category);
+          appendAllPosts(elem.id, elem.postpic, elem.title, elem.post_votes, elem.pp, elem.username, postIcon);
         });
         masonryGrid();
         showOnePost();
@@ -394,9 +414,9 @@ $(document).ready(function () {
       url: "/api/posts/environment.json",
       method: "GET",
       success: function (response, status) {
-        console.log(response);
         response.forEach(function (elem, index) {
-          appendAllPosts(elem.id, elem.postpic, elem.title, elem.post_votes, elem.pp, elem.username, elem.category);
+          getCategoryImage(elem.category);
+          appendAllPosts(elem.id, elem.postpic, elem.title, elem.post_votes, elem.pp, elem.username, postIcon);
         });
         masonryGrid();
         showOnePost();
@@ -414,9 +434,9 @@ $(document).ready(function () {
       url: "/api/posts/animals.json",
       method: "GET",
       success: function (response, status) {
-        console.log(response);
         response.forEach(function (elem, index) {
-          appendAllPosts(elem.id, elem.postpic, elem.title, elem.post_votes, elem.pp, elem.username, elem.category);
+          getCategoryImage(elem.category);
+          appendAllPosts(elem.id, elem.postpic, elem.title, elem.post_votes, elem.pp, elem.username, postIcon);
         });
         masonryGrid()
         showOnePost();
@@ -434,9 +454,9 @@ $(document).ready(function () {
       url: "/api/posts/good_deeds.json",
       method: "GET",
       success: function (response, status) {
-        console.log(response);
         response.forEach(function (elem, index) {
-          appendAllPosts(elem.id, elem.postpic, elem.title, elem.post_votes, elem.pp, elem.username, elem.category);
+          getCategoryImage(elem.category);
+          appendAllPosts(elem.id, elem.postpic, elem.title, elem.post_votes, elem.pp, elem.username, postIcon);
         });
         masonryGrid()
         showOnePost();
@@ -453,12 +473,12 @@ $(document).ready(function () {
       url: "/api/posts/most_popular.json",
       method: "GET",
       success: function (response, status) {
-        console.log(response);
         response.forEach(function (elem, index) {
+          getCategoryImage(elem.category);
           // var text = '<div class="col-xs-12 top-twenty">Top 20 Stories</div>';
 
           // $('#userposts').append(text);
-          appendAllPosts(elem.id, elem.postpic, elem.title, elem.post_votes, elem.pp, elem.username, elem.category);
+          appendAllPosts(elem.id, elem.postpic, elem.title, elem.post_votes, elem.pp, elem.username, postIcon);
         });
         masonryGrid()
         showOnePost();

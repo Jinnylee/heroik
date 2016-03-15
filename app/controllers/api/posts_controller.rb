@@ -74,7 +74,7 @@ class API::PostsController < ApplicationController
   end
 
   def good_deeds
-    @posts = Post.where(category: 'Good deeds').order("created_at DESC")
+    @posts = Post.where(category: 'Good Deeds').order("created_at DESC")
     respond_to do |format|
       format.json { render 'index.jbuilder' }
     end
