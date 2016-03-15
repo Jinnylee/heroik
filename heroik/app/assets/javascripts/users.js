@@ -53,7 +53,7 @@ var editUserInfo = function (id) {
         $('#edit-firstname').val(user.first_name);
         $('#edit-lastname').val(user.last_name);
         $('#edit-quote').val(user.quote);
-        $("#for-image").append('<img src="' + user.avatar + '" onerror="this.src=\'http://camaleon.tuzitio.com/assets/camaleon_cms/image-not-found-4a963b95bf081c3ea02923dceaeb3f8085e1a654fc54840aac61a57a60903fef.png\'" class="col-xs-12 photo">')
+        $("#for-image").append('<img src="' + user.image + '" onerror="this.src=\'http://camaleon.tuzitio.com/assets/camaleon_cms/image-not-found-4a963b95bf081c3ea02923dceaeb3f8085e1a654fc54840aac61a57a60903fef.png\'" class="col-xs-12 photo">')
         editUserInfo(id);
       },
       error: function(response, status) {
