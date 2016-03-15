@@ -54,14 +54,15 @@ $(document).ready(function () {
   };
 
   // GET POSTS THAT BELONG TO USER (PROFILE PAGE)
-  var appendOwnPosts = function(id, image, title, post_votes, username, category) {
+  var appendOwnPosts = function(id, image, title, post_votes, pp, username, category) {
     var ownPosts =
     '<div class="col-xs-12 col-md-4 item">' +
       '<div class="col-xs-12 post" data-id="'+ id + '" data-toggle="modal" data-target="#showsinglepost">' +
         '<img src="' + image + '" onerror="this.src=\'http://camaleon.tuzitio.com/assets/camaleon_cms/image-not-found-4a963b95bf081c3ea02923dceaeb3f8085e1a654fc54840aac61a57a60903fef.png\'" class="col-xs-12 photo">' +
         '<div class="col-xs-12 title">' + title + '</div>' +
         '<div class="col-xs-12 votes"><i class="fa fa-thumbs-up"></i> ' + post_votes + '</div>' +
-        '<div class="col-xs-12 username">' + username + '</div>' +
+        '<div class="row"><img src="' + pp + '" onerror="this.src=\'http://camaleon.tuzitio.com/assets/camaleon_cms/image-not-found-4a963b95bf081c3ea02923dceaeb3f8085e1a654fc54840aac61a57a60903fef.png\'" class="col-xs-2 photo">' +
+        '<div class="col-xs-10 username">' + username + '</div></div>' +
         '<div class="col-xs-12 category">' + category + '</div>' +
       '</div>' +
     '</div>';
@@ -82,7 +83,7 @@ $(document).ready(function () {
         appendUserInformation(user.image, user.name, user.username, moment(user.created_at.event_time).format('MM/DD/YYYY'), user.quote);
 
         response.posts.forEach(function(elem, index) {
-          appendOwnPosts(elem.id, elem.image, elem.title, elem.post_votes, elem.username, elem.category);
+          appendOwnPosts(elem.id, elem.image, elem.title, elem.post_votes, elem.pp, elem.username, elem.category);
         });
 
         showOnePost();
@@ -246,19 +247,40 @@ $(document).ready(function () {
   };
 
   // APPEND POSTS TO HOME
-  var appendAllPosts = function(id, image, title, post_votes, username, category) {
+  var appendAllPosts = function(id, image, title, post_votes, pp, username, category) {
     var ownPosts =
     '<div class="item">' +
       '<div class="col-xs-12 post" data-id="'+ id + '" data-toggle="modal" data-target="#showsinglepost">' +
         '<img src="' + image + '" onerror="this.src=\'http://camaleon.tuzitio.com/assets/camaleon_cms/image-not-found-4a963b95bf081c3ea02923dceaeb3f8085e1a654fc54840aac61a57a60903fef.png\'" class="col-xs-12 photo">' +
         '<div class="col-xs-12 title">' + title +
         '</div>' +'<div class="col-xs-12 votes"><i class="fa fa-thumbs-up"></i> ' + post_votes + '</div>' +
-        '<div class="col-xs-12 username">' + username + '</div>' +
+        '<div class="row"><img src="' + pp + '" onerror="this.src=\'http://camaleon.tuzitio.com/assets/camaleon_cms/image-not-found-4a963b95bf081c3ea02923dceaeb3f8085e1a654fc54840aac61a57a60903fef.png\'" class="col-xs-2 photo">' +
+        '<div class="col-xs-10 username">' + username + '</div></div>' +
         '<div class="col-xs-12 category">' + category + '</div>' +
       '</div>' +
     '</div>';
 
     $('#post-home').append(ownPosts);
+  };
+
+  // GET ALL POSTS (HOME PAGE)
+  var allPostsHomePage = function () {
+    $.ajax({
+      url: "/api/posts.json",
+      method: "GET",
+      success: function (response, status) {
+        response.forEach(function(elem, index) {
+          appendAllPosts(elem.id, elem.image, elem.title, elem.post_votes, elem.user.image, elem.user.username, elem.category);
+          getQuote();
+        });
+        masonryGrid();
+        showOnePost();
+      },
+      error: function(response, status) {
+        console.log(response);
+        console.log("did not get post data")
+      }
+    });
   };
 
   // APPEND QUOTE TO HOME
@@ -306,26 +328,6 @@ $(document).ready(function () {
         }
       });
     };
-  };
-
-  // GET ALL POSTS (HOME PAGE)
-  var allPostsHomePage = function () {
-    $.ajax({
-      url: "/api/posts.json",
-      method: "GET",
-      success: function (response, status) {
-        response.forEach(function(elem, index) {
-          appendAllPosts(elem.id, elem.image, elem.title, elem.post_votes, elem.user.username, elem.category);
-          getQuote();
-        });
-        masonryGrid();
-        showOnePost();
-      },
-      error: function(response, status) {
-        console.log(response);
-        console.log("did not get post data")
-      }
-    });
   };
 
   // GET COMMUNITY POSTS
