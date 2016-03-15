@@ -1,9 +1,9 @@
 class API::CommentsController < ApplicationController
 
   def index
-    @comments = Comment.where(post_id: params[:post_id]).order("created_at DESC")
+    @comments = Comment.includes(:user).where(post_id: params[:post_id]).order("created_at DESC")
     respond_to do |format|
-      format.json { render json: @comments.as_json(include: :user) }
+      format.json { render 'index.jbuilder' }
     end
   end
 

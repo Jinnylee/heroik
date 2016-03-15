@@ -102,22 +102,20 @@ $(document).ready(function () {
     $('.post').off().on('click', function (e) {
       e.preventDefault();
       var id = $(this).data("id")
-      if (location.pathname == "/") {
-        $('.editPostBtn').hide();
-        $('.deletePostBtn').hide();
-      }
-      $('.heroBtn').removeClass("hide");
+      $('.editPostBtn').hide();
+      $('.deletePostBtn').hide();
+      $('.heroBtn').show();
 
       $.ajax({
         method: "GET",
         url: "/api/posts/" + id + ".json",
         success: function (response) {
           if (response.belongs_to_current_user){
-            $('.editPostBtn').removeClass('hide');
-            $('.deletePostBtn').removeClass('hide');
+            $('.editPostBtn').show('hide');
+            $('.deletePostBtn').show('hide');
           }
           if (response.current_user_voted > 0) {
-            $('.heroBtn').addClass("hide");
+            $('.heroBtn').hide();
           }
           console.log(response);
           modalForSinglePost(response.post_votes, moment(response.created_at.event_time).format('MM/DD/YYYY'), response.category, response.title, response.postpic, response.location, response.description, response.pp, response.username, response.id);
