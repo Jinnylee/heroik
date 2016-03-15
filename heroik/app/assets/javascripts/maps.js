@@ -65,6 +65,7 @@ function initMap() {
       url: "/api/maps.json",
       method: "GET",
       success: function (response, status) {
+          console.log(response);
         response.forEach(function (elem, index){
           getIcon(elem.category);
           marker[index] = new google.maps.Marker({
@@ -75,7 +76,7 @@ function initMap() {
             postID: elem.id
           });
           marker[index].addListener("click",function(){
-            modalForSinglePost(response[index].post_votes, response[index].title, response[index].image, response[index].user.username, response[index].location, response[index].description, response[index].created_at, response[index].category, response[index].id);
+            modalForSinglePost(response[index].post_votes,moment(response.created_at).format('MM/DD/YYYY'), response[index].category, response[index].title, response[index].postpic, response[index].location, response[index].description, response[index].pp, response[index].username, response[index].id);
             $('#showsinglepost').modal('show');
             $('.editPostBtn').hide();
             $('.deletePostBtn').hide();
