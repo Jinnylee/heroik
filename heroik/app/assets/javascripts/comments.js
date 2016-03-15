@@ -3,7 +3,6 @@
   var addComment = function (user) {
     $(".comment-btn").off().on('click', function(e) {
     e.preventDefault();
-    console.log("clicked comment")
 
     var id = $(this).data("id");
 
@@ -12,7 +11,6 @@
       post_id : id,
       user_id : user.id
     };
-    console.log(newComment);
 
     $.ajax({
       type: 'POST',
@@ -42,19 +40,19 @@
         $('#allcomments').empty();
         $('#see-more').show();
 
-        if (response.length <= 5) {
+        if (response.length <= 4) {
           $('#see-more').hide();
           for (var i = 0; i < response.length; i++) {
             appendComments(response[i].user.image, response[i].user.username, response[i].comment, response[i].id, response[i].user.id);
           }
         } else {
-          for (var i = 0; i <= 5; i++) {
+          for (var i = 0; i <= 4; i++) {
             appendComments(response[i].user.image, response[i].user.username, response[i].comment, response[i].id, response[i].user.id);
           }
           $('#view-all-comments').off().on('click', function(e) {
             e.preventDefault();
             console.log('clicked');
-            $('#see-more').hid, response[i].user.ide();
+            $('#see-more').hide();
             for (i = 5; i < response.length; i++) {
               appendComments(response[i].user.image, response[i].user.username, response[i].comment, response[i].id, response[i].user.id);
             };
@@ -79,7 +77,6 @@
 
     var $comment = $(commentHTML)
 
-    console.log(userID, user_id)
     if (window.userID == user_id) {
       $comment.append('<button type="button" class="btn btn-default deleteCommentBtn" data-id="' + id + '"><i class="fa fa-trash-o"></i></button>')
     }
@@ -90,8 +87,6 @@
   var deleteComment = function() {
     $('.deleteCommentBtn').off().on('click', function (e){
       e.preventDefault();
-
-      console.log("request sent!");
 
       var id = $('.comment-btn').data("id");
       var cid = $(this).data("id");
