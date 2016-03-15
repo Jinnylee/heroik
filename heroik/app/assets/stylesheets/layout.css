@@ -46,12 +46,26 @@ a.navbar-brand > img {
   text-align:center;
 }
 
-#environment:hover, #community:hover, #animals:hover, #youth:hover, #gooddeeds:hover, #mostpopular:hover, #neighborhood:hover {
+/*#environment:hover, #community:hover, #animals:hover, #youth:hover, #gooddeeds:hover, #mostpopular:hover, #neighborhood:hover {
   background-color:DarkTurquoise;
   color:transparent;
   background-image:url("http://i65.tinypic.com/sbnh9f.png");
   background-size: 100%;
   background-position: center;
+}*/
+
+.icon {
+  display: none;
+}
+#community {
+  width: 100px;
+}
+#community:hover .title {
+  display: none;
+}
+
+#community:hover .icon {
+  display: block;
 }
 
 #nav-profile {
