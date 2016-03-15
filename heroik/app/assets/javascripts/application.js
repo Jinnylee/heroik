@@ -18,6 +18,7 @@
 //= require j-toker/dist/jquery.j-toker.js
 //= require twitter/bootstrap
 //= require masonry/dist/masonry.pkgd.js
+//= require moment
 //= require_tree .
 
 $.auth.configure({
