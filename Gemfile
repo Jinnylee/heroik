@@ -40,6 +40,7 @@ gem 'omniauth-facebook'
 gem 'bower'
 gem 'paperclip', '~> 4.3'
 gem 'aws-sdk-v1'
+gem 'rails_12factor', group: :production
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
