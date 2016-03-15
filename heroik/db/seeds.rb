@@ -12,8 +12,8 @@ Comment.delete_all
 Vote.delete_all
 Quote.delete_all
 
-user1 = User.create(name: 'Clark Kent', nickname: 'supes', email: 'clark@kent.com', first_name: 'Clark', last_name: 'Kent', username:'supes', quote:'Not a bird nor a plane', password:'clarkkent', image:'http://img05.deviantart.net/13d1/i/2014/261/4/a/earth_2_superman__bourassa_style__by_owc478-d74ivzp.png')
-user2 = User.create(name: 'Bruce Wayne', nickname: 'bats', email: 'bruce@wayne.com', first_name: 'Bruce', last_name: 'Wayne', username:'bats', quote:'i am batman', password:'brucewayne', image:'http://cdn-static.denofgeek.com/sites/denofgeek/files/2015/10/batman-yellow-west.jpg')
+user1 = User.create(name: 'Clark Kent', nickname: 'Supes', email: 'clark@kent.com', first_name: 'Clark', last_name: 'Kent', username:'supes', quote:'Not a bird nor a plane', password:'clarkkent', image:'http://images-cdn.moviepilot.com/image/upload/c_fill,h_1200,w_1920/t_mp_quality/henry_cavill_in_man_of_steel-wide-henry-cavill-confirms-batman-vs-superman-won-t-be-split-into-two-movies-jpeg-219245.jpg')
+user2 = User.create(name: 'Wade Wilson', nickname: 'Mr Pool', email: 'dead@pool.com', first_name: 'Wade', last_name: 'Wilson', username:'deadpool', quote:'McAvoy or Stewart? These timelines can get so confusing.', password:'wadewilson', image:'http://download.gamezone.com/uploads/image/data/1199916/james-gunn-explains-why-deadpool-made-so-much-money-844407.jpg')
 user3 = User.create(name: 'Steve Rogers', nickname: 'cap', email: 'steve@rogers.com', first_name: 'Steve', last_name: 'Rogers', username:'cap', quote:'live long and prosper', password:'steverogers', image:'http://vignette1.wikia.nocookie.net/disney/images/f/fa/Captain-America-AOU-Render.png/revision/latest?cb=20150208173400')
 user4 = User.create(name: 'Tony Stark', nickname: 'iman', email: 'anthony@stark.com', first_name: 'Tony', last_name: 'Stark', username:'iman', quote:'iron is my game', password:'tonystark', image:'http://vignette3.wikia.nocookie.net/ironman/images/4/4f/Photo(1073).png/revision/latest?cb=20150417140445')
 

@@ -7,4 +7,5 @@ $(document).ready(function () {
       console.log("clicked env button");
       window.location.href = '/posts?target=environment'
   });
+
 });
