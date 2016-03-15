@@ -1,6 +1,6 @@
 json.merge! post.attributes
 json.username post.user.username
-json.pp post.user.image.url
+json.pp post.user.image.nil? ? post.user.avatar.url : post.user.image
 json.postpic post.image
 json.user_id post.user.id
 if user
