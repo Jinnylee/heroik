@@ -6,7 +6,7 @@
       '<div class="body col-xs-8" id="singledate">' + created_at + '</div>' +
       '<div class="body col-xs-2" id="singlecategory">' + category + '</div>' +
       '<div  class="body col-xs-12" id="singletitle">' + title + '</div>' +
-      '<p><img src="' + image + '" onerror="this.src=\'http://camaleon.tuzitio.com/assets/camaleon_cms/image-not-found-4a963b95bf081c3ea02923dceaeb3f8085e1a654fc54840aac61a57a60903fef.png\'" class="photo body col-xs-12"></p>' +
+      '<p><img src=' + image + ' onerror="this.src=\'http://camaleon.tuzitio.com/assets/camaleon_cms/image-not-found-4a963b95bf081c3ea02923dceaeb3f8085e1a654fc54840aac61a57a60903fef.png\'" class="photo body col-xs-12"></p>' +
       '<div class="body col-xs-12" id="singlelocation">' + location + '</div>' +
       '<div class="body col-xs-12" id="singledescription">' + description + '</div></div>' +
       '<div class="row userrow"><img src="' + pp + '" onerror="this.src=\'http://camaleon.tuzitio.com/assets/camaleon_cms/image-not-found-4a963b95bf081c3ea02923dceaeb3f8085e1a654fc54840aac61a57a60903fef.png\'" class="photo body pro-pic col-xs-3">' +
@@ -19,7 +19,7 @@
     $('#editpost').data('id', id);
 
     $('#edit-title').val(title);
-    $('#edit-image').val(image);
+    $("#for-postimage").empty().append('<img src="' + image + '" onerror="this.src=\'http://camaleon.tuzitio.com/assets/camaleon_cms/image-not-found-4a963b95bf081c3ea02923dceaeb3f8085e1a654fc54840aac61a57a60903fef.png\'" class="col-xs-12 photo">')
     $('#edit-category').val(category);
     $('#edit-location').val(location);
     $('#edit-description').val(description);
@@ -40,14 +40,15 @@ $(document).ready(function () {
   };
 
   // GET USER INFORMATION FOR USER COLUMN (PROFILE PAGE)
-  var appendUserInformation = function(image, name, username, created_at, quote) {
+  var appendUserInformation = function(id, image, name, username, created_at, quote) {
     var userInfo =
     '<div class="col-xs-12" id="userinfo">' +
       '<img src=' + image + ' onerror="this.src=\'http://camaleon.tuzitio.com/assets/camaleon_cms/image-not-found-4a963b95bf081c3ea02923dceaeb3f8085e1a654fc54840aac61a57a60903fef.png\'" class="col-xs-12 photo">' +
-      '<div class="col-xs-12">' + name + '</div>' +
+      '<div id="userNameDiv" class="col-xs-12">' + name + '</div>' +
       '<div class="col-xs-12">' + username + '</div>' +
       '<div class="col-xs-12">' + created_at + '</div>' +
-      '<div class="col-xs-12">' + quote + '</div>' +
+      '<div id="userQuoteDiv"class="col-xs-12">' + quote + '</div>' +
+      '<div><buttontype="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#editusermodal" data-id='+id+' id="edit-user-btn">Edit Profile</button></div>' +
     '</div>';
 
     $('#usercolumn').append(userInfo);
@@ -58,7 +59,7 @@ $(document).ready(function () {
     var ownPosts =
     '<div class="col-xs-12 col-md-4 item">' +
       '<div class="col-xs-12 post" data-id="'+ id + '" data-toggle="modal" data-target="#showsinglepost">' +
-        '<img src="' + image + '" onerror="this.src=\'http://camaleon.tuzitio.com/assets/camaleon_cms/image-not-found-4a963b95bf081c3ea02923dceaeb3f8085e1a654fc54840aac61a57a60903fef.png\'" class="col-xs-12 photo">' +
+        '<img src=' + image + ' onerror="this.src=\'http://camaleon.tuzitio.com/assets/camaleon_cms/image-not-found-4a963b95bf081c3ea02923dceaeb3f8085e1a654fc54840aac61a57a60903fef.png\'" class="col-xs-12 photo">' +
         '<div class="col-xs-12 title">' + title + '</div>' +
         '<div class="col-xs-12 votes"><i class="fa fa-thumbs-up"></i> ' + post_votes + '</div>' +
         '<div class="row"><img src="' + pp + '" onerror="this.src=\'http://camaleon.tuzitio.com/assets/camaleon_cms/image-not-found-4a963b95bf081c3ea02923dceaeb3f8085e1a654fc54840aac61a57a60903fef.png\'" class="col-xs-2 photo">' +
@@ -80,10 +81,11 @@ $(document).ready(function () {
         $('#userposts').empty();
         $('#usercolumn').empty();
         user = response.user;
-        appendUserInformation(user.image, user.name, user.username, moment(user.created_at.event_time).format('MM/DD/YYYY'), user.quote);
+        appendUserInformation(user.id, user.image, user.name, user.username, moment(user.created_at.event_time).format('MM/DD/YYYY'), user.quote);
+        showEditUser();
 
         response.posts.forEach(function(elem, index) {
-          appendOwnPosts(elem.id, elem.image, elem.title, elem.post_votes, elem.pp, elem.username, elem.category);
+          appendOwnPosts(elem.id, elem.postpic, elem.title, elem.post_votes, elem.pp, elem.username, elem.category);
         });
 
         showOnePost();
@@ -118,8 +120,8 @@ $(document).ready(function () {
           if (response.current_user_voted > 0) {
             $('.heroBtn').addClass("hide");
           }
-
-          modalForSinglePost(response.post_votes, moment(response.created_at.event_time).format('MM/DD/YYYY'), response.category, response.title, response.image, response.location, response.description, response.pp, response.username, response.id);
+          console.log(response);
+          modalForSinglePost(response.post_votes, moment(response.created_at.event_time).format('MM/DD/YYYY'), response.category, response.title, response.postpic, response.location, response.description, response.pp, response.username, response.id);
 
           openEditModal();
           editPost();
@@ -147,24 +149,38 @@ $(document).ready(function () {
     $('#createpost').on('submit', function (e) {
       e.preventDefault();
       $('#create-form-message').text('');
-      var post = {
-        title   : $('#createpost [name="title"]').val(),
-        image : $('#createpost [name="image"]').val(),
-        category    : $('#createpost [name="category"]').val(),
-        location : $('#createpost [name="location"]').val(),
-        description : $('#createpost [name="description"]').val(),
-        user_id : user.id,
-        post_votes : 0,
-        latitude: postLat.toString(),
-        longitude: postLong.toString()
-      };
+      // var post = {
+      //   title   : $('#createpost [name="title"]').val(),
+      //   image : $('#createpost [name="image"]').val(),
+      //   category    : $('#createpost [name="category"]').val(),
+      //   location : $('#createpost [name="location"]').val(),
+      //   description : $('#createpost [name="description"]').val(),
+      //   user_id : user.id,
+      //   post_votes : 0,
+      //   latitude: postLat.toString(),
+      //   longitude: postLong.toString()
+      // };
+
+      var formData = new FormData();
+      var imageFile = $('#create-image')[0].files[0];
+      formData.append('post[image]', imageFile);
+      formData.append('post[title]', $('#createpost [name="title"]').val());
+      formData.append('post[category]', $('#createpost [name="category"]').val());
+      formData.append('post[location]', $('#createpost [name="location"]').val());
+      formData.append('post[description]', $('#createpost [name="description"]').val());
+      formData.append('post[user_id]', user.id);
+      formData.append('post[post_votes]', 0);
+      formData.append('post[latitude]', postLat.toString());
+      formData.append('post[longitude]', postLong.toString());
 
       $.ajax({
         method: 'POST',
         url: '/api/posts',
-        data: {
-          post: post
-        },
+        dataType: "JSON",
+        cache: false,
+        contentType: false,
+        processData: false,
+        data: formData,
         success: function (response) {
           $('#addpostmodal').modal('hide');
           showUserPage();
@@ -194,21 +210,25 @@ $(document).ready(function () {
       e.preventDefault();
 
       var id = $(this).data("id");
-      console.log(id);
-      var editedpost = {
-        title: $('#edit-title').val(),
-        image: $('#edit-image').val(),
-        category: $('#edit-category').val(),
-        location: $('#edit-location').val(),
-        description: $('#edit-description').val()
-      };
+
+      var formData = new FormData();
+      var imageFile = $('#edit-post-image')[0].files[0];
+      formData.append('editedpost[image]', imageFile);
+      formData.append('editedpost[title]', $('#edit-title').val());
+      formData.append('editedpost[category]', $('#edit-category').val());
+      formData.append('editedpost[location]', $('#edit-location').val());
+      formData.append('editedpost[description]', $('#edit-description').val());
+      formData.append('editedpost[latitude]', postLat.toString());
+      formData.append('editedpost[longitude]', postLong.toString());
 
       $.ajax({
         url: "/api/posts/" + id + ".json",
         method: "PUT",
-        data: {
-          editedpost: editedpost
-        },
+        dataType: "JSON",
+        cache: false,
+        contentType: false,
+        processData: false,
+        data: formData,
         success: function (response, status) {
           console.log(response);
           $('#editpostmodal').modal('hide');
@@ -251,7 +271,7 @@ $(document).ready(function () {
     var ownPosts =
     '<div class="item">' +
       '<div class="col-xs-12 post" data-id="'+ id + '" data-toggle="modal" data-target="#showsinglepost">' +
-        '<img src="' + image + '" onerror="this.src=\'http://camaleon.tuzitio.com/assets/camaleon_cms/image-not-found-4a963b95bf081c3ea02923dceaeb3f8085e1a654fc54840aac61a57a60903fef.png\'" class="col-xs-12 photo">' +
+        '<img src=' + image + ' onerror="this.src=\'http://camaleon.tuzitio.com/assets/camaleon_cms/image-not-found-4a963b95bf081c3ea02923dceaeb3f8085e1a654fc54840aac61a57a60903fef.png\'" class="col-xs-12 photo">' +
         '<div class="col-xs-12 title">' + title +
         '</div>' +'<div class="col-xs-12 votes"><i class="fa fa-thumbs-up"></i> ' + post_votes + '</div>' +
         '<div class="row"><img src="' + pp + '" onerror="this.src=\'http://camaleon.tuzitio.com/assets/camaleon_cms/image-not-found-4a963b95bf081c3ea02923dceaeb3f8085e1a654fc54840aac61a57a60903fef.png\'" class="col-xs-2 photo">' +
@@ -269,8 +289,9 @@ $(document).ready(function () {
       url: "/api/posts.json",
       method: "GET",
       success: function (response, status) {
+        console.log(response);
         response.forEach(function(elem, index) {
-          appendAllPosts(elem.id, elem.image, elem.title, elem.post_votes, elem.user.image, elem.user.username, elem.category);
+          appendAllPosts(elem.id, elem.postpic, elem.title, elem.post_votes, elem.pp, elem.username, elem.category);
           getQuote();
         });
         masonryGrid();
@@ -338,7 +359,7 @@ $(document).ready(function () {
       success: function (response, status) {
         console.log(response);
         response.forEach(function (elem, index) {
-          appendAllPosts(elem.id, elem.image, elem.title, elem.post_votes, elem.user.image, elem.username, elem.category);
+          appendAllPosts(elem.id, elem.postpic, elem.title, elem.post_votes, elem.pp, elem.username, elem.category);
         });
         masonryGrid();
         showOnePost();
@@ -358,7 +379,7 @@ $(document).ready(function () {
       success: function (response, status) {
         console.log(response);
         response.forEach(function (elem, index) {
-          appendAllPosts(elem.id, elem.image, elem.title, elem.post_votes, elem.user.image, elem.username, elem.category);
+          appendAllPosts(elem.id, elem.postpic, elem.title, elem.post_votes, elem.pp, elem.username, elem.category);
         });
         masonryGrid();
         showOnePost();
@@ -378,7 +399,7 @@ $(document).ready(function () {
       success: function (response, status) {
         console.log(response);
         response.forEach(function (elem, index) {
-          appendAllPosts(elem.id, elem.image, elem.title, elem.post_votes, elem.user.image, elem.username, elem.category);
+          appendAllPosts(elem.id, elem.postpic, elem.title, elem.post_votes, elem.pp, elem.username, elem.category);
         });
         masonryGrid();
         showOnePost();
@@ -398,7 +419,7 @@ $(document).ready(function () {
       success: function (response, status) {
         console.log(response);
         response.forEach(function (elem, index) {
-          appendAllPosts(elem.id, elem.image, elem.title, elem.post_votes, elem.user.image, elem.username, elem.category);
+          appendAllPosts(elem.id, elem.postpic, elem.title, elem.post_votes, elem.pp, elem.username, elem.category);
         });
         masonryGrid()
         showOnePost();
@@ -418,7 +439,7 @@ $(document).ready(function () {
       success: function (response, status) {
         console.log(response);
         response.forEach(function (elem, index) {
-          appendAllPosts(elem.id, elem.image, elem.title, elem.post_votes, elem.user.image, elem.username, elem.category);
+          appendAllPosts(elem.id, elem.postpic, elem.title, elem.post_votes, elem.pp, elem.username, elem.category);
         });
         masonryGrid()
         showOnePost();
@@ -440,7 +461,7 @@ $(document).ready(function () {
           // var text = '<div class="col-xs-12 top-twenty">Top 20 Stories</div>';
 
           // $('#userposts').append(text);
-          appendAllPosts(elem.id, elem.image, elem.title, elem.post_votes, elem.user.image, elem.username, elem.category);
+          appendAllPosts(elem.id, elem.postpic, elem.title, elem.post_votes, elem.pp, elem.username, elem.category);
         });
         masonryGrid()
         showOnePost();

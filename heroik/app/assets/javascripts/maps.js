@@ -65,6 +65,7 @@ function initMap() {
       url: "/api/maps.json",
       method: "GET",
       success: function (response, status) {
+          console.log(response);
         response.forEach(function (elem, index){
           getIcon(elem.category);
           marker[index] = new google.maps.Marker({
@@ -75,7 +76,7 @@ function initMap() {
             postID: elem.id
           });
           marker[index].addListener("click",function(){
-            modalForSinglePost(response[index].post_votes, response[index].title, response[index].image, response[index].user.username, response[index].location, response[index].description, response[index].created_at, response[index].category, response[index].id);
+            modalForSinglePost(response[index].post_votes,moment(response.created_at).format('MM/DD/YYYY'), response[index].category, response[index].title, response[index].postpic, response[index].location, response[index].description, response[index].pp, response[index].username, response[index].id);
             $('#showsinglepost').modal('show');
             $('.editPostBtn').hide();
             $('.deletePostBtn').hide();
@@ -161,13 +162,22 @@ function initMap() {
 
 function initAutocomplete() {
   var map = new google.maps.Map(document.getElementById('map'), {
-    center: {lat: -33.8688, lng: 151.2195},
+    center: hongKong,
     zoom: 13,
-    // mapTypeId: google.maps.MapTypeId.ROADMAP
   });
+    var map2 = new google.maps.Map(document.getElementById('map2'), {
+    center: hongKong,
+    zoom: 13,
+  });
+
 
   $("#addpostmodal").on("shown.bs.modal", function(e) {
       google.maps.event.trigger(map, "resize");
+      map.setCenter(hongKong);
+      // map.setZoom(15);
+    });
+  $("#editpostmodal").on("shown.bs.modal", function(e) {
+      google.maps.event.trigger(map2, "resize");
       map.setCenter(hongKong);
       // map.setZoom(15);
     });
@@ -178,12 +188,20 @@ function initAutocomplete() {
   var searchBox = new google.maps.places.SearchBox(input);
   map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 
+  var input2 = document.getElementById('district2');
+  var searchBox2 = new google.maps.places.SearchBox(input2);
+  map2.controls[google.maps.ControlPosition.TOP_LEFT].push(input2);
+
   // Bias the SearchBox results towards current map's viewport.
   map.addListener('bounds_changed', function() {
     searchBox.setBounds(map.getBounds());
   });
+  map2.addListener('bounds_changed', function() {
+    searchBox2.setBounds(map2.getBounds());
+  });
 
   var markers = [];
+  var markers2 = [];
   // Listen for the event fired when the user selects a prediction and retrieve
   // more details for that place.
   searchBox.addListener('places_changed', function() {
@@ -227,19 +245,56 @@ function initAutocomplete() {
     });
     map.fitBounds(bounds);
   });
+  searchBox2.addListener('places_changed', function() {
+    var places2 = searchBox2.getPlaces();
+
+    if (places2.length == 0) {
+      return;
+    }
+
+    // Clear out the old markers.
+    markers2.forEach(function(marker) {
+      marker.setMap(null);
+    });
+    markers2 = [];
+
+    // For each place, get the icon, name and location.
+    var bounds2 = new google.maps.LatLngBounds();
+    places2.forEach(function(place) {
+      var icon = {
+        url: place.icon,
+        size: new google.maps.Size(71, 71),
+        origin: new google.maps.Point(0, 0),
+        anchor: new google.maps.Point(17, 34),
+        scaledSize: new google.maps.Size(25, 25)
+      };
+
+      if (place.geometry.viewport) {
+        // Only geocodes have viewport.
+        bounds2.union(place.geometry.viewport);
+      } else {
+        bounds2.extend(place.geometry.location);
+      }
+    });
+    map2.fitBounds(bounds2);
+  });
   function addMarkerOnClick(){
     setMarkersArray = []
+    setMarkersArray2 = []
     google.maps.event.addListener(map, "click", function(event) {
       // place a marker
       placeMarker(event.latLng);
-      postLat = event.latLng.lat().toString();
-      postLong = event.latLng.lng().toString();
-      console.log(postLat);
-      console.log(postLong);
+      postLat = event.latLng.lat().toString() || "22.2783";
+      postLong = event.latLng.lng().toString() || "114.1747";
 
       // display the lat/lng in your form's lat/lng fields
       // document.getElementById("latFld").value = event.latLng.lat();
       // document.getElementById("lngFld").value = event.latLng.lng();
+    });
+    google.maps.event.addListener(map2, "click", function(event) {
+      placeMarker(event.latLng);
+      postLat = event.latLng.lat().toString() || "22.2783";
+      postLong = event.latLng.lng().toString() || "114.1747";
     });
   };
   function placeMarker(location) {
@@ -259,9 +314,15 @@ function initAutocomplete() {
         map: map,
         icon: hero
     });
+    var postMarker2 = new google.maps.Marker({
+        position: location,
+        map: map2,
+        icon: hero
+    });
 
     // add marker in markers array
     setMarkersArray.push(postMarker);
+    setMarkersArray2.push(postMarker2);
 
     //re-center location to clicked point
     // map.setCenter(location);
@@ -272,6 +333,12 @@ function initAutocomplete() {
         setMarkersArray[i].setMap(null);
       }
     setMarkersArray.length = 0;
+    }
+    if (setMarkersArray2) {
+      for (i in setMarkersArray2) {
+        setMarkersArray2[i].setMap(null);
+      }
+    setMarkersArray2.length = 0;
     }
   };
   addMarkerOnClick();
