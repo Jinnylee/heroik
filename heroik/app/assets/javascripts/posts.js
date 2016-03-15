@@ -68,7 +68,7 @@ $(document).ready(function () {
 
     $('#userposts').append(ownPosts);
   };
-
+// moment(response.event_time).format("hh:mm")
 
   // GET ALL POSTS AND USER INFORMATION
   var showUserPage = function () {
@@ -79,7 +79,7 @@ $(document).ready(function () {
         $('#userposts').empty();
         $('#usercolumn').empty();
         user = response.user;
-        appendUserInformation(user.image, user.name, user.username, user.created_at, user.quote);
+        appendUserInformation(user.image, user.name, user.username, moment(user.created_at.event_time).format('MM/DD/YYYY'), user.quote);
 
         response.posts.forEach(function(elem, index) {
           appendOwnPosts(elem.id, elem.image, elem.title, elem.post_votes, elem.username, elem.category);
@@ -118,7 +118,7 @@ $(document).ready(function () {
             $('.heroBtn').addClass("hide");
           }
 
-          modalForSinglePost(response.post_votes, response.created_at, response.category, response.title, response.image, response.location, response.description, response.pp, response.username, response.id);
+          modalForSinglePost(response.post_votes, moment(response.created_at.event_time).format('MM/DD/YYYY'), response.category, response.title, response.image, response.location, response.description, response.pp, response.username, response.id);
 
           openEditModal();
           editPost();
