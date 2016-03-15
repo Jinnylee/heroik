@@ -1,7 +1,7 @@
 <div class="container-fluid">
   <div class="col-md-3" id="usercolumn">
-    <button id="edit-user-btn">Edit Profile</button>
   </div>
+
 
   <div class="col-md-9" id="showuserposts">
     <div class="col-md-4" id="addpostdiv"><button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#addpostmodal"><i class="fa fa-plus"></i></button></div>
@@ -82,20 +82,33 @@
 <div class="modal fade" id="editusermodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="my EditProfile">Edit Profile</h4>
+      </div>
       <div class="modal-body">
 
         <div id="edit-user-profile">
 
             <form id="edituser">
-              <p><input type="text" id="edit-firstname" class="form-control"></p>
-              <p><input type="text" name="edit-lastname" class="form-control"></p>
-              <p><input type="text" name="edit-quote" class="form-control"></p>
-              <p><input type="submit" name="edit" class="btn btn-info" value="Edit Profile"></p>
+              <div id="for-image"></div>
+              <div>
+              <input type="file" name="image" id="edit-image"><br>
+              </div>
+              <p>
+              <label for="edit-firstname">First Name</label>
+              <input type="text" id="edit-firstname" class="form-control">
+              </p>
+              <p>
+              <label for="edit-lastname">Last Name</label>
+              <input type="text" id="edit-lastname" class="form-control">
+              </p>
+              <p>
+              <label for="edit-quote">Favorite Quote</label>
+              <input type="text" id="edit-quote" class="form-control">
+              </p>
+              <p><input type="submit" id="edit-user-data" class="btn btn-default" value="Update"></p>
             </form>
-
-            <div id="edit-user-form-message"></div>
           </div>
       </div>
     </div>

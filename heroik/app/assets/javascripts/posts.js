@@ -40,7 +40,7 @@ $(document).ready(function () {
   };
 
   // GET USER INFORMATION FOR USER COLUMN (PROFILE PAGE)
-  var appendUserInformation = function(image, name, username, created_at, quote) {
+  var appendUserInformation = function(id, image, name, username, created_at, quote) {
     var userInfo =
     '<div class="col-xs-12" id="userinfo">' +
       '<img src=' + image + ' onerror="this.src=\'http://camaleon.tuzitio.com/assets/camaleon_cms/image-not-found-4a963b95bf081c3ea02923dceaeb3f8085e1a654fc54840aac61a57a60903fef.png\'" class="col-xs-12 photo">' +
@@ -48,6 +48,7 @@ $(document).ready(function () {
       '<div class="col-xs-12">' + username + '</div>' +
       '<div class="col-xs-12">' + created_at + '</div>' +
       '<div class="col-xs-12">' + quote + '</div>' +
+      '<div><buttontype="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#editusermodal" data-id='+id+' id="edit-user-btn">Edit Profile</button></div>' +
     '</div>';
 
     $('#usercolumn').append(userInfo);
@@ -80,7 +81,8 @@ $(document).ready(function () {
         $('#userposts').empty();
         $('#usercolumn').empty();
         user = response.user;
-        appendUserInformation(user.image, user.name, user.username, moment(user.created_at.event_time).format('MM/DD/YYYY'), user.quote);
+        appendUserInformation(user.id, user.image, user.name, user.username, moment(user.created_at.event_time).format('MM/DD/YYYY'), user.quote);
+        showEditUser();
 
         response.posts.forEach(function(elem, index) {
           appendOwnPosts(elem.id, elem.image, elem.title, elem.post_votes, elem.pp, elem.username, elem.category);
