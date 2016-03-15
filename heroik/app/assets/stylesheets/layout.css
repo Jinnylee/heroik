@@ -307,11 +307,11 @@ a.navbar-brand > img {
   font-style:italic;
 }
 
-p.fbButtonModal {
+#sign-in form p.fbButtonModal {
   margin-top:-20px;
 }
 
-.modal-header {
+#myModal.modal-header {
   padding-left:0px;
   padding-right:0px;
   margin-top:-45px;
