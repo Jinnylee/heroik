@@ -45,18 +45,18 @@
         if (response.length <= 5) {
           $('#see-more').hide();
           for (var i = 0; i < response.length; i++) {
-            appendComments(response[i].user.image, response[i].user.username, response[i].comment, response[i].id);
+            appendComments(response[i].user.image, response[i].user.username, response[i].comment, response[i].id, response[i].user.id);
           }
         } else {
           for (var i = 0; i <= 5; i++) {
-            appendComments(response[i].user.image, response[i].user.username, response[i].comment, response[i].id);
+            appendComments(response[i].user.image, response[i].user.username, response[i].comment, response[i].id, response[i].user.id);
           }
           $('#view-all-comments').off().on('click', function(e) {
             e.preventDefault();
             console.log('clicked');
-            $('#see-more').hide();
+            $('#see-more').hid, response[i].user.ide();
             for (i = 5; i < response.length; i++) {
-              appendComments(response[i].user.image, response[i].user.username, response[i].comment, response[i].id);
+              appendComments(response[i].user.image, response[i].user.username, response[i].comment, response[i].id, response[i].user.id);
             };
           });
         }
@@ -69,16 +69,22 @@
   }
 
 // APPEND COMMENTS ON POST MODEL (limit to 5)
-  var appendComments = function(image, username, comment, id) {
-    var comments =
+  var appendComments = function(image, username, comment, id, user_id) {
+    var commentHTML =
     '<div class="comment">' +
       '<img src="' + image + '" class="comment-user-image" >' +
       '<div class="comment-user">' + username + '</div>' +
       '<div class="comment-text">' + comment + '</div>' +
-      '<button type="button" class="btn btn-default deleteCommentBtn" data-id="' + id + '"><i class="fa fa-trash-o"></i></button>'
     '</div>'
 
-    $('#allcomments').append(comments);
+    var $comment = $(commentHTML)
+
+    console.log(userID, user_id)
+    if (window.userID == user_id) {
+      $comment.append('<button type="button" class="btn btn-default deleteCommentBtn" data-id="' + id + '"><i class="fa fa-trash-o"></i></button>')
+    }
+
+    $('#allcomments').append($comment);
   };
 
   var deleteComment = function() {

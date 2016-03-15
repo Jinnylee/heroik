@@ -456,6 +456,7 @@ $(document).ready(function () {
   $.auth.validateToken().then(function(user){
     showUserPage();
     createPost(user);
+    window.userID = user.id;
   }).fail(function(response){
     console.log(response);
   });
