@@ -48,10 +48,10 @@ a.navbar-brand > img {
 
 #environment:hover, #community:hover, #animals:hover, #youth:hover, #gooddeeds:hover, #mostpopular:hover, #neighborhood:hover {
   background-color:DarkTurquoise;
-  color:white;
-/*  background-image:url("https://d3ui957tjb5bqd.cloudfront.net/images/screenshots/products/24/240/240143/christmas-tree-f.jpg?1416330834");
+  color:transparent;
+  background-image:url("http://i65.tinypic.com/sbnh9f.png");
   background-size: 100%;
-  background-position: center;*/
+  background-position: center;
 }
 
 #nav-profile {
