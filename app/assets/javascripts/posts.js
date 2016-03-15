@@ -105,6 +105,8 @@ $(document).ready(function () {
       $('.editPostBtn').hide();
       $('.deletePostBtn').hide();
       $('.heroBtn').show();
+      $('.thank-you-btn').hide();
+
 
       $.ajax({
         method: "GET",
@@ -116,6 +118,7 @@ $(document).ready(function () {
           }
           if (response.current_user_voted > 0) {
             $('.heroBtn').hide();
+            $('.thank-you-btn').show();
           }
           console.log(response);
           modalForSinglePost(response.post_votes, moment(response.created_at.event_time).format('MM/DD/YYYY'), response.category, response.title, response.postpic, response.location, response.description, response.pp, response.username, response.id);
