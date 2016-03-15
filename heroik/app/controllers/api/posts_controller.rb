@@ -48,42 +48,42 @@ class API::PostsController < ApplicationController
   def community
     @posts = Post.where(category: 'Community').order("created_at DESC")
     respond_to do |format|
-      format.json { render 'index.jbuilder' }
+      format.json { render json: @posts.as_json(include: :user) }
     end
   end
 
   def youth
     @posts = Post.where(category: 'Youth').order("created_at DESC")
     respond_to do |format|
-      format.json { render 'index.jbuilder' }
+      format.json { render json: @posts.as_json(include: :user) }
     end
   end
 
   def environment
     @posts = Post.where(category: 'Environment').order("created_at DESC")
     respond_to do |format|
-      format.json { render 'index.jbuilder' }
+      format.json { render json: @posts.as_json(include: :user) }
     end
   end
 
   def animals
     @posts = Post.where(category: 'Animals').order("created_at DESC")
     respond_to do |format|
-      format.json { render 'index.jbuilder' }
+      format.json { render json: @posts.as_json(include: :user) }
     end
   end
 
   def good_deeds
     @posts = Post.where(category: 'Good deeds').order("created_at DESC")
     respond_to do |format|
-      format.json { render 'index.jbuilder' }
+      format.json { render json: @posts.as_json(include: :user) }
     end
   end
 
   def most_popular
     @posts = Post.order("post_votes DESC").limit(20)
     respond_to do |format|
-      format.json { render 'index.jbuilder' }
+      format.json { render json: @posts.as_json(include: :user) }
     end
   end
 
