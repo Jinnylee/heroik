@@ -56,6 +56,19 @@
   font-size: 30px;
 }
 
+/*IMPROVING POSTS ON HOME PAGE*/
+.col-xs-10.username {
+  line-height: 91px;
+  font-weight: bold;
+  width: 45.333333%;
+}
+
+.col-xs-2.photo {
+  border-radius: 50px;
+  margin-left: 25px;
+  margin-top: 15px;
+  padding: 2px;
+}
 #singledescription {
   margin-top:10px;
 }
