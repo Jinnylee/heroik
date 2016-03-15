@@ -6,7 +6,7 @@ var editUserInfo = function (id) {
     var fullName = $('#edit-firstname').val()+' '+$('#edit-lastname').val();
     var formData = new FormData();
     var imageFile = $('#edit-image')[0].files[0];
-    formData.append('user[image]', imageFile);
+    formData.append('user[avatar]', imageFile);
     formData.append('user[first_name]', $('#edit-firstname').val());
     formData.append('user[last_name]', $('#edit-lastname').val());
     formData.append('user[name]', fullName);
@@ -53,7 +53,7 @@ var editUserInfo = function (id) {
         $('#edit-firstname').val(user.first_name);
         $('#edit-lastname').val(user.last_name);
         $('#edit-quote').val(user.quote);
-        $("#for-image").append('<img src="' + user.image + '" onerror="this.src=\'http://camaleon.tuzitio.com/assets/camaleon_cms/image-not-found-4a963b95bf081c3ea02923dceaeb3f8085e1a654fc54840aac61a57a60903fef.png\'" class="col-xs-12 photo">')
+        $("#for-image").append('<img src="' + user.avatar + '" onerror="this.src=\'http://camaleon.tuzitio.com/assets/camaleon_cms/image-not-found-4a963b95bf081c3ea02923dceaeb3f8085e1a654fc54840aac61a57a60903fef.png\'" class="col-xs-12 photo">')
         editUserInfo(id);
       },
       error: function(response, status) {
