@@ -88,3 +88,11 @@
 .col-xs-12.title{
   padding-left: 0px;
   margin-top: 5px;
+}
+
+#quoteText {
+  color:white;
+  font-family:;
+  font-size:18px;
+  font-family: 'Raleway', sans-serif;
+}
