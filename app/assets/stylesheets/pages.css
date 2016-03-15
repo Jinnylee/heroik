@@ -24,7 +24,7 @@ body {
   background:white;
   margin-bottom:20px;
   padding-top:20px;
-  padding-bottom:20px;
+  padding-bottom:0px;
 }
 
 /*This item is attached to masonryGrid in posts.js file*/

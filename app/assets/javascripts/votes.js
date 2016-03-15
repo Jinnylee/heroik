@@ -22,8 +22,15 @@ var addHeroButton = function (){
       },
       error: function (response) {
         console.log(response);
-        console.log("not getting single post data!")
+        $('#vote-form-message').text('Please sign in to vote!');
       }
     });
   });
 };
+
+var votedAlready = function () {
+  $('.thank-you-btn').off().on('click', function(e) {
+    e.preventDefault;
+    $('#vote-form-message').text("You've already voted for this hero!");
+  });
+}
