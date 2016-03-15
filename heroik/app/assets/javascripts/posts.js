@@ -1,26 +1,17 @@
   // APPEND CONTENT TO MODAL
-  var modalForSinglePost = function(post_votes, title, image, username, location, description, created_at, category, id) {
+  var modalForSinglePost = function(post_votes, created_at, category, title, image, location, description, pp, username, id) {
     var body =
-    '<div id="singlebody">' +
-      '<div id="singlevotes"><i class="fa fa-thumbs-up"></i> ' + post_votes + '</div>' +
-      '<div id="singletitle">' + title + '</div>' +
-      '<p><img src=' + image + ' onerror="this.src=\'http://camaleon.tuzitio.com/assets/camaleon_cms/image-not-found-4a963b95bf081c3ea02923dceaeb3f8085e1a654fc54840aac61a57a60903fef.png\'" class="col-xs-12 photo"></p>' +
-      '<p><div id="singleusername">' + username + '</div></p>' +
-      '<p><div id="singlelocation">' + location + '</div></p>' +
-      '<p><div id="singledescription">' + description + '</div></p>' +
-      '<p><div id="singledate">' + created_at + '</p>' +
-      '<p><div id="singlecategory">' + category + '</div></p>' +
+    '<div class="col-xs-12" id="singlebody">' +
+      '<div class="row"><div class="body col-xs-2" id="singlevotes"><i class="fa fa-thumbs-up"></i> ' + post_votes + '</div>' +
+      '<div class="body col-xs-8" id="singledate">' + created_at + '</div>' +
+      '<div class="body col-xs-2" id="singlecategory">' + category + '</div>' +
+      '<div  class="body col-xs-12" id="singletitle">' + title + '</div>' +
+      '<p><img src="' + image + '" onerror="this.src=\'http://camaleon.tuzitio.com/assets/camaleon_cms/image-not-found-4a963b95bf081c3ea02923dceaeb3f8085e1a654fc54840aac61a57a60903fef.png\'" class="photo body col-xs-12"></p>' +
+      '<div class="body col-xs-12" id="singlelocation">' + location + '</div>' +
+      '<div class="body col-xs-12" id="singledescription">' + description + '</div></div>' +
+      '<div class="row userrow"><img src="' + pp + '" onerror="this.src=\'http://camaleon.tuzitio.com/assets/camaleon_cms/image-not-found-4a963b95bf081c3ea02923dceaeb3f8085e1a654fc54840aac61a57a60903fef.png\'" class="photo body pro-pic col-xs-2">' +
+      '<div class="body col-xs-10" id="singleusername">' + username + '</div></div>' +
     '</div>';
-
-    // var footer =
-    // '<div id="commentsection">' +
-    //   '<p id="commenttag"> Comments </p>' +
-    //   '<p><i class="fa fa-user"></i>&nbsp;&nbsp;' +
-    //   '<textarea class="form-control" id="commentform" name="comment" rows="1" placeholder="Add a comment..."></textarea>' +
-    //   '</p>' +
-    //   '<button type="button" class="btn btn-danger" id="comment-btn">Comment</button>' +
-    //   '<p><div id="allcomments"></div></p>' +
-    // '</div>';
 
     $('.deletePostBtn').data('id', id);
     $('.heroBtn').data('id', id);
@@ -34,12 +25,8 @@
     $('#edit-description').val(description);
 
     $('.single-body').empty();
-    // $('.single-footer').empty();
     $('.single-body').append(body);
-    // $('.single-footer').append(footer)
   };
-// Place all the behaviors and hooks related to the matching controller here.
-// All this logic will automatically be available in application.js.
 
 $(document).ready(function () {
 
@@ -67,15 +54,14 @@ $(document).ready(function () {
   };
 
   // GET POSTS THAT BELONG TO USER (PROFILE PAGE)
-  var appendOwnPosts = function(id, image, title, post_votes, username, created_at, category) {
+  var appendOwnPosts = function(id, image, title, post_votes, username, category) {
     var ownPosts =
     '<div class="col-xs-12 col-md-4 item">' +
       '<div class="col-xs-12 post" data-id="'+ id + '" data-toggle="modal" data-target="#showsinglepost">' +
-        '<img src=' + image + ' onerror="this.src=\'http://camaleon.tuzitio.com/assets/camaleon_cms/image-not-found-4a963b95bf081c3ea02923dceaeb3f8085e1a654fc54840aac61a57a60903fef.png\'" class="col-xs-12 photo">' +
+        '<img src="' + image + '" onerror="this.src=\'http://camaleon.tuzitio.com/assets/camaleon_cms/image-not-found-4a963b95bf081c3ea02923dceaeb3f8085e1a654fc54840aac61a57a60903fef.png\'" class="col-xs-12 photo">' +
         '<div class="col-xs-12 title">' + title + '</div>' +
-        '<div class="col-xs-12 votes">' + post_votes + '</div>' +
+        '<div class="col-xs-12 votes"><i class="fa fa-thumbs-up"></i> ' + post_votes + '</div>' +
         '<div class="col-xs-12 username">' + username + '</div>' +
-        '<div class="col-xs-12 date">' + created_at + '</div>' +
         '<div class="col-xs-12 category">' + category + '</div>' +
       '</div>' +
     '</div>';
@@ -96,7 +82,7 @@ $(document).ready(function () {
         appendUserInformation(user.image, user.name, user.username, user.created_at, user.quote);
 
         response.posts.forEach(function(elem, index) {
-          appendOwnPosts(elem.id, elem.image, elem.title, elem.post_votes, elem.username, elem.created_at, elem.category);
+          appendOwnPosts(elem.id, elem.image, elem.title, elem.post_votes, elem.username, elem.category);
         });
 
         showOnePost();
@@ -132,11 +118,12 @@ $(document).ready(function () {
             $('.heroBtn').addClass("hide");
           }
 
-          modalForSinglePost(response.post_votes, response.title, response.image, response.username, response.location, response.description, response.created_at, response.category, response.id);
+          modalForSinglePost(response.post_votes, response.created_at, response.category, response.title, response.image, response.location, response.description, response.pp, response.username, response.id);
 
           openEditModal();
           editPost();
           deletePost();
+          showAllComments();
 
           $.auth.validateToken().then(function(user){
             addComment(user);
@@ -215,14 +202,6 @@ $(document).ready(function () {
         description: $('#edit-description').val()
       };
 
-      // var updatepost = function(image, title, username, created_at) {
-      //   var post =
-      //   '<img src=' + image + ' class="col-xs-12 photo">' +
-      //   '<div class="col-xs-12 title">' + title + '</div>' +
-      //   '<div class="col-xs-12 username">' + username + '</div>' +
-      //   '<div class="col-xs-12 date">' + created_at + '</div>';
-      // };
-
       $.ajax({
         url: "/api/posts/" + id + ".json",
         method: "PUT",
@@ -233,9 +212,6 @@ $(document).ready(function () {
           console.log(response);
           $('#editpostmodal').modal('hide');
           showUserPage();
-
-          // var post = updatepost(response.image, response.title, response.username, response.created_at);
-          // $('div.data-id='+ response.id).html(post);
         },
         error: function (response, status) {
           console.log(response);
@@ -270,15 +246,14 @@ $(document).ready(function () {
   };
 
   // APPEND POSTS TO HOME
-  var appendAllPosts = function(id, image, title, post_votes, username, created_at, category) {
+  var appendAllPosts = function(id, image, title, post_votes, username, category) {
     var ownPosts =
     '<div class="item">' +
       '<div class="col-xs-12 post" data-id="'+ id + '" data-toggle="modal" data-target="#showsinglepost">' +
-        '<img src=' + image + ' onerror="this.src=\'http://camaleon.tuzitio.com/assets/camaleon_cms/image-not-found-4a963b95bf081c3ea02923dceaeb3f8085e1a654fc54840aac61a57a60903fef.png\'" class="col-xs-12 photo">' +
+        '<img src="' + image + '" onerror="this.src=\'http://camaleon.tuzitio.com/assets/camaleon_cms/image-not-found-4a963b95bf081c3ea02923dceaeb3f8085e1a654fc54840aac61a57a60903fef.png\'" class="col-xs-12 photo">' +
         '<div class="col-xs-12 title">' + title +
-        '</div>' +'<div class="col-xs-12 votes">' + post_votes + '</div>' +
+        '</div>' +'<div class="col-xs-12 votes"><i class="fa fa-thumbs-up"></i> ' + post_votes + '</div>' +
         '<div class="col-xs-12 username">' + username + '</div>' +
-        '<div class="col-xs-12 date">' + created_at + '</div>' +
         '<div class="col-xs-12 category">' + category + '</div>' +
       '</div>' +
     '</div>';
@@ -340,7 +315,7 @@ $(document).ready(function () {
       method: "GET",
       success: function (response, status) {
         response.forEach(function(elem, index) {
-          appendAllPosts(elem.id, elem.image, elem.title, elem.post_votes, elem.user.username, elem.created_at, elem.category);
+          appendAllPosts(elem.id, elem.image, elem.title, elem.post_votes, elem.user.username, elem.category);
           getQuote();
         });
         masonryGrid();
@@ -361,7 +336,7 @@ $(document).ready(function () {
       success: function (response, status) {
         console.log(response);
         response.forEach(function (elem, index) {
-          appendAllPosts(elem.id, elem.image, elem.title, elem.post_votes, elem.username, elem.created_at, elem.category);
+          appendAllPosts(elem.id, elem.image, elem.title, elem.post_votes, elem.username, elem.category);
         });
         masonryGrid();
         showOnePost();
@@ -381,7 +356,7 @@ $(document).ready(function () {
       success: function (response, status) {
         console.log(response);
         response.forEach(function (elem, index) {
-          appendAllPosts(elem.id, elem.image, elem.title, elem.post_votes, elem.username, elem.created_at, elem.category);
+          appendAllPosts(elem.id, elem.image, elem.title, elem.post_votes, elem.username, elem.category);
         });
         masonryGrid();
         showOnePost();
@@ -401,7 +376,7 @@ $(document).ready(function () {
       success: function (response, status) {
         console.log(response);
         response.forEach(function (elem, index) {
-          appendAllPosts(elem.id, elem.image, elem.title, elem.post_votes, elem.username, elem.created_at, elem.category);
+          appendAllPosts(elem.id, elem.image, elem.title, elem.post_votes, elem.username, elem.category);
         });
         masonryGrid();
         showOnePost();
@@ -421,7 +396,7 @@ $(document).ready(function () {
       success: function (response, status) {
         console.log(response);
         response.forEach(function (elem, index) {
-          appendAllPosts(elem.id, elem.image, elem.title, elem.post_votes, elem.username, elem.created_at, elem.category);
+          appendAllPosts(elem.id, elem.image, elem.title, elem.post_votes, elem.username, elem.category);
         });
         masonryGrid()
         showOnePost();
@@ -441,19 +416,39 @@ $(document).ready(function () {
       success: function (response, status) {
         console.log(response);
         response.forEach(function (elem, index) {
-          appendAllPosts(elem.id, elem.image, elem.title, elem.post_votes, elem.username, elem.created_at, elem.category);
+          appendAllPosts(elem.id, elem.image, elem.title, elem.post_votes, elem.username, elem.category);
         });
         masonryGrid()
         showOnePost();
       },
       error: function (response, status) {
         console.log(response);
-        console.log("did not get community posts");
       }
     });
   };
 
   // GET MOST POPULAR POSTS
+  var popularPosts = function() {
+    $.ajax({
+      url: "/api/posts/most_popular.json",
+      method: "GET",
+      success: function (response, status) {
+        console.log(response);
+        response.forEach(function (elem, index) {
+          // var text = '<div class="col-xs-12 top-twenty">Top 20 Stories</div>';
+
+          // $('#userposts').append(text);
+          appendAllPosts(elem.id, elem.image, elem.title, elem.post_votes, elem.username, elem.category);
+        });
+        masonryGrid()
+        showOnePost();
+      },
+      error: function (response, status) {
+        console.log(response);
+      }
+    });
+  };
+
   // GO TO HOME
 
   $.auth.validateToken().then(function(user){
@@ -487,6 +482,9 @@ $(document).ready(function () {
             break;
           case "gooddeeds":
             goodDeedsPosts();
+            break;
+          case "mostpopular":
+            popularPosts();
             break;
           default:
             allPostsHomePage();
