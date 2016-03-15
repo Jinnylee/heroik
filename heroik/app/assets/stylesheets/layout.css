@@ -288,6 +288,40 @@ a.navbar-brand > img {
 }
 
 /****** LOGIN MODAL ******/
+
+#myModalLabel {
+  background-color:DarkTurquoise;
+  color:white;
+
+}
+
+#fb-button {
+  float:left;
+  display:inline-block;
+}
+
+.orText {
+  display:inline-block;
+  line-height: 80px;
+  padding-left: 20px;
+  font-style:italic;
+}
+
+p.fbButtonModal {
+  margin-top:-20px;
+}
+
+.modal-header {
+  padding-left:0px;
+  padding-right:0px;
+  margin-top:-45px;
+  background-color:DarkTurquoise;
+}
+
+.button.close < span {
+  color:white;
+  font-size:48px;
+}
 .modal-content {
   padding: 30px;
   max-width: 550px;
