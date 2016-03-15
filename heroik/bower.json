@@ -1,0 +1,11 @@
+{
+  "name": "heroik",
+  "version": "1.0",
+  "main": "",
+  "private": true,
+  "dependencies": {
+    "bootstrap": "^3.3.6",
+    "masonry": "^4.0.0",
+    "j-toker": "^0.0.9"
+  }
+}
