@@ -9,8 +9,8 @@
       '<p><img src="' + image + '" onerror="this.src=\'http://camaleon.tuzitio.com/assets/camaleon_cms/image-not-found-4a963b95bf081c3ea02923dceaeb3f8085e1a654fc54840aac61a57a60903fef.png\'" class="photo body col-xs-12"></p>' +
       '<div class="body col-xs-12" id="singlelocation">' + location + '</div>' +
       '<div class="body col-xs-12" id="singledescription">' + description + '</div></div>' +
-      '<div class="row userrow"><img src="' + pp + '" onerror="this.src=\'http://camaleon.tuzitio.com/assets/camaleon_cms/image-not-found-4a963b95bf081c3ea02923dceaeb3f8085e1a654fc54840aac61a57a60903fef.png\'" class="photo body pro-pic col-xs-2">' +
-      '<div class="body col-xs-10" id="singleusername">' + username + '</div></div>' +
+      '<div class="row userrow"><img src="' + pp + '" onerror="this.src=\'http://camaleon.tuzitio.com/assets/camaleon_cms/image-not-found-4a963b95bf081c3ea02923dceaeb3f8085e1a654fc54840aac61a57a60903fef.png\'" class="photo body pro-pic col-xs-3">' +
+      '<div class="body col-xs-7" id="singleusername">' + username + '</div></div>' +
     '</div>';
 
     $('.deletePostBtn').data('id', id);
