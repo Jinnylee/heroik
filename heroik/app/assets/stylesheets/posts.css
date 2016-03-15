@@ -56,6 +56,34 @@
   font-size: 30px;
 }
 
+/*IMPROVING POSTS ON HOME PAGE*/
+.col-xs-10.username {
+  line-height: 91px;
+  font-weight: bold;
+  width: 45.333333%;
+}
+
+.col-xs-2.photo {
+  border-radius: 25px;
+  height:50px;
+  width:50px;
+  margin-left: 25px;
+  margin-top: 15px;
+  padding: 2px;
+  overflow: hidden;
+  object-fit:cover;
+}
+
 #singledescription {
   margin-top:10px;
+}
+.col-xs-12.votes {
+  margin-top: 10px;
+  font-size: 20px;
+  border-bottom: 3px solid #d3d3d3;
+  padding-bottom: 10px;
+}
+.col-xs-12.title{
+  padding-left: 0px;
+  margin-top: 5px;
 }
