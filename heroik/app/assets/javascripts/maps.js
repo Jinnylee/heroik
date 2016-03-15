@@ -232,10 +232,8 @@ function initAutocomplete() {
     google.maps.event.addListener(map, "click", function(event) {
       // place a marker
       placeMarker(event.latLng);
-      postLat = event.latLng.lat().toString();
-      postLong = event.latLng.lng().toString();
-      console.log(postLat);
-      console.log(postLong);
+      postLat = event.latLng.lat().toString() || "22.2783";
+      postLong = event.latLng.lng().toString() || "114.1747";
 
       // display the lat/lng in your form's lat/lng fields
       // document.getElementById("latFld").value = event.latLng.lat();
