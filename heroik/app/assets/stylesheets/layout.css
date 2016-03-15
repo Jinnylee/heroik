@@ -39,20 +39,209 @@ a.navbar-brand > img {
   background-color: white;
 }
 
-#environment, #community, #animals, #youth, #gooddeeds, #mostpopular, #neighborhood {
-  padding-right: 20px;
-  padding-left:20px;
+#environment, #community, #animals, #youth, #gooddeeds, #neighborhood {
+  padding-right: 2px;
+  padding-left:2px;
   line-height: 50px;
   text-align:center;
 }
 
-#environment:hover, #community:hover, #animals:hover, #youth:hover, #gooddeeds:hover, #mostpopular:hover, #neighborhood:hover {
-  background-color:DarkTurquoise;
-  color:white;
-/*  background-image:url("https://d3ui957tjb5bqd.cloudfront.net/images/screenshots/products/24/240/240143/christmas-tree-f.jpg?1416330834");
-  background-size: 100%;
-  background-position: center;*/
+#mostpopular {
+  padding-right: 5px;
+  padding-left:0px;
+  line-height: 50px;
+  text-align:center;
 }
+
+/*#environment:hover, #community:hover, #animals:hover, #youth:hover, #gooddeeds:hover, #mostpopular:hover, #neighborhood:hover {
+  background-color:DarkTurquoise;
+  color:transparent;
+  background-image:url("http://i65.tinypic.com/sbnh9f.png");
+  background-size: 100%;
+  background-position: center;
+}*/
+
+/*COMMUNITY HOVER EFFECT - NAV BAR*/
+.icon {
+  display: none;
+  font-size:48px;
+  color:white;
+  background-color:DarkTurquoise;
+}
+
+#community {
+  width: 110px;
+}
+
+#community:hover {
+  background-color:DarkTurquoise;
+}
+
+#community:hover .title {
+  background-color:DarkTurquoise;
+  display: none;
+}
+
+#community:hover .icon {
+  display: block;
+}
+
+/*YOUTH HOVER EFFECT - NAV BAR*/
+
+.icon2 {
+  display: none;
+  font-size:48px;
+  color:white;
+  background-color:#9907ff;
+}
+
+#youth {
+  width: 110px;
+}
+
+#youth:hover {
+  background-color:#9907ff;
+}
+
+#youth:hover .title2 {
+  background-color:#9907ff;
+  display: none;
+}
+
+#youth:hover .icon2 {
+  display: block;
+}
+
+/*ENVIRONMENT HOVER EFFECT - NAV BAR*/
+
+.icon3 {
+  display: none;
+  font-size:48px;
+  color:white;
+  background-color:#7CFF00;
+}
+
+#environment {
+  width: 110px;
+}
+
+#environment:hover {
+  background-color:#7CFF00;
+}
+
+#environment:hover .title3 {
+  background-color:#7CFF00;
+  display: none;
+}
+
+#environment:hover .icon3 {
+  display: block;
+}
+
+/*ANIMALS HOVER EFFECT - NAV BAR*/
+
+.icon4 {
+  display: none;
+  font-size:48px;
+  color:white;
+  background-color:#fff200;
+}
+
+#animals {
+  width: 125px;
+}
+
+#animals:hover {
+  background-color:#fff200;
+}
+
+#animals:hover .title4 {
+  background-color:#fff200;
+  display: none;
+}
+
+#animals:hover .icon4 {
+  display: block;
+}
+
+/*GOOD DEEDS HOVER EFFECT - NAV BAR*/
+
+.icon5 {
+  display: none;
+  font-size:48px;
+  color:white;
+  background-color:#FF0067;
+}
+
+#gooddeeds {
+  width: 110px;
+}
+
+#gooddeeds:hover {
+  background-color:#FF0067;
+}
+
+#gooddeeds:hover .title5 {
+  background-color:#FF0067;
+  display: none;
+}
+
+#gooddeeds:hover .icon5 {
+  display: block;
+}
+
+/*MOST POPULAR HOVER EFFECT - NAV BAR*/
+
+.icon6 {
+  display: none;
+  font-size:48px;
+  color:white;
+  background-color:#ff4e8d;
+}
+
+#mostpopular {
+  width: 175px;
+}
+
+#mostpopular:hover {
+  background-color:#ff4e8d;
+}
+
+#mostpopular:hover .title6 {
+  background-color:#ff4e8d;
+  display: none;
+}
+
+#mostpopular:hover .icon6 {
+  display: block;
+}
+
+/*IN MY HOOD HOVER EFFECT - NAV BAR*/
+
+.icon7 {
+  display: none;
+  font-size:48px;
+  color:white;
+  background-color:#67f0db;
+}
+
+#neighborhood {
+  width: 125px;
+}
+
+#neighborhood:hover {
+  background-color:#67f0db;
+}
+
+#neighborhood:hover .title7 {
+  background-color:#67f0db;
+  display: none;
+}
+
+#neighborhood:hover .icon7 {
+  display: block;
+}
+
 
 #nav-profile {
   padding-right: 25px;
