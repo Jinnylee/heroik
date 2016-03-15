@@ -19,7 +19,7 @@ body {
 }
 
 .post{
-  border:1px solid #bfbfbf;
+  border:1px solid #D9D9D9;
   border-radius: 5px;
   background:white;
   margin-bottom:20px;
@@ -41,7 +41,6 @@ title {
     font-weight: bold;
     font-size: 16px;
 }
-
 
 
 /*PREVIOUS PINTEREST CSS CODE - HARDWIRED*/
@@ -92,11 +91,19 @@ title {
 }
 
 
-/*CAROUSEL
+/*CAROUSEL*/
 
+/*@media (max-width:800px) {
+    #bs-carousel {
+        display:none !important;
+    }*/
+}
+/*
 Code snippet by maridlcrmn (Follow me on Twitter @maridlcrmn) for Bootsnipp.com
 Image credits: unsplash.com
-*/*/
+*//**/
+
+
 
 /********************************/
 /*       Fade Bs-carousel       */
@@ -169,9 +176,9 @@ Image credits: unsplash.com
     position: absolute;
     width: 100%;
     height: 100%;
-    z-index: 2;
+    z-index: 1;
     background-color: #080d15;
-    opacity: .7;
+    opacity: .1;
 }
 
 /********************************/
@@ -193,21 +200,36 @@ Image credits: unsplash.com
 /********************************/
 .fade-carousel .slides .slide-1,
 .fade-carousel .slides .slide-2,
-.fade-carousel .slides .slide-3 {
+.fade-carousel .slides .slide-3,
+.fade-carousel .slides .slide-4,
+.fade-carousel .slides .slide-5 {
   height: 100vh;
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
 }
 .fade-carousel .slides .slide-1 {
-  background-image: url(https://ununsplash.imgix.net/photo-1416339134316-0e91dc9ded92?q=75&fm=jpg&s=883a422e10fc4149893984019f63c818);
+  background-image: url(https://www.scmp.com/sites/default/files/styles/486w/public/2015/09/07/chenglaiking.jpg?itok=C5GlL3n-);
+  background-size:100%;
+  background-position:center;
 }
 .fade-carousel .slides .slide-2 {
-  background-image: url(https://ununsplash.imgix.net/photo-1416339684178-3a239570f315?q=75&fm=jpg&s=c39d9a3bf66d6566b9608a9f1f3765af);
+  background-image: url(http://cdn2.i-scmp.com/sites/default/files/styles/486x302/public/2015/06/28/d41175b9eb68e97c579333b60956430c.jpg?itok=WtDJ1hAC);
 }
 .fade-carousel .slides .slide-3 {
-  background-image: url(https://ununsplash.imgix.net/photo-1416339276121-ba1dfa199912?q=75&fm=jpg&s=9bf9f2ef5be5cb5eee5255e7765cb327);
+  background-image: url(http://cdn2.i-scmp.com/sites/default/files/styles/980w/public/2015/06/06/05f71407207a31e8e59c53509c7a35a0.jpg?itok=TsnmAJKp);
 }
+.fade-carousel .slides .slide-4 {
+  background-image: url(http://www.expatliving.sg/incoming/article115110.ece/alternates/w1024/Streetart);
+}
+.fade-carousel .slides .slide-5 {
+  background-image: url(http://i.imgur.com/JbKmW.jpg);
+}
+
+.carousel-inner {
+  z-index:3;
+}
+
 
 /********************************/
 /*          Media Queries       */
@@ -218,3 +240,25 @@ Image credits: unsplash.com
 @media screen and (max-width: 640px){
     .hero h1 { font-size: 4em; }
 }
+/*
+PROFILE PAGE CSS*/
+
+#userposts.row {
+  margin-top: 20px;
+}
+
+button.btn.btn-primary.btn-lg {
+  height: 300px;
+  width: 100%;
+  margin-top: 20px;
+}
+
+i.fa.fa-plus {
+  font-size: 70px;
+}
+
+#usercolumn {
+  margin-top: 20px;
+  background-color: #E8E8E8;
+}
+

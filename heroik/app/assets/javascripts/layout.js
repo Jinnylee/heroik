@@ -73,4 +73,6 @@ $(document).ready(function () {
     }).fail(function(resp){
       console.log(resp)
     });
+
+
 });

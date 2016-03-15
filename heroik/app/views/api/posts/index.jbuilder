@@ -1,4 +1,3 @@
 json.array! @posts do |post|
-  json.extract! post, :id, :image, :title, :post_votes, :created_at, :category
-
+  json.partial! 'api/partials/post_show', locals: {post: post, user: @current_user}
 end

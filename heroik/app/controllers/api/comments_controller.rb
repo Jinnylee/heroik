@@ -1,7 +1,10 @@
 class API::CommentsController < ApplicationController
 
-  def show
-    @comment = Comment.where(post_id: params[:id])
+  def index
+    @comments = Comment.where(post_id: params[:post_id]).order("created_at DESC")
+    respond_to do |format|
+      format.json { render json: @comments.as_json(include: :user) }
+    end
   end
 
   def create
@@ -14,6 +17,14 @@ class API::CommentsController < ApplicationController
       else
         format.json { render json: @comment.errors, status: :unprocessable_entity }
       end
+    end
+  end
+
+  def destroy
+    Comment.destroy(params[:id])
+    respond_to do |format|
+      # format.html { redirect_to events_url, notice: 'Event was successfully destroyed.' }
+      format.json { head :no_content }
     end
   end
 

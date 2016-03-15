@@ -8,20 +8,21 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="/"><img src="http://i65.tinypic.com/rbjqfr.png"></a>
+      <a class="navbar-brand" href="/"><img src="http://i68.tinypic.com/2qm13ci.png"></a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav" id="not-home-page">
-        <li><a href="/posts?target=community" id="community">Community <span class="sr-only">(current)</span></a></li>
-        <li><a href="/posts?target=youth" id="youth">Youth</a></li>
-        <li><a href="/posts?target=environment" id="environment">Environment</a></li>
-        <li><a href="/posts?target=animals" id="animals">Animals</a></li>
-        <li><a href="/posts?target=gooddeeds" id="gooddeeds">Good deeds</a></li>
-        <li><a href="/" id="mostpopular">Most popular</a></li>
-
-        <li><a href="/neighbourhood" id="neighborhood">In my neighbourhood</a></li>
+        <li>
+          <a href="/posts?target=community" id="community"><span class="title">COMMUNITY</span><span class="icon"><i class="fa fa-users"></i></span></a>
+        </li>
+        <li><a href="/posts?target=youth" id="youth"><span class="title2">YOUTH</span><span class="icon2"><i class="fa fa-child"></i></span></a></li>
+        <li><a href="/posts?target=environment" id="environment"><span class="title3">ENVIRONMENT</span><span class="icon3 glyphicon glyphicon-tree-deciduous"></span></a></li>
+        <li><a href="/posts?target=animals" id="animals"><span class="title4">ANIMALS</span><span class="icon4"><i class="fa fa-bug"></span></i></a></li>
+        <li><a href="/posts?target=gooddeeds" id="gooddeeds"><span class="title5">GOOD DEEDS</span><span class="icon5 glyphicon glyphicon-gift"></span></a></li>
+        <li><a href="/posts?target=mostpopular" id="mostpopular"><span class="title6">MOST POPULAR</span><span class="icon6 glyphicon glyphicon-heart-empty"></span></a></li>
+        <li><a href="/neighbourhood" id="neighborhood"><span class="title7">IN MY HOOD</span><span class="icon7 glyphicon glyphicon-globe"></span></a></li>
 
       </ul>
 
@@ -35,10 +36,10 @@
           </div>
         </li> -->
         <li id="logout" style="display: none">
-          <button class="btn btn-primary" id="logout-button">Logout</button>
+          <button class="btn btn-info" id="logout-button">LOGOUT</button>
         </li>
         <li id="signin-signup">
-          <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Sign Up/Sign in</button>
+          <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">SIGN UP/SIGN IN</button>
         </li>
       </ul>
     </div><!-- /.navbar-collapse -->
@@ -57,11 +58,12 @@
       <div class="modal-body">
         <form id="signin-form">
           <p class="sign-in-font">SIGN IN</p>
+          <p id="fbButtonModal"><button class="btn" id="fb-button"></button><span class="orText"> -- or -- </span></p>
           <p><input type="email" name="email" placeholder="email"></p>
           <p><input type="password" name="password" placeholder="password"></p>
           <button id="submit-button-home" class="btn btn-info"type="submit">Submit</button>
         </form>
-        <button class="btn" id="fb-button"></button>
+
 <!--         <img src="http://i63.tinypic.com/281snlw.png" id="fb-button"> -->
 
         <form id="signup-form">

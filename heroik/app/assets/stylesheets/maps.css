@@ -23,7 +23,7 @@
       z-index:2147483647;!important
   }
 
-  #district {
+  #district, #district2 {
       z-index:2147483647; !important
     background-color: #fff;
     font-family: Roboto;
@@ -53,3 +53,6 @@
   #target {
     width: 345px;
   }
+  .modal {
+    overflow-y: scroll;
+}
