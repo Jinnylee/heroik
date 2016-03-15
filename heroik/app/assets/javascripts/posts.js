@@ -2,7 +2,7 @@
   var modalForSinglePost = function(post_votes, created_at, category, title, image, location, description, pp, username, id) {
     var body =
     '<div class="col-xs-12" id="singlebody">' +
-      '<div class="row"><div class="body col-xs-2" id="singlevotes"><i class="fa fa-thumbs-up"></i> ' + post_votes + '</div>' +
+      '<div class="row"><div class="body col-xs-2" id="singlevotes" data-id="' + id + '"><i class="fa fa-thumbs-up"></i> ' + post_votes + '</div>' +
       '<div class="body col-xs-8" id="singledate">' + created_at + '</div>' +
       '<div class="body col-xs-2" id="singlecategory">' + category + '</div>' +
       '<div  class="body col-xs-12" id="singletitle">' + title + '</div>' +
@@ -61,13 +61,12 @@ $(document).ready(function () {
       '<div class="col-xs-12 post" data-id="'+ id + '" data-toggle="modal" data-target="#showsinglepost">' +
         '<img src=' + image + ' onerror="this.src=\'http://camaleon.tuzitio.com/assets/camaleon_cms/image-not-found-4a963b95bf081c3ea02923dceaeb3f8085e1a654fc54840aac61a57a60903fef.png\'" class="col-xs-12 photo">' +
         '<div class="col-xs-12 title">' + title + '</div>' +
-        '<div class="col-xs-12 votes"><i class="fa fa-thumbs-up"></i> ' + post_votes + '</div>' +
+        '<div class="col-xs-12 votes" data-id="' + id + '"><i class="fa fa-thumbs-up"></i> ' + post_votes + '</div>' +
         '<div class="row"><img src="' + pp + '" onerror="this.src=\'http://camaleon.tuzitio.com/assets/camaleon_cms/image-not-found-4a963b95bf081c3ea02923dceaeb3f8085e1a654fc54840aac61a57a60903fef.png\'" class="col-xs-2 photo">' +
         '<div class="col-xs-10 username">' + username + '</div></div>' +
         '<div class="col-xs-12 category">' + category + '</div>' +
       '</div>' +
     '</div>';
-
     $('#userposts').append(ownPosts);
   };
 // moment(response.event_time).format("hh:mm")
@@ -273,7 +272,7 @@ $(document).ready(function () {
       '<div class="col-xs-12 post" data-id="'+ id + '" data-toggle="modal" data-target="#showsinglepost">' +
         '<img src=' + image + ' onerror="this.src=\'http://camaleon.tuzitio.com/assets/camaleon_cms/image-not-found-4a963b95bf081c3ea02923dceaeb3f8085e1a654fc54840aac61a57a60903fef.png\'" class="col-xs-12 photo">' +
         '<div class="col-xs-12 title">' + title +
-        '</div>' +'<div class="col-xs-12 votes"><i class="fa fa-thumbs-up"></i> ' + post_votes + '</div>' +
+        '</div>' +'<div class="col-xs-12 votes" data-id="'+ id +'"><i class="fa fa-thumbs-up"></i> ' + post_votes + '</div>' +
         '<div class="row"><img src="' + pp + '" onerror="this.src=\'http://camaleon.tuzitio.com/assets/camaleon_cms/image-not-found-4a963b95bf081c3ea02923dceaeb3f8085e1a654fc54840aac61a57a60903fef.png\'" class="col-xs-2 photo">' +
         '<div class="col-xs-10 username">' + username + '</div></div>' +
         '<div class="col-xs-12 category">' + category + '</div>' +

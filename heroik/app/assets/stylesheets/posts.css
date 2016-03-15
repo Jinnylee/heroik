@@ -54,6 +54,7 @@
 
 #singleusername {
   font-size: 30px;
+  padding-left: 20px;
 }
 
 /*IMPROVING POSTS ON HOME PAGE*/
@@ -77,6 +78,7 @@
 #singledescription {
   margin-top:10px;
 }
+
 .col-xs-12.votes {
   margin-top: 10px;
   font-size: 20px;
@@ -86,4 +88,7 @@
 .col-xs-12.title{
   padding-left: 0px;
   margin-top: 5px;
+
+.thumb {
+  color: #9E9E9E;
 }
