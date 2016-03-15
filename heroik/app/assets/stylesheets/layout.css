@@ -295,6 +295,9 @@ a.navbar-brand > img {
 
 }
 
+.modal-header {
+  padding-top:0;
+}
 #fb-button {
   float:left;
   display:inline-block;
@@ -307,9 +310,11 @@ a.navbar-brand > img {
   font-style:italic;
 }
 
-#sign-in form p.fbButtonModal {
+#fbButtonModal {
   margin-top:-20px;
+  height:20px;
 }
+
 
 #myModal.modal-header {
   padding-left:0px;
@@ -318,10 +323,6 @@ a.navbar-brand > img {
   background-color:DarkTurquoise;
 }
 
-.button.close < span {
-  color:white;
-  font-size:48px;
-}
 .modal-content {
   padding: 30px;
   max-width: 550px;
@@ -348,16 +349,16 @@ a.navbar-brand > img {
 }
 
 .modal-content input[type=text], input[type=email], input[type=password] {
-  height: 44px;
+  height: 30px;
   font-size: 16px;
   width: 100%;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
   -webkit-appearance: none;
   background: #fff;
   border: 1px solid #d9d9d9;
   border-top: 1px solid #c0c0c0;
   /* border-radius: 2px; */
-  padding: 0 8px;
+  padding: 0 5px;
   box-sizing: border-box;
   -moz-box-sizing: border-box;
 }
@@ -373,11 +374,13 @@ a.navbar-brand > img {
 .sign-in-font {
   font-style:bold;
   font-size:18px;
+  margin-bottom:10px;
 }
 
 .sign-up-font {
   font-style:bold;
   font-size:18px;
+  padding-top:10px;
 }
 
 .modalbody {
