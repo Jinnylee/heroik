@@ -39,8 +39,11 @@
 }
 .userrow{
   border-top: solid #E0E0E0 1px;
+  border-bottom: solid #E0E0E0 1px;
   padding-top: 10px;
+  padding-bottom:10px;
   margin-top: 10px;
+  margin-bottom:5px;
 }
 
 .pro-pic {
@@ -51,4 +54,8 @@
 
 #singleusername {
   font-size: 30px;
+}
+
+#singledescription {
+  margin-top:10px;
 }
