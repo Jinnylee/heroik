@@ -4,24 +4,49 @@
   border-radius: 25px;
 }
 
+#see-more{
+  text-align: center;
+}
+
+.comment {
+  padding: 10px 0px 10px 0px;
+}
+
 .comment-user-image {
+  padding:0px;
+}
+.comment-user-div {
+  padding:0px;
+}
+
+.comment-user {
+  padding:0px;
+  font-weight: 700;
+}
+
+.comment-text {
+  padding:0px;
+  font-weight: lighter;
+}
+
+.comment-image-raw {
   height: 40px;
   width: 40px;
   border-radius: 25px;
 }
 
-#commenttag{
-  padding-top: 15px;
-  padding-left: 0px;
-  margin-top: 10px;
-  margin-bottom:10px;
-  border-top: solid #E0E0E0 1px;
+.deleteCommentBtn {
+  margin-top: 3px;
+}
+
+#commentsection{
 }
 
 #commentform{
   margin-top: 10px;
-
 }
+
 .comment-btn {
   margin-top: 10px;
+  margin-bottom: 10px;
 }

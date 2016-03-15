@@ -3,7 +3,7 @@
 <head>
   <title>Heroik</title>
   <%= stylesheet_link_tag    'application', media: 'all' %>
-  <%= stylesheet_link_tag 'application', 'https://fonts.googleapis.com/css?family=Roboto', media: 'all' %>
+  <%= stylesheet_link_tag 'application', 'https://fonts.googleapis.com/css?family=Roboto:400,700,900,500,300', media: 'all' %>
   <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
 </head>
@@ -23,11 +23,10 @@
       </div>
       <div class="modal-body single-body"></div>
       <div id ="commentsection">
-        <div class="col-xs-12" id="commenttag"> Comments </div>
-        <textarea class="form-control" id="commentform" name="comment" rows="1" placeholder="Add a comment..."></textarea>
-        <button type="button" class="btn btn-info comment-btn">Comment</button>
-        <div class="col-xs-12" id="allcomments"></div>
         <div class="col-xs-12" id="see-more"><button type="button" class="btn btn-default" id="view-all-comments">View all comments...</button></div>
+        <div class="col-xs-12" id="allcomments"></div>
+        <textarea class="form-control" id="commentform" name="comment" rows="1" placeholder="Add a comment..."></textarea>
+        <button type="button" class="btn btn-info comment-btn"><i class="fa fa-commenting-o"></i>  Comment</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
