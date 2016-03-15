@@ -6,7 +6,7 @@
       '<div class="body col-xs-8" id="singledate">' + created_at + '</div>' +
       '<div class="body col-xs-2" id="singlecategory">' + category + '</div>' +
       '<div  class="body col-xs-12" id="singletitle">' + title + '</div>' +
-      '<p><img src=' + image + ' onerror="this.src=\'http://camaleon.tuzitio.com/assets/camaleon_cms/image-not-found-4a963b95bf081c3ea02923dceaeb3f8085e1a654fc54840aac61a57a60903fef.png\'" class="photo body col-xs-12"></p>' +
+      '<p><img src="' + image + '" onerror="this.src=\'http://camaleon.tuzitio.com/assets/camaleon_cms/image-not-found-4a963b95bf081c3ea02923dceaeb3f8085e1a654fc54840aac61a57a60903fef.png\'" class="photo body col-xs-12"></p>' +
       '<div class="body col-xs-12" id="singlelocation">' + location + '</div>' +
       '<div class="body col-xs-12" id="singledescription">' + description + '</div></div>' +
       '<div class="row userrow"><img src="' + pp + '" onerror="this.src=\'http://camaleon.tuzitio.com/assets/camaleon_cms/image-not-found-4a963b95bf081c3ea02923dceaeb3f8085e1a654fc54840aac61a57a60903fef.png\'" class="photo body pro-pic col-xs-2">' +
@@ -58,7 +58,7 @@ $(document).ready(function () {
     var ownPosts =
     '<div class="col-xs-12 col-md-4 item">' +
       '<div class="col-xs-12 post" data-id="'+ id + '" data-toggle="modal" data-target="#showsinglepost">' +
-        '<img src=' + image + ' onerror="this.src=\'http://camaleon.tuzitio.com/assets/camaleon_cms/image-not-found-4a963b95bf081c3ea02923dceaeb3f8085e1a654fc54840aac61a57a60903fef.png\'" class="col-xs-12 photo">' +
+        '<img src="' + image + '" onerror="this.src=\'http://camaleon.tuzitio.com/assets/camaleon_cms/image-not-found-4a963b95bf081c3ea02923dceaeb3f8085e1a654fc54840aac61a57a60903fef.png\'" class="col-xs-12 photo">' +
         '<div class="col-xs-12 title">' + title + '</div>' +
         '<div class="col-xs-12 votes"><i class="fa fa-thumbs-up"></i> ' + post_votes + '</div>' +
         '<div class="col-xs-12 username">' + username + '</div>' +
@@ -250,7 +250,7 @@ $(document).ready(function () {
     var ownPosts =
     '<div class="item">' +
       '<div class="col-xs-12 post" data-id="'+ id + '" data-toggle="modal" data-target="#showsinglepost">' +
-        '<img src=' + image + ' onerror="this.src=\'http://camaleon.tuzitio.com/assets/camaleon_cms/image-not-found-4a963b95bf081c3ea02923dceaeb3f8085e1a654fc54840aac61a57a60903fef.png\'" class="col-xs-12 photo">' +
+        '<img src="' + image + '" onerror="this.src=\'http://camaleon.tuzitio.com/assets/camaleon_cms/image-not-found-4a963b95bf081c3ea02923dceaeb3f8085e1a654fc54840aac61a57a60903fef.png\'" class="col-xs-12 photo">' +
         '<div class="col-xs-12 title">' + title +
         '</div>' +'<div class="col-xs-12 votes"><i class="fa fa-thumbs-up"></i> ' + post_votes + '</div>' +
         '<div class="col-xs-12 username">' + username + '</div>' +

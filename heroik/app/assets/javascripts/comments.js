@@ -46,28 +46,28 @@
       type: 'GET',
       url: 'api/posts/' + id + '/comments.json',
       success: function(response) {
-        console.log(response);
+        console.log(response[0]);
         $('#allcomments').empty();
         $('#see-more').show();
 
         if (response.length <= 5) {
-          console.log("why");
           $('#see-more').hide();
-        }
-
-        var i;
-        for (i = 0; i < 5; i++) {
-          appendComments(response[i].user.image, response[i].user.username, response[i].comment);
-        }
-
-        $('#view-all-comments').off().on('click', function(e) {
-          e.preventDefault();
-          console.log('clicked');
-          $('#see-more').hide();
-          for (i = 5; i < response.length; i++) {
+          for (var i = 0; i < response.length; i++) {
             appendComments(response[i].user.image, response[i].user.username, response[i].comment);
-          };
-        });
+          }
+        } else {
+          for (var i = 0; i <= 5; i++) {
+            appendComments(response[i].user.image, response[i].user.username, response[i].comment);
+          }
+          $('#view-all-comments').off().on('click', function(e) {
+            e.preventDefault();
+            console.log('clicked');
+            $('#see-more').hide();
+            for (i = 5; i < response.length; i++) {
+              appendComments(response[i].user.image, response[i].user.username, response[i].comment);
+            };
+          });
+        }
 
       },
       error: function(response) {
