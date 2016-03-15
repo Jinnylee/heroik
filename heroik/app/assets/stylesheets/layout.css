@@ -54,19 +54,109 @@ a.navbar-brand > img {
   background-position: center;
 }*/
 
+/*COMMUNITY HOVER EFFECT - NAV BAR*/
 .icon {
   display: none;
+  font-size:48px;
+  color:white;
+  background-color:DarkTurquoise;
 }
+
 #community {
-  width: 100px;
+  width: 120px;
 }
+
+#community:hover {
+  background-color:DarkTurquoise;
+}
+
 #community:hover .title {
+  background-color:DarkTurquoise;
   display: none;
 }
 
 #community:hover .icon {
   display: block;
 }
+
+/*YOUTH HOVER EFFECT - NAV BAR*/
+
+.icon2 {
+  display: none;
+  font-size:48px;
+  color:white;
+  background-color:DarkTurquoise;
+}
+
+#youth {
+  width: 120px;
+}
+
+#youth:hover {
+  background-color:DarkTurquoise;
+}
+
+#youth:hover .title2 {
+  background-color:DarkTurquoise;
+  display: none;
+}
+
+#youth:hover .icon2 {
+  display: block;
+}
+
+/*ENVIRONMENT HOVER EFFECT - NAV BAR*/
+
+.icon3 {
+  display: none;
+  font-size:48px;
+  color:white;
+  background-color:DarkTurquoise;
+}
+
+#environment {
+  width: 120px;
+}
+
+#environment:hover {
+  background-color:DarkTurquoise;
+}
+
+#environment:hover .title3 {
+  background-color:DarkTurquoise;
+  display: none;
+}
+
+#environment:hover .icon3 {
+  display: block;
+}
+
+/*ANIMALS HOVER EFFECT - NAV BAR*/
+
+.icon4 {
+  display: none;
+  font-size:48px;
+  color:white;
+  background-color:DarkTurquoise;
+}
+
+#animals {
+  width: 120px;
+}
+
+#animals:hover {
+  background-color:DarkTurquoise;
+}
+
+#animals:hover .title4 {
+  background-color:DarkTurquoise;
+  display: none;
+}
+
+#animals:hover .icon4 {
+  display: block;
+}
+
 
 #nav-profile {
   padding-right: 25px;
