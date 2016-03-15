@@ -338,7 +338,7 @@ $(document).ready(function () {
       success: function (response, status) {
         console.log(response);
         response.forEach(function (elem, index) {
-          appendAllPosts(elem.id, elem.image, elem.title, elem.post_votes, elem.username, elem.category);
+          appendAllPosts(elem.id, elem.image, elem.title, elem.post_votes, elem.user.image, elem.username, elem.category);
         });
         masonryGrid();
         showOnePost();
@@ -358,7 +358,7 @@ $(document).ready(function () {
       success: function (response, status) {
         console.log(response);
         response.forEach(function (elem, index) {
-          appendAllPosts(elem.id, elem.image, elem.title, elem.post_votes, elem.username, elem.category);
+          appendAllPosts(elem.id, elem.image, elem.title, elem.post_votes, elem.user.image, elem.username, elem.category);
         });
         masonryGrid();
         showOnePost();
@@ -378,7 +378,7 @@ $(document).ready(function () {
       success: function (response, status) {
         console.log(response);
         response.forEach(function (elem, index) {
-          appendAllPosts(elem.id, elem.image, elem.title, elem.post_votes, elem.username, elem.category);
+          appendAllPosts(elem.id, elem.image, elem.title, elem.post_votes, elem.user.image, elem.username, elem.category);
         });
         masonryGrid();
         showOnePost();
@@ -398,7 +398,7 @@ $(document).ready(function () {
       success: function (response, status) {
         console.log(response);
         response.forEach(function (elem, index) {
-          appendAllPosts(elem.id, elem.image, elem.title, elem.post_votes, elem.username, elem.category);
+          appendAllPosts(elem.id, elem.image, elem.title, elem.post_votes, elem.user.image, elem.username, elem.category);
         });
         masonryGrid()
         showOnePost();
@@ -418,7 +418,7 @@ $(document).ready(function () {
       success: function (response, status) {
         console.log(response);
         response.forEach(function (elem, index) {
-          appendAllPosts(elem.id, elem.image, elem.title, elem.post_votes, elem.username, elem.category);
+          appendAllPosts(elem.id, elem.image, elem.title, elem.post_votes, elem.user.image, elem.username, elem.category);
         });
         masonryGrid()
         showOnePost();
@@ -440,7 +440,7 @@ $(document).ready(function () {
           // var text = '<div class="col-xs-12 top-twenty">Top 20 Stories</div>';
 
           // $('#userposts').append(text);
-          appendAllPosts(elem.id, elem.image, elem.title, elem.post_votes, elem.username, elem.category);
+          appendAllPosts(elem.id, elem.image, elem.title, elem.post_votes, elem.user.image, elem.username, elem.category);
         });
         masonryGrid()
         showOnePost();
