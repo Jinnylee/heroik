@@ -21,8 +21,8 @@ var editUserInfo = function (id) {
       processData: false,
       data: formData,
       success: function (response, status) {
-        console.log(response);
         $('#editusermodal').modal('hide');
+        window.location.href='/profile';
       },
       error: function (response, status) {
         console.log(response);
