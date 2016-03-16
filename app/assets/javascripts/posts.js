@@ -331,21 +331,25 @@ $(document).ready(function () {
     var sentence =
     '<div class="item">' +
       '<div class="col-xs-12 post" style="background-color:'+colorPick+'">' +
-        '<div class="col-xs-12">' + quote +'</div>' +
+        '<div id="quoteText" class="col-xs-12">' + quote +'</div>' +
       '</div>' +
     '</div>';
     $('#post-home').append(sentence);
   };
   function colorGenerator(){
-    var color=Math.floor((Math.random()*4+1));
+    var color=Math.floor((Math.random()*6+1));
     if (color==1){
-      colorPick = "#66c2ff";//blue
+      colorPick = "DarkTurquoise";//blue
     } else if (color==2){
-      colorPick = "#ff3333"; //red
+      colorPick = "#9907ff"; //
     } else if (color==3){
-      colorPick = "#00cc00"; //green
-    } else if (color>=4){
-      colorPick = "#ffa31a"; //orange
+      colorPick = "#ff4e8d"; //
+    } else if (color==4){
+      colorPick = "#FF0067"; //
+    } else if (color==5){
+      colorPick = "#1abc9c";
+    } else if (color==6){
+      colorPick = "#31b0d5";
     }
   }
 
