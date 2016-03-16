@@ -112,8 +112,8 @@ $(document).ready(function () {
         url: "/api/posts/" + id + ".json",
         success: function (response) {
           if (response.belongs_to_current_user){
-            $('.editPostBtn').show('hide');
-            $('.deletePostBtn').show('hide');
+            $('.editPostBtn').show();
+            $('.deletePostBtn').show();
           }
           if (response.current_user_voted > 0) {
             $('.heroBtn').hide();
@@ -149,17 +149,6 @@ $(document).ready(function () {
     $('#createpost').on('submit', function (e) {
       e.preventDefault();
       console.log("clicked! create now")
-      // var post = {
-      //   title   : $('#createpost [name="title"]').val(),
-      //   image : $('#createpost [name="image"]').val(),
-      //   category    : $('#createpost [name="category"]').val(),
-      //   location : $('#createpost [name="location"]').val(),
-      //   description : $('#createpost [name="description"]').val(),
-      //   user_id : user.id,
-      //   post_votes : 0,
-      //   latitude: postLat.toString(),
-      //   longitude: postLong.toString()
-      // };
 
       var formData = new FormData();
       var imageFile = $('#create-image')[0].files[0];

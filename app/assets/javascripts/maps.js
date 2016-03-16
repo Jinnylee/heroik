@@ -67,6 +67,7 @@ function initMap() {
       success: function (response, status) {
           console.log(response);
         response.forEach(function (elem, index){
+          console.log(elem);
           getIcon(elem.category);
           marker[index] = new google.maps.Marker({
             position: {lat: parseFloat(elem.latitude), lng: parseFloat(elem.longitude)},
@@ -78,22 +79,26 @@ function initMap() {
           marker[index].addListener("click",function(){
             modalForSinglePost(response[index].post_votes,moment(response.created_at).format('MM/DD/YYYY'), response[index].category, response[index].title, response[index].postpic, response[index].location, response[index].description, response[index].pp, response[index].username, response[index].id);
             $('#showsinglepost').modal('show');
+            $('.heroBtn').show();
+            $('.thank-you-btn').hide();
             $('.editPostBtn').hide();
             $('.deletePostBtn').hide();
-            $('.heroBtn').removeClass("hide");
-            $.auth.validateToken().then(function(user){
-              addComment(user);
-              addHeroButton();
-            }).fail(function(response){
-              console.log(response);
-            });
-              // console.log(elem);
-            // if (response.current_user_voted > 0) {
-            //   $('.heroBtn').addClass("hide");
-            // }
+
+            if (response.current_user_voted > 0) {
+              $('.heroBtn').hide();
+              $('.thank-you-btn').show();
+            }
+            showAllComments();
+
+          $.auth.validateToken().then(function(user){
+            addComment(user);
+            addHeroButton();
+          }).fail(function(response){
+            console.log(response);
+            $('#comment-form-message').text("Please sign in to comment!");
+          });
           });
         });
-
       },
       error: function(response, status) {
         console.log(response);
@@ -102,62 +107,6 @@ function initMap() {
     })
   };
   getMarkers();
-
-
-  // function addMarkerOnClick(){
-  //   setMarkersArray = []
-  //   google.maps.event.addListener(map, "click", function(event) {
-  //     // place a marker
-  //     placeMarker(event.latLng);
-  //     var postLat = event.latLng.lat();
-  //     var postLong = event.latLng.lng();
-
-  //     // display the lat/lng in your form's lat/lng fields
-  //     // document.getElementById("latFld").value = event.latLng.lat();
-  //     // document.getElementById("lngFld").value = event.latLng.lng();
-  //   });
-  // };
-  // function placeMarker(location) {
-  //   //remove all markers if there are any
-  //   deleteOverlays();
-
-  //   //set hero icon
-  //   var hero = {
-  //     url:'https://cdn3.iconfinder.com/data/icons/human-behaviour-and-situations-part-1/400/Popular-19-512.png',
-  //     size: new google.maps.Size(300,300),
-  //     origin: new google.maps.Point(0, 0),
-  //     anchor: new google.maps.Point(0, 0),
-  //     scaledSize: new google.maps.Size(100, 100)
-  //   }
-  //   var postMarker = new google.maps.Marker({
-  //       position: location,
-  //       map: map,
-  //       icon: hero
-  //   });
-
-  //   // add marker in markers array
-  //   setMarkersArray.push(postMarker);
-
-  //   //re-center location to clicked point
-  //   // map.setCenter(location);
-  // };
-  // function deleteOverlays() {
-  //   if (setMarkersArray) {
-  //     for (i in setMarkersArray) {
-  //       setMarkersArray[i].setMap(null);
-  //     }
-  //   setMarkersArray.length = 0;
-  //   }
-  // };
-  // // getMarkers();
-  // // tempMarkers();
-  // addMarkerOnClick();
-
-  // $("#addpostmodal").on("shown.bs.modal", function(e) {
-  //     google.maps.event.trigger(map, "resize");
-  //     map.setCenter(hongKong);
-  //     // map.setZoom(15);
-  //   });
 };
 
 function initAutocomplete() {
@@ -228,14 +177,6 @@ function initAutocomplete() {
         scaledSize: new google.maps.Size(25, 25)
       };
 
-      // Create a marker for each place.
-      // markers.push(new google.maps.Marker({
-      //   map: map,
-      //   icon: icon,
-      //   title: place.name,
-      //   position: place.geometry.location
-      // }));
-
       if (place.geometry.viewport) {
         // Only geocodes have viewport.
         bounds.union(place.geometry.viewport);
@@ -287,9 +228,6 @@ function initAutocomplete() {
       postLat = event.latLng.lat().toString() || "22.2783";
       postLong = event.latLng.lng().toString() || "114.1747";
 
-      // display the lat/lng in your form's lat/lng fields
-      // document.getElementById("latFld").value = event.latLng.lat();
-      // document.getElementById("lngFld").value = event.latLng.lng();
     });
     google.maps.event.addListener(map2, "click", function(event) {
       placeMarker(event.latLng);
