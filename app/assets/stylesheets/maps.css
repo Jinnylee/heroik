@@ -2,7 +2,7 @@
   height: 100vh;
 }
 .ui-autocomplete {
-  z-index:2147483647 !important ;
+  z-index:2147483647;
 }
 .modal{
     z-index: 20;

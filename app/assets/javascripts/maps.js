@@ -8,7 +8,7 @@ var hongKong = {lat: 22.2783, lng: 114.1747};
 function getIcon(post){
   if (post == "Community") {
     postIcon = {
-      url:'http://discoverycrc.com/wp-content/uploads/2014/09/Community-Icon.png',
+      url:'http://i63.tinypic.com/2u3w8wg.png',
       size: new google.maps.Size(90,90),
       origin: new google.maps.Point(0, 0),
       anchor: new google.maps.Point(0, 0),
@@ -17,7 +17,7 @@ function getIcon(post){
   }
   else if (post == "Animals") {
     postIcon = {
-      url:'https://www.jetblue.com/img/special-needs/main_service_animal_icon.png',
+      url:'http://i63.tinypic.com/2qis2ko.png',
       size: new google.maps.Size(90,90),
       origin: new google.maps.Point(0, 0),
       anchor: new google.maps.Point(0, 0),
@@ -26,7 +26,7 @@ function getIcon(post){
   }
   else if (post == "Youth") {
     postIcon = {
-      url:'https://metrounitedway.org/servlet/eAndar.WebExtDocument/article/323832353233/373834/July15Newsletter_GraduationIcon.png',
+      url:'http://i66.tinypic.com/16beu88.png',
       size: new google.maps.Size(90,90),
       origin: new google.maps.Point(0, 0),
       anchor: new google.maps.Point(0, 0),
@@ -35,7 +35,7 @@ function getIcon(post){
   }
   else if (post == "Environment") {
     postIcon = {
-      url:'http://www.yara.us/images/399-77022IMAGE%20banner%20image%20environment%20CORRECT.png',
+      url:'http://i64.tinypic.com/34yz3uc.png',
       size: new google.maps.Size(90,90),
       origin: new google.maps.Point(0, 0),
       anchor: new google.maps.Point(0, 0),
@@ -44,7 +44,7 @@ function getIcon(post){
   }
   else if (post == "Good deeds") {
     postIcon = {
-      url:'http://cdn.mysitemyway.com/etc-mysitemyway/icons/legacy-previews/icons/glossy-black-icons-symbols-shapes/018721-glossy-black-icon-symbols-shapes-smiley-face1.png',
+      url:'http://i67.tinypic.com/2exnc79.png',
       size: new google.maps.Size(90,90),
       origin: new google.maps.Point(0, 0),
       anchor: new google.maps.Point(0, 0),
