@@ -50,11 +50,12 @@
           for (var i = 0; i <= 4; i++) {
             appendComments(response[i].user.image, response[i].user.username, response[i].comment, response[i].id, response[i].user.id);
           }
+
           $('#view-all-comments').off().on('click', function(e) {
             e.preventDefault();
             console.log('clicked');
             $('#see-more').hide();
-            for (i = 5; i < response.length; i++) {
+            for (i = 4; i < response.length; i++) {
               appendComments(response[i].user.image, response[i].user.username, response[i].comment, response[i].id, response[i].user.id);
             };
           });

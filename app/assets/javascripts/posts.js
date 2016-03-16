@@ -241,6 +241,7 @@ $(document).ready(function () {
         success: function (response, status) {
           $('#showsinglepost').modal('hide');
           showUserPage();
+          allPostsHomePage();
         },
         error: function (response, status) {
           console.log(response);
