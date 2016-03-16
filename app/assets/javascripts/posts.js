@@ -112,14 +112,13 @@ $(document).ready(function () {
         url: "/api/posts/" + id + ".json",
         success: function (response) {
           if (response.belongs_to_current_user){
-            $('.editPostBtn').show('hide');
-            $('.deletePostBtn').show('hide');
+            $('.editPostBtn').show();
+            $('.deletePostBtn').show();
           }
           if (response.current_user_voted > 0) {
             $('.heroBtn').hide();
             $('.thank-you-btn').show();
           }
-          console.log(response);
           modalForSinglePost(response.post_votes, moment(response.created_at.event_time).format('MM/DD/YYYY'), response.category, response.title, response.postpic, response.location, response.description, response.pp, response.username, response.id);
 
           openEditModal();
@@ -148,18 +147,6 @@ $(document).ready(function () {
   var createPost = function (user) {
     $('#createpost').on('submit', function (e) {
       e.preventDefault();
-      console.log("clicked! create now")
-      // var post = {
-      //   title   : $('#createpost [name="title"]').val(),
-      //   image : $('#createpost [name="image"]').val(),
-      //   category    : $('#createpost [name="category"]').val(),
-      //   location : $('#createpost [name="location"]').val(),
-      //   description : $('#createpost [name="description"]').val(),
-      //   user_id : user.id,
-      //   post_votes : 0,
-      //   latitude: postLat.toString(),
-      //   longitude: postLong.toString()
-      // };
 
       var formData = new FormData();
       var imageFile = $('#create-image')[0].files[0];
@@ -196,7 +183,6 @@ $(document).ready(function () {
   // OPEN THE EDIT MODAL
   var openEditModal = function () {
     $('.editPostBtn').off().on('click', function (e) {
-      console.log("clicked")
       e.preventDefault();
       $('#editpostmodal').modal('show');
       $('#showsinglepost').modal('hide');
@@ -230,7 +216,6 @@ $(document).ready(function () {
         processData: false,
         data: formData,
         success: function (response, status) {
-          console.log(response);
           $('#editpostmodal').modal('hide');
           showUserPage();
         },
@@ -247,8 +232,6 @@ $(document).ready(function () {
     $('.deletePostBtn').off().on('click', function (e){
       e.preventDefault();
       $('#delete-form-message').text('');
-
-      console.log("request sent!");
 
       var id = $(this).data("id");
 
