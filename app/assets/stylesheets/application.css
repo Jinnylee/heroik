@@ -10,9 +10,15 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
- *= require bootstrap/dist/css/bootstrap
  *= require font-awesome
+ *= require bootstrap/dist/css/bootstrap
+ *= require bootstrap/dist/css/bootstrap-theme
  *= require_tree .
  *= require_self
  */
 
+@import 'bootstrap/dist/fonts/glyphicons-halflings-regular.eot';
+@import 'bootstrap/dist/fonts/glyphicons-halflings-regular.svg';
+@import 'bootstrap/dist/fonts/glyphicons-halflings-regular.ttf';
+@import 'bootstrap/dist/fonts/glyphicons-halflings-regular.woff';
+@import 'bootstrap/dist/fonts/glyphicons-halflings-regular.woff2';

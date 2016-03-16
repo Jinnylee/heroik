@@ -25,7 +25,8 @@ $(document).ready(function () {
       first_name: first_name,
       last_name: last_name,
       username: $('#signup-form input[name="username"]').val(),
-      name: first_name +' ' + last_name
+      name: first_name +' ' + last_name,
+      quote: 'Add a quote!'
 
     }).then(function(user){
       console.log(user)

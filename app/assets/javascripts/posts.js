@@ -45,10 +45,10 @@ $(document).ready(function () {
     '<div class="col-xs-12" id="userinfo">' +
       '<img src=' + image + ' onerror="this.src=\'http://camaleon.tuzitio.com/assets/camaleon_cms/image-not-found-4a963b95bf081c3ea02923dceaeb3f8085e1a654fc54840aac61a57a60903fef.png\'" class="col-xs-12 photo">' +
       '<div id="userNameDiv" class="col-xs-12">' + name + '</div>' +
-      '<div class="col-xs-12">' + username + '</div>' +
-      '<div class="col-xs-12">' + created_at + '</div>' +
-      '<div id="userQuoteDiv"class="col-xs-12">' + quote + '</div>' +
-      '<div><buttontype="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#editusermodal" data-id='+id+' id="edit-user-btn">Edit Profile</button></div>' +
+      '<div class="col-xs-12" id="user-username">' + username + '</div>' +
+      '<div class="col-xs-12" id="user-created">Joined: ' + created_at + '</div>' +
+      '<div id="userQuoteDiv" class="col-xs-12">"' + quote + '"</div>' +
+      '<div><buttontype="button" class="btn btn-info btn-md" data-toggle="modal" data-target="#editusermodal" data-id='+id+' id="edit-user-btn">Edit Profile</button></div>' +
     '</div>';
 
     $('#usercolumn').append(userInfo);
@@ -96,7 +96,6 @@ $(document).ready(function () {
     });
   };
 
-
   // SHOW ONE POST ON MODAL
   var showOnePost = function () {
     $('.post').off().on('click', function (e) {
@@ -105,6 +104,8 @@ $(document).ready(function () {
       $('.editPostBtn').hide();
       $('.deletePostBtn').hide();
       $('.heroBtn').show();
+      $('.thank-you-btn').hide();
+
 
       $.ajax({
         method: "GET",
@@ -116,6 +117,7 @@ $(document).ready(function () {
           }
           if (response.current_user_voted > 0) {
             $('.heroBtn').hide();
+            $('.thank-you-btn').show();
           }
           console.log(response);
           modalForSinglePost(response.post_votes, moment(response.created_at.event_time).format('MM/DD/YYYY'), response.category, response.title, response.postpic, response.location, response.description, response.pp, response.username, response.id);
@@ -130,6 +132,7 @@ $(document).ready(function () {
             addHeroButton();
           }).fail(function(response){
             console.log(response);
+            $('#comment-form-message').text("Please sign in to comment!");
           });
         },
         error: function (response) {
@@ -145,7 +148,7 @@ $(document).ready(function () {
   var createPost = function (user) {
     $('#createpost').on('submit', function (e) {
       e.preventDefault();
-      $('#create-form-message').text('');
+      console.log("clicked! create now")
       // var post = {
       //   title   : $('#createpost [name="title"]').val(),
       //   image : $('#createpost [name="image"]').val(),

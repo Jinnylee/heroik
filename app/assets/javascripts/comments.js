@@ -39,7 +39,8 @@
       success: function(response) {
         $('#allcomments').empty();
         $('#see-more').show();
-        console.log(response)
+        $('#vote-form-message').text("");
+
         if (response.length <= 4) {
           $('#see-more').hide();
           for (var i = 0; i < response.length; i++) {
@@ -59,6 +60,7 @@
           });
         }
         deleteComment();
+        votedAlready();
       },
       error: function(response) {
         console.log(response);
