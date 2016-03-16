@@ -271,7 +271,7 @@ $(document).ready(function () {
         '<img src=' + image + ' onerror="this.src=\'http://camaleon.tuzitio.com/assets/camaleon_cms/image-not-found-4a963b95bf081c3ea02923dceaeb3f8085e1a654fc54840aac61a57a60903fef.png\'" class="col-xs-12 photo">' +
         '<div class="col-xs-12 title">' + title +'</div>' +
         '<div class="col-xs-12 votes" data-id="'+ id +'"><i class="fa fa-thumbs-up"></i> ' + post_votes +
-        '<img style="float:right" src=' + category + '></div>' +
+        '<img style="float:right; height:30px;width:30px" src=' + category + '></div>' +
         '<div class="row"><img src="' + pp + '" onerror="this.src=\'http://camaleon.tuzitio.com/assets/camaleon_cms/image-not-found-4a963b95bf081c3ea02923dceaeb3f8085e1a654fc54840aac61a57a60903fef.png\'" class="col-xs-2 photo">' +
         '<div class="col-xs-10 username">' + username + '</div></div>' +
       '</div>' +
