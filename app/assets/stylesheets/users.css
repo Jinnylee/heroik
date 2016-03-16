@@ -1,0 +1,41 @@
+#edit-image {
+  padding: 10px;
+}
+
+#create-image {
+  display: inline;
+  padding-bottom: 10px;
+}
+
+#edit-post-image {
+  display: inline;
+  padding: 10px;
+}
+
+#edit-user-btn {
+  margin-left: 15px;
+  margin-top:20px;
+}
+
+#userNameDiv {
+  font-size: 35px;
+  margin-top: 25px;
+  margin-bottom:13px;
+  font-weight:700;
+}
+
+#user-username {
+  font-size: 20px;
+  margin: 5px;
+}
+
+#user-created {
+  font-size: 20px;
+  margin: 5px;
+}
+
+#userQuoteDiv {
+  font-size: 20px;
+  font-style: italic;
+  margin: 5px
+}
