@@ -148,7 +148,7 @@ $(document).ready(function () {
   var createPost = function (user) {
     $('#createpost').on('submit', function (e) {
       e.preventDefault();
-      $('#create-form-message').text('');
+      console.log("clicked! create now")
       // var post = {
       //   title   : $('#createpost [name="title"]').val(),
       //   image : $('#createpost [name="image"]').val(),
