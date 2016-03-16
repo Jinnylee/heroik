@@ -65,9 +65,7 @@ function initMap() {
       url: "/api/maps.json",
       method: "GET",
       success: function (response, status) {
-          console.log(response);
         response.forEach(function (elem, index){
-          console.log(elem);
           getIcon(elem.category);
           marker[index] = new google.maps.Marker({
             position: {lat: parseFloat(elem.latitude), lng: parseFloat(elem.longitude)},
@@ -94,14 +92,12 @@ function initMap() {
             addComment(user);
             addHeroButton();
           }).fail(function(response){
-            console.log(response);
             $('#comment-form-message').text("Please sign in to comment!");
           });
           });
         });
       },
       error: function(response, status) {
-        console.log(response);
         console.log("did not get post data")
       }
     })
