@@ -287,17 +287,19 @@ $(document).ready(function () {
         break;
     }
   };
-
+var allquotes;
   // GET ALL POSTS (HOME PAGE)
   var allPostsHomePage = function () {
     $.ajax({
       url: "/api/posts.json",
       method: "GET",
       success: function (response, status) {
-        response.forEach(function(elem, index) {
+        console.log(response)
+        allquotes = response.quotes
+        response.posts.forEach(function(elem, index) {
           getCategoryImage(elem.category);
           appendAllPosts(elem.id, elem.postpic, elem.title, elem.post_votes, elem.pp, elem.username, postIcon);
-          getQuote();
+          getQuote(allquotes);
         });
         masonryGrid();
         showOnePost();
@@ -315,7 +317,7 @@ $(document).ready(function () {
     colorGenerator();
     var sentence =
     '<div class="item">' +
-      '<div class="col-xs-12 post" style="background-color:'+colorPick+'">' +
+      '<div class="col-xs-12 post quote-box" style="background-color:'+colorPick+'">' +
         '<div id="quoteText" class="col-xs-12">' + quote +'</div>' +
       '</div>' +
     '</div>';
@@ -339,24 +341,12 @@ $(document).ready(function () {
   }
 
   //GET RANDOM QUOTE
-  var quoteArray=[];
-  var getQuote = function(){
+  var getQuote = function(response){
     var randomizer = Math.floor((Math.random() * 10) + 1);
     if (randomizer<5){
-      $.ajax({
-        url: "/api/quotes.json",
-        method: "GET",
-        success: function (response, status) {
-          if ($.inArray(response.id, quoteArray)<0){
-             appendQuote(response.smile);
-             quoteArray.push(response.id);
-           };
-        },
-        error: function(response, status) {
-          console.log(response);
-          console.log("did not get quote data")
-        }
-      });
+    var random = Math.floor((Math.random() * response.length) + 1);
+      appendQuote(response[random].quotation);
+      allquotes.splice(random,1);
     };
   };
 

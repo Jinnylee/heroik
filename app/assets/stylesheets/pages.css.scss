@@ -1,3 +1,7 @@
+.row {
+  z-index: -1;
+}
+
 body {
   font-family: 'Roboto', serif;
   font-size: 15px;
@@ -89,6 +93,10 @@ title {
 .navbar {
   border-radius: 0px;
   background-color: white;
+}
+
+#bs-carousel {
+  z-index: -1;
 }
 
 

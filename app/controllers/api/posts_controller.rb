@@ -2,6 +2,7 @@ class API::PostsController < ApplicationController
 
   def index
     @posts = Post.all.order("created_at DESC")
+    @quotes = Quote.all
     respond_to do |format|
       format.json { render 'index.jbuilder' }
     end
