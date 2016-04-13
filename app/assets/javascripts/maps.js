@@ -240,7 +240,7 @@ function initAutocomplete() {
       url:'https://cdn3.iconfinder.com/data/icons/human-behaviour-and-situations-part-1/400/Popular-19-512.png',
       size: new google.maps.Size(300,300),
       origin: new google.maps.Point(0, 0),
-      anchor: new google.maps.Point(0, 0),
+      anchor: new google.maps.Point(50, 50),
       scaledSize: new google.maps.Size(100, 100)
     }
     var postMarker = new google.maps.Marker({
