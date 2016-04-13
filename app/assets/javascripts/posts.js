@@ -31,11 +31,13 @@
 $(document).ready(function () {
 
   var masonryGrid = function() {
+    console.log("start masonry")
     setTimeout(function(){
       $('#post-home').masonry({
         itemSelector: '.item',
         columnWidth: 350
       });
+      console.log("end masonry")
     }, 1000)
   };
 
@@ -301,6 +303,7 @@ var allquotes;
           appendAllPosts(elem.id, elem.postpic, elem.title, elem.post_votes, elem.pp, elem.username, postIcon);
           getQuote(allquotes);
         });
+        console.log("finished loop")
         masonryGrid();
         showOnePost();
       },
@@ -344,7 +347,8 @@ var allquotes;
   var getQuote = function(response){
     var randomizer = Math.floor((Math.random() * 10) + 1);
     if (randomizer<5){
-    var random = Math.floor((Math.random() * response.length) + 1);
+      var random = Math.floor(Math.random() * response.length);
+      console.log(random)
       appendQuote(response[random].quotation);
       allquotes.splice(random,1);
     };
