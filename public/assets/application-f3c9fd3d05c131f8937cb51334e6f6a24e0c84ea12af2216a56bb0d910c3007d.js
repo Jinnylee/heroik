@@ -11641,7 +11641,7 @@ return jQuery;
                 if ( keys_last ) {
                     // Complex key, build deep object structure based on a few rules:
                     // * The 'cur' pointer starts at the object top-level.
-                    // * [] = array push (n is set to array length), [n] = array if n is 
+                    // * [] = array push (n is set to array length), [n] = array if n is
                     //   numeric, otherwise object.
                     // * If at the last keys part, set the value.
                     // * For each keys part, if the current level is undefined create an
@@ -11827,7 +11827,7 @@ https://github.com/mroderick/PubSubJS
     var PubSub = {};
     root.PubSub = PubSub;
     factory(PubSub);
-    
+
 }(( typeof window === 'object' && window ) || this, function (PubSub){
 	'use strict';
 
@@ -11985,7 +11985,7 @@ https://github.com/mroderick/PubSubJS
 	/*Public: Clear subscriptions by the topic
 	*/
 	PubSub.clearSubscriptions = function clearSubscriptions(topic){
-		var m; 
+		var m;
 		for (m in messages){
 			if (messages.hasOwnProperty(m) && m.indexOf(topic) === 0){
 				delete messages[m];
@@ -22847,7 +22847,7 @@ var addHeroButton = function (){
 $.auth.configure({
   // By default, you only need to configure apiUrl
   // Note that if you put a '/' at the end of the link, there will be errors when calling the api
-  apiUrl: 'http://localhost:3000',
+  apiUrl: location.origin,
   forceHardRedirect: true,
   authProviderPaths: {
     facebook:  '/auth/facebook',
