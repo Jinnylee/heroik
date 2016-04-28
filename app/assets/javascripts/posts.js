@@ -360,7 +360,7 @@ var allquotes;
       url: "/api/posts/community.json",
       method: "GET",
       success: function (response, status) {
-        response.forEach(function (elem, index) {
+        response.posts.forEach(function (elem, index) {
           getCategoryImage(elem.category);
           appendAllPosts(elem.id, elem.postpic, elem.title, elem.post_votes, elem.pp, elem.username, postIcon);
         });
@@ -380,7 +380,7 @@ var allquotes;
       url: "/api/posts/youth.json",
       method: "GET",
       success: function (response, status) {
-        response.forEach(function (elem, index) {
+        response.posts.forEach(function (elem, index) {
           getCategoryImage(elem.category);
           appendAllPosts(elem.id, elem.postpic, elem.title, elem.post_votes, elem.pp, elem.username, postIcon);
         });
@@ -400,7 +400,7 @@ var allquotes;
       url: "/api/posts/environment.json",
       method: "GET",
       success: function (response, status) {
-        response.forEach(function (elem, index) {
+        response.posts.forEach(function (elem, index) {
           getCategoryImage(elem.category);
           appendAllPosts(elem.id, elem.postpic, elem.title, elem.post_votes, elem.pp, elem.username, postIcon);
         });
@@ -420,7 +420,7 @@ var allquotes;
       url: "/api/posts/animals.json",
       method: "GET",
       success: function (response, status) {
-        response.forEach(function (elem, index) {
+        response.posts.forEach(function (elem, index) {
           getCategoryImage(elem.category);
           appendAllPosts(elem.id, elem.postpic, elem.title, elem.post_votes, elem.pp, elem.username, postIcon);
         });
@@ -440,7 +440,7 @@ var allquotes;
       url: "/api/posts/good_deeds.json",
       method: "GET",
       success: function (response, status) {
-        response.forEach(function (elem, index) {
+        response.posts.forEach(function (elem, index) {
           getCategoryImage(elem.category);
           appendAllPosts(elem.id, elem.postpic, elem.title, elem.post_votes, elem.pp, elem.username, postIcon);
         });
@@ -459,7 +459,7 @@ var allquotes;
       url: "/api/posts/most_popular.json",
       method: "GET",
       success: function (response, status) {
-        response.forEach(function (elem, index) {
+        response.posts.forEach(function (elem, index) {
           getCategoryImage(elem.category);
           // var text = '<div class="col-xs-12 top-twenty">Top 20 Stories</div>';
 
