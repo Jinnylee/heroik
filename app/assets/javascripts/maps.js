@@ -65,7 +65,7 @@ function initMap() {
       url: "/api/maps.json",
       method: "GET",
       success: function (response, status) {
-        response.forEach(function (elem, index){
+        response.posts.forEach(function (elem, index){
           getIcon(elem.category);
           marker[index] = new google.maps.Marker({
             position: {lat: parseFloat(elem.latitude), lng: parseFloat(elem.longitude)},
@@ -75,7 +75,7 @@ function initMap() {
             postID: elem.id
           });
           marker[index].addListener("click",function(){
-            modalForSinglePost(response[index].post_votes,moment(response.created_at).format('MM/DD/YYYY'), response[index].category, response[index].title, response[index].postpic, response[index].location, response[index].description, response[index].pp, response[index].username, response[index].id);
+            modalForSinglePost(response.posts[index].post_votes,moment(response.created_at).format('MM/DD/YYYY'), response.posts[index].category, response.posts[index].title, response.posts[index].postpic, response.posts[index].location, response.posts[index].description, response.posts[index].pp, response.posts[index].username, response.posts[index].id);
             $('#showsinglepost').modal('show');
             $('.heroBtn').show();
             $('.thank-you-btn').hide();

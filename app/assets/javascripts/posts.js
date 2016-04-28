@@ -31,14 +31,14 @@
 $(document).ready(function () {
 
   var masonryGrid = function() {
-    console.log("start masonry")
+    console.log("start masonry");
     setTimeout(function(){
       $('#post-home').masonry({
         itemSelector: '.item',
         columnWidth: 350
       });
       console.log("end masonry")
-    }, 1000)
+    }, 1000);
   };
 
   // GET USER INFORMATION FOR USER COLUMN (PROFILE PAGE)
@@ -102,6 +102,7 @@ $(document).ready(function () {
   // SHOW ONE POST ON MODAL
   var showOnePost = function () {
     $('.post').off().on('click', function (e) {
+      console.log("clicked");
       e.preventDefault();
       var id = $(this).data("id")
       $('.editPostBtn').hide();
@@ -296,6 +297,7 @@ var allquotes;
       url: "/api/posts.json",
       method: "GET",
       success: function (response, status) {
+        $('#post-home').empty();
         console.log(response)
         allquotes = response.quotes
         response.posts.forEach(function(elem, index) {
@@ -303,7 +305,7 @@ var allquotes;
           appendAllPosts(elem.id, elem.postpic, elem.title, elem.post_votes, elem.pp, elem.username, postIcon);
           getQuote(allquotes);
         });
-        console.log("finished loop")
+        console.log("finished loop");
         masonryGrid();
         showOnePost();
       },
@@ -320,7 +322,7 @@ var allquotes;
     colorGenerator();
     var sentence =
     '<div class="item">' +
-      '<div class="col-xs-12 post quote-box" style="background-color:'+colorPick+'">' +
+      '<div class="col-xs-12 quote-box" style="background-color:'+colorPick+'">' +
         '<div id="quoteText" class="col-xs-12">' + quote +'</div>' +
       '</div>' +
     '</div>';
@@ -517,7 +519,7 @@ var allquotes;
             allPostsHomePage();
         }
       }
-    } else {
+    } else if(location.pathname == '/'){
       allPostsHomePage();
     }
   }
