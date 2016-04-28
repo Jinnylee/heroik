@@ -322,7 +322,7 @@ var allquotes;
     colorGenerator();
     var sentence =
     '<div class="item">' +
-      '<div class="col-xs-12 quote-box" style="background-color:'+colorPick+'">' +
+      '<div class="col-xs-12 post quote-box" style="background-color:'+colorPick+'">' +
         '<div id="quoteText" class="col-xs-12">' + quote +'</div>' +
       '</div>' +
     '</div>';
