@@ -31,14 +31,17 @@
 $(document).ready(function () {
 
   var masonryGrid = function() {
-    console.log("start masonry");
-    setTimeout(function(){
       $('#post-home').masonry({
         itemSelector: '.item',
-        columnWidth: 350
+        columnWidth: 350,
+        isInitLayout: false
       });
-      console.log("end masonry")
-    }, 1000);
+      $('#post-home').masonry('on', 'layoutComplete', function(){showOnePost()});
+      $('#post-home').masonry();
+    // console.log("start masonry");
+    // setTimeout(function(){
+    //   console.log("end masonry")
+    // }, 1000);
   };
 
   // GET USER INFORMATION FOR USER COLUMN (PROFILE PAGE)
@@ -101,6 +104,7 @@ $(document).ready(function () {
 
   // SHOW ONE POST ON MODAL
   var showOnePost = function () {
+    console.log("testing");
     $('.post').off().on('click', function (e) {
       console.log("clicked");
       e.preventDefault();
@@ -146,6 +150,8 @@ $(document).ready(function () {
 
     });
   };
+
+  window.debug = showOnePost;
 
   // CREATE POST
   var createPost = function (user) {
@@ -307,7 +313,7 @@ var allquotes;
         });
         console.log("finished loop");
         masonryGrid();
-        showOnePost();
+        // showOnePost();
       },
       error: function(response, status) {
         console.log(response);
